@@ -36,7 +36,7 @@
         { x: 62, y: 71, t: 'Trukovka', d: 'Zlatá trukovka na čiernom saténe — autorský vzor inšpirovaný starými predlohami.', z: 380 },
         { x: 28, y: 88, t: 'Čipka', d: 'Biela čipka na leme spodnej sukne.', z: 420 },
       ],
-      macro: { o: '55% 71%', z: 5, detail: 'img/basovsky-zastera.webp', pos: '50% 76%', label: 'Trukovka na smaragdovej zástere' },
+      macro: { o: '55% 71%', z: 5, detail: 'img/trukovka-zlata.webp', pos: '50% 50%', label: 'Zlatá trukovka na čiernom saténe' },
     },
     {
       key: 'modrotlac', title: 'Modrotlač', sub: 'Farba, ktorá má vlastnú pamäť.',
@@ -49,6 +49,28 @@
         { x: 50, y: 86, t: 'Lem', d: 'Tmavomodrý lem so vzorom, ktorý sa odtláčal drevenou formou.', z: 400 },
       ],
       macro: { o: '50% 60%', z: 5, detail: 'img/detail-modrotlac.webp', pos: '50% 50%', label: 'Vzor modrotlače' },
+    },
+    {
+      key: 'fialovy', title: 'Brokát a čipka', sub: 'Sviatočný kroj s fialovým živôtikom.',
+      txt: 'Fialový brokát s ľaliami, zlaté a strieborné borty, nariasený čipkový golier. Rukávce s vyšívanými kolesami a madeirou, zástera s trukovanými kvetmi a modrá tylová čipka.',
+      cta: 'Pozrieť detaily', href: '#macro', real: true,
+      img: 'img/kroj-fialovy.webp', ar: 1036 / 1334, amb: '#5B2A86',
+      hs: [
+        { x: 50, y: 6, t: 'Golier', d: 'Nariasený čipkový golier s modrou a zelenou výšivkou na okraji.', z: 520 },
+        { x: 50, y: 16, t: 'Živôtik', d: 'Fialový brokát s ľaliami, zlaté a strieborné borty a kovové gombíky.', z: 460 },
+        { x: 12, y: 34, t: 'Rukávce', d: 'Vyšívané kolesá v žltej, fialovej a zelenej, pod nimi madeira s farebnými vlnovkami.', z: 440 },
+        { x: 50, y: 29, t: 'Pás', d: 'Biely pás s tkanými kvetmi, lemovaný červenou bortou.', z: 460 },
+        { x: 70, y: 76, t: 'Zástera', d: 'Trukované kvety a slučky v bielej, fialovej a modrej, uprostred tkaná stuha s ružami.', z: 380 },
+        { x: 30, y: 93, t: 'Čipka', d: 'Modrá tylová čipka s kvetmi na leme.', z: 400 },
+      ],
+      macro: { o: '50% 22%', z: 4.2, rot: 3, label: 'Detaily kroja',
+        steps: ['Celý kroj', 'Živôtik', 'Brokát', 'Rukávce', 'Zástera'],
+        gallery: [
+          { src: 'img/fialovy-zivotik.webp', label: 'Živôtik · borty a gombíky' },
+          { src: 'img/fialovy-brokat.webp', label: 'Brokát s ľaliami · chrbát' },
+          { src: 'img/fialovy-rukav.webp', label: 'Rukávce · kolesá a madeira' },
+          { src: 'img/fialovy-zastera.webp', label: 'Zástera · trukované kvety' },
+        ] },
     },
     {
       key: 'zasterky', title: 'Výšivka', sub: 'Zásterky na hody v Pobedime.',
@@ -299,6 +321,7 @@
   });
 
   /* ───────── makro: vždy aktuálny kroj z hero ───────── */
+  const macro = $('#macro');
   const mk = $('.macro-kroj'), mDetail = $('#macro-detail'), mLabel = $('#macro-label');
   function setMacro(s) {
     const m = s.macro;
@@ -311,7 +334,10 @@
     mDetail.dataset.rot = m.rot || 6;
     const labels = m.steps || ['Celý kroj', 'Detail', 'Ornament', 'Steh', 'Ruka'];
     $$('.macro-steps li').forEach((li, i) => (li.textContent = labels[i]));
-    mDetail.innerHTML = m.video
+    macro.classList.toggle('is-gallery', !!m.gallery);
+    mDetail.innerHTML = m.gallery
+      ? m.gallery.map((g, i) => `<img src="${g.src}" alt="${g.label}" data-label="${g.label}" loading="lazy" class="${i ? '' : 'is-on'}">`).join('')
+      : m.video
       ? `<video src="${m.video}" poster="${m.poster}" muted loop playsinline preload="none" aria-label="${m.label}"></video>`
       : `<img src="${m.detail}" alt="${m.label}" style="object-position:${m.pos}" loading="lazy">`;
     mLabel.textContent = m.label + (s.real ? ' · z ateliéru' : '');
@@ -377,6 +403,7 @@
   /* ───────── kolekcia ───────── */
   const CARDS = [
     { reg: 'Bašovce', t: 'Autorský trukovaný kroj', m: '2026 · ženský', img: 'img/kroj-basovsky-v2.webp', f: 'zensky' },
+    { reg: 'Sviatočný', t: 'Kroj s fialovým brokátom', m: 'ženský', img: 'img/kroj-fialovy.webp', f: 'zensky' },
     { reg: 'Pobedim', t: 'Zásterky na hody', m: '2026 · ženské', img: 'img/zasterky-pobedim.webp', f: 'zensky', wide: true },
     { reg: 'Očkov', t: 'Detský kroj podľa fotky', m: 'na zákazku · detský', img: 'img/kroj-ockovsky-detsky.webp', f: 'detsky zakazka', wide: true },
     { reg: 'Bučany', t: 'Mužský prucel', m: 'Trnavský kroj · mužský', img: 'img/prucel-bucany.webp', f: 'muzsky zakazka', wide: true },
@@ -434,7 +461,7 @@
   $$('.reveal, .stitch, .reg-map').forEach(x => io.observe(x));
 
   /* ───────── scroll: macro zoom, parallax, progress ───────── */
-  const macro = $('#macro'), mv = mDetail, mSticky = $('.macro-sticky');
+  const mv = mDetail, mSticky = $('.macro-sticky');
   const steps = $$('.macro-steps li'), mThread = $('.macro-thread path');
   mThread.setAttribute('pathLength', 1);
   const qb = $('.qb-img img'), atd = $('.at-detail'), pt = $('#pt-fill');
@@ -461,9 +488,17 @@
     mv.style.setProperty('--vr', (-rot + v * rot * 1.2) + 'deg');
     const vid = $('video', mv);
     if (vid) { if (v > .2 && vid.paused) vid.play().catch(() => {}); else if (v <= .2 && !vid.paused) vid.pause(); }
+    const gal = $$('img[data-label]', mv);
+    if (gal.length) {
+      const gi = Math.min(gal.length - 1, Math.floor(range(p, .5, .96) * gal.length));
+      gal.forEach((g, i) => g.classList.toggle('is-on', i === gi));
+      mLabel.textContent = gal[gi].dataset.label;
+    }
     mSticky.style.setProperty('--co', range(p, .7, .86));
     mThread.style.setProperty('--to', 1 - range(p, .78, 1));
-    const si = Math.min(4, Math.floor(p * 5.2));
+    let si = Math.min(4, Math.floor(p * 5.2));
+    const galOn = $$('img[data-label]', mv).findIndex(g => g.classList.contains('is-on'));
+    if (galOn >= 0 && p >= .5) si = Math.min(4, galOn + 1);
     steps.forEach((s, i) => s.classList.toggle('is-on', i === si));
 
     if (qb) {
