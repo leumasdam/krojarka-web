@@ -152,7 +152,7 @@ svg use { pointer-events: none; }
 .stage { position: absolute; inset: 0; z-index: 2; touch-action: pan-y; cursor: grab; }
 .stage.is-drag { cursor: grabbing; }
 .fig {
-  position: absolute; left: 50%; bottom: 7vh; height: min(76vh, 830px, calc(38vw / var(--ar, .73))); aspect-ratio: var(--ar, .73);
+  position: absolute; left: 50%; bottom: 7vh; height: calc(min(76vh, 830px, calc(38vw / var(--ar, .73))) * var(--sc, 1)); aspect-ratio: var(--ar, .73);
   transform: translateX(calc(-50% + var(--x, 0px))) scale(var(--s, 1));
   transform-origin: 50% 100%;
   transition: transform 1.25s var(--ease), opacity 1.1s var(--ease), filter 1.1s var(--ease);
@@ -599,3 +599,8 @@ svg use { pointer-events: none; }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* menší kus v hero (prucel) + väčšia predloha */
+.fig.small { bottom: 14vh; }
+.fig.small .fig-inset { width: 36%; left: -27%; top: 4%; z-index: 2; }
+@media (max-width: 960px) { .fig.small { bottom: 0; } .fig.small .fig-inset { width: 34%; left: -8%; } }

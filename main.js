@@ -79,6 +79,7 @@
       txt: 'Trnavský kroj. Prucel ušitý podľa starej fotografie — brokát, vykrajované plstené lemy a rozety s gombíkmi.',
       cta: 'Objaviť regióny', href: '#regiony', real: true,
       img: 'img/prucel-bucany.webp', ar: 1145 / 1400, amb: '#16795A',
+      sc: .8, inset: 'img/foto-bucany-predloha.webp', insetCap: 'Predloha · Bučany',
       hs: [
         { x: 50, y: 8, t: 'Mašľa', d: 'Biela saténová mašľa s vyšívanými stuhami a zlatými strapcami.', z: 440 },
         { x: 26, y: 40, t: 'Rozety', d: 'Plstené rozety v červenej a zelenej s maľovanými gombíkmi — každá vystrihnutá ručne.', z: 460 },
@@ -173,8 +174,9 @@
     const f = document.createElement('div');
     f.className = 'fig' + (s.person ? ' person' : '') + (s.photo ? ' photo' : '');
     f.style.setProperty('--ar', s.ar);
+    if (s.sc) { f.style.setProperty('--sc', s.sc); f.classList.add('small'); }
     f.innerHTML = `<img src="${s.img}" alt="${s.title} — ${s.sub}" ${i > 1 && i < N - 1 ? 'loading="lazy"' : ''} draggable="false">` +
-      (s.inset ? `<figure class="fig-inset"><img src="${s.inset}" alt="Pôvodná rodinná fotografia — predloha kroja" loading="lazy"><figcaption>Predloha</figcaption></figure>` : '') +
+      (s.inset ? `<figure class="fig-inset"><img src="${s.inset}" alt="Pôvodná fotografia — predloha kroja" loading="lazy"><figcaption>${s.insetCap || 'Predloha'}</figcaption></figure>` : '') +
       s.hs.map((h, j) => `<button class="hs" style="--hx:${h.x}%;--hy:${h.y}%" data-s="${i}" data-h="${j}" aria-label="Detail: ${h.t}"><i class="ring"></i><span>${h.t}</span></button>`).join('');
     f.addEventListener('click', e => {
       if (e.target.closest('.hs') || moved) return;
