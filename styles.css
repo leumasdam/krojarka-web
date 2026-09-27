@@ -242,7 +242,7 @@ svg use { pointer-events: none; }
 .hb-count { display: flex; align-items: center; gap: 16px; font-family: var(--sans); font-size: 12px; letter-spacing: .1em; }
 .hb-count b { font-family: var(--serif); font-weight: 400; font-size: 24px; letter-spacing: 0; }
 .hb-bar { position: relative; width: 70px; height: 1px; background: var(--line); }
-.hb-bar i { position: absolute; inset: 0; background: var(--text); transform-origin: left; transform: scaleX(calc(1 / 7)); transition: transform 1s var(--ease); }
+.hb-bar i { position: absolute; inset: 0; background: var(--text); transform-origin: left; transform: scaleX(.125); transition: transform 1s var(--ease); }
 .hb-nums { display: flex; gap: 6px; }
 .hb-nums button { font-family: var(--sans); font-size: 11px; letter-spacing: .1em; padding: 10px 12px; color: var(--muted); position: relative; transition: color .3s; }
 .hb-nums button::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 4px; height: 1px; background: var(--accent); transform: scaleX(0); transition: transform .6s var(--ease-out); }
@@ -279,6 +279,8 @@ svg use { pointer-events: none; }
   transform: translate(-50%, -50%) scale(var(--vz, .6)) rotate(var(--vr, -6deg));
   opacity: var(--vo, 0); will-change: transform, opacity; box-shadow: 0 40px 90px rgba(24,22,20,.25); background: #1e1a17;
 }
+.macro-detail.is-cutout { width: min(92vh, 980px, 92vw); aspect-ratio: auto; border-radius: 0; overflow: visible; box-shadow: none; background: none; }
+.macro-detail.is-cutout img { height: auto; object-fit: contain; transform: none; }
 .macro-detail img, .macro-detail video { width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); }
 .macro-steps { position: absolute; left: var(--pad); top: 50%; transform: translateY(-50%); list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; z-index: 2; }
 .macro-steps li { font-family: var(--sans); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 14px; transition: color .4s; }

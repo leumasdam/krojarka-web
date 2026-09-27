@@ -10,6 +10,21 @@
      macro: kam sa zoomuje v sekcii pod hero (o = transform-origin, detail = obrázok/video na konci) */
   const SLIDES = [
     {
+      key: 'sviatocny', title: 'Sviatočný kroj', sub: 'Každý detail má svoj význam.',
+      txt: 'Živôtik, rukávce, pás, stuha, sukňa — vrstvy, z ktorých sa v kraji čítal vek, príležitosť aj rodina.',
+      cta: 'Pozrieť sa bližšie', href: '#macro',
+      img: 'img/kroj-trukovanie.webp', ar: 1026 / 1400, amb: '#A70F19',
+      hs: [
+        { x: 50, y: 17, t: 'Živôtik', d: 'Zamatový živôtik s ručnou výšivkou a perličkami. Pevný strih drží siluetu celého kroja.', z: 520 },
+        { x: 14, y: 25, t: 'Rukáv', d: 'Nariasený rukáv s čiernou geometrickou výšivkou.', z: 480 },
+        { x: 56, y: 29, t: 'Pás a mašľa', d: 'Vyšívaný pás viazaný do veľkej mašle.', z: 460 },
+        { x: 66, y: 50, t: 'Stuha', d: 'Dlhá stuha s kvetinovým ornamentom po celej dĺžke.', z: 480 },
+        { x: 34, y: 76, t: 'Sukňa', d: 'Čierna sukňa s pásmi výšivky a čipkovým lemom.', z: 380 },
+      ],
+      macro: { o: '16% 26%', z: 7.5, detail: 'img/detail-vysivka.webp', pos: '50% 50%', contain: true, rot: 10, label: 'Od kroja k stehu',
+        steps: ['Celý kroj', 'Živôtik', 'Rukáv', 'Výšivka', 'Jeden steh'] },
+    },
+    {
       key: 'trukovanie', title: 'Trukovanie', sub: 'Autorský Bašovský kroj.',
       txt: 'Retiazkový steh vedený rukou na historickom stroji Lintz & Eckhardt. Čierna a zlatá trukovka inšpirovaná starodávnymi vzormi.',
       cta: 'Zistiť viac o trukovaní', href: '#remeslo', real: true,
@@ -151,6 +166,7 @@
   /* ───────── HERO ───────── */
   const hero = $('#hero'), stage = $('#stage'), hrBody = $('#hr-body'), nums = $('#hb-nums');
   const N = SLIDES.length;
+  $$('.of-n').forEach(e => (e.textContent = pad(N)));
   let cur = 0, busy = false;
 
   const figs = SLIDES.map((s, i) => {
@@ -195,7 +211,7 @@
   /* niť — nová vlna pri každom prechode */
   const thread = $('#thread-path');
   const wave = i => {
-    const seed = [0.2, 0.7, 0.45, 0.9, 0.1, 0.6, 0.35][i];
+    const seed = [0.2, 0.7, 0.45, 0.9, 0.1, 0.6, 0.35, 0.8][i % 8];
     const a = 90 + seed * 90, b = 60 + (1 - seed) * 110;
     return `M-20 ${200 - a * .3} C 180 ${140 + a * .6}, 360 ${300}, 520 ${230} S 820 ${120 + b * .4}, 1000 ${190} S 1260 ${260 - b * .5}, 1460 ${120 + seed * 90}`;
   };
@@ -289,6 +305,10 @@
     mk.style.transformOrigin = m.o;
     mk.classList.toggle('photo', !!s.photo);
     mk.dataset.z = m.z;
+    mDetail.classList.toggle('is-cutout', !!m.contain);
+    mDetail.dataset.rot = m.rot || 6;
+    const labels = m.steps || ['Celý kroj', 'Detail', 'Ornament', 'Steh', 'Ruka'];
+    $$('.macro-steps li').forEach((li, i) => (li.textContent = labels[i]));
     mDetail.innerHTML = m.video
       ? `<video src="${m.video}" poster="${m.poster}" muted loop playsinline preload="none" aria-label="${m.label}"></video>`
       : `<img src="${m.detail}" alt="${m.label}" style="object-position:${m.pos}" loading="lazy">`;
@@ -435,7 +455,8 @@
     const v = range(p, .42, .8);
     mv.style.setProperty('--vo', clamp(v * 1.6));
     mv.style.setProperty('--vz', .7 + ease(v) * .55);
-    mv.style.setProperty('--vr', (-6 + v * 6) + 'deg');
+    const rot = +mv.dataset.rot || 6;
+    mv.style.setProperty('--vr', (-rot + v * rot * 1.2) + 'deg');
     const vid = $('video', mv);
     if (vid) { if (v > .2 && vid.paused) vid.play().catch(() => {}); else if (v <= .2 && !vid.paused) vid.pause(); }
     mSticky.style.setProperty('--co', range(p, .7, .86));

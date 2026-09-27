@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/kroj-basovsky.webp">
+<link rel="preload" as="image" href="img/kroj-trukovanie.webp">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -99,14 +99,14 @@
   </div>
 
   <div class="hero-right" aria-live="polite">
-    <p class="counter"><b id="h-num">01</b> / 07</p>
+    <p class="counter"><b id="h-num">01</b> / <span class="of-n">08</span></p>
     <span class="rule"></span>
     <div class="hr-body" id="hr-body"></div>
   </div>
 
 
   <div class="hero-bottom">
-    <div class="hb-count"><b id="hb-num">01</b><span class="hb-bar"><i id="hb-fill"></i></span>07</div>
+    <div class="hb-count"><b id="hb-num">01</b><span class="hb-bar"><i id="hb-fill"></i></span><span class="of-n">08</span></div>
     <div class="hb-mid"><button class="hero-arrow prev" id="prev" aria-label="Predchádzajúci kroj"><span><svg><use href="#chev-l"/></svg></span><em>Predchádzajúci<br>kroj</em></button><div class="hb-nums" id="hb-nums" role="tablist"></div><button class="hero-arrow next" id="next" aria-label="Nasledujúci kroj"><span><svg><use href="#chev-r"/></svg></span><em>Nasledujúci<br>kroj</em></button></div>
     <p class="hb-note">Slovenské dedičstvo<br>v súčasnom svete</p>
   </div>
@@ -120,7 +120,7 @@
 <section class="macro" id="macro" aria-label="Od kroja k stehu">
   <div class="macro-sticky">
     <div class="macro-frame">
-      <img class="macro-kroj" src="img/kroj-basovsky.webp" alt="" aria-hidden="true">
+      <img class="macro-kroj" src="img/kroj-trukovanie.webp" alt="" aria-hidden="true">
       <div class="macro-detail" id="macro-detail"></div>
     </div>
     <ol class="macro-steps">
@@ -311,7 +311,7 @@
 <!-- detail panel pre hotspoty -->
 <aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="dr-title">
   <button class="dr-close" id="dr-close" aria-label="Zavrieť"><svg viewBox="0 0 24 24" width="22" height="22"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.4"/></svg></button>
-  <div class="dr-meta"><span><b id="dr-num">01</b> / 07</span><span class="dr-kind">Detail kroja</span></div>
+  <div class="dr-meta"><span><b id="dr-num">01</b> / <span class="of-n">08</span></span><span class="dr-kind">Detail kroja</span></div>
   <h2 id="dr-title" class="display-m">Trukovanie</h2>
   <p class="dr-sub" id="dr-sub"></p>
   <p class="dr-text" id="dr-text"></p>
