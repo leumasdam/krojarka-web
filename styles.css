@@ -604,3 +604,9 @@ svg use { pointer-events: none; }
 .fig.small { bottom: 14vh; }
 .fig.small .fig-inset { width: 36%; left: -27%; top: 4%; z-index: 2; }
 @media (max-width: 960px) { .fig.small { bottom: 0; } .fig.small .fig-inset { width: 34%; left: -8%; } }
+
+/* karty: obrázok za textom, jemne nižšie */
+.card { isolation: isolate; }
+.card img { z-index: -1; bottom: -4%; }
+.card.wide img { bottom: -2%; }
+.card .reg, .card h3, .card .meta { z-index: 1; }
