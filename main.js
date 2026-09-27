@@ -115,7 +115,7 @@
 
   /* ───────── mapa (reálne súradnice z OpenStreetMap, obce z tvorby Krojárky) ───────── */
   const TOWNS = [
-    { n: 'Podolie', lat: 48.6751, lon: 17.7739, img: 'img/rukavce-poster.jpg', photo: true, t: 'Detské podolské rukávce', a: 'end', dy: -4 },
+    { n: 'Podolie', lat: 48.6751, lon: 17.7739, img: 'img/rukavce-podolie.webp', t: 'Detské podolské rukávce', a: 'end', dy: -4 },
     { n: 'Pobedim', lat: 48.6561, lon: 17.8072, img: 'img/zasterky-pobedim.webp', t: 'Zásterky na hody · workshop trukovania v škole', a: 'start', dy: -2 },
     { n: 'Očkov', lat: 48.6528, lon: 17.7647, img: 'img/kroj-ockovsky-detsky.webp', t: 'Detský kroj podľa rodinnej fotky', a: 'end', dy: 8 },
     { n: 'Bašovce', lat: 48.6330, lon: 17.7974, img: 'img/kroj-basovsky-v2.webp', t: 'Autorský trukovaný Bašovský kroj', a: 'start', dy: 12, main: true },
@@ -380,7 +380,7 @@
     { reg: 'Pobedim', t: 'Zásterky na hody', m: '2026 · ženské', img: 'img/zasterky-pobedim.webp', f: 'zensky', wide: true },
     { reg: 'Očkov', t: 'Detský kroj podľa fotky', m: 'na zákazku · detský', img: 'img/kroj-ockovsky-detsky.webp', f: 'detsky zakazka', wide: true },
     { reg: 'Bučany', t: 'Mužský prucel', m: 'Trnavský kroj · mužský', img: 'img/prucel-bucany.webp', f: 'muzsky zakazka', wide: true },
-    { reg: 'Podolie', t: 'Detské rukávce', m: 'trukovanie · detské', img: 'img/rukavce-poster.jpg', f: 'detsky', photo: true },
+    { reg: 'Podolie', t: 'Detské rukávce', m: 'trukovanie · detské', img: 'img/rukavce-podolie.webp', f: 'detsky', wide: true },
   ];
   const cards = $('#cards');
   cards.innerHTML = CARDS.map(c => `
