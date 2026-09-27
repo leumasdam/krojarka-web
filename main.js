@@ -28,15 +28,15 @@
       key: 'trukovanie', title: 'Trukovanie', sub: 'Autorský Bašovský kroj.',
       txt: 'Retiazkový steh vedený rukou na historickom stroji Lintz & Eckhardt. Čierna a zlatá trukovka inšpirovaná starodávnymi vzormi.',
       cta: 'Zistiť viac o trukovaní', href: '#remeslo', real: true,
-      img: 'img/kroj-basovsky.webp', ar: 717 / 1400, amb: '#B07A12',
+      img: 'img/kroj-basovsky-v2.webp', ar: 1009 / 1380, amb: '#B07A12',
       hs: [
-        { x: 50, y: 11, t: 'Golier', d: 'Zlatý nariasený golier s flitrami — to prvé, čo na Bašovskom kroji zaujme.', z: 520 },
-        { x: 12, y: 36, t: 'Rukávce', d: 'Rukávce s trukovaným ornamentom v zlatej a zelenej. Každý oblúk je jedna súvislá retiazka.', z: 480 },
-        { x: 56, y: 41, t: 'Pás', d: 'Žltý pás s tkaným kvetinovým vzorom stiahnutý nad riasenou sukňou.', z: 480 },
-        { x: 50, y: 74, t: 'Trukovka', d: 'Zlatá trukovka na čiernom saténe — autorský vzor inšpirovaný starými predlohami.', z: 380 },
-        { x: 70, y: 95, t: 'Čipka', d: 'Ružová čipka na leme spodnej sukne.', z: 420 },
+        { x: 50, y: 7, t: 'Golier', d: 'Zlatý nariasený golier s flitrami — to prvé, čo na Bašovskom kroji zaujme.', z: 520 },
+        { x: 20, y: 30, t: 'Rukávce', d: 'Rukávce s trukovaným ornamentom v zlatej a zelenej. Každý oblúk je jedna súvislá retiazka.', z: 480 },
+        { x: 50, y: 34, t: 'Pás', d: 'Žltý pás s tkaným kvetinovým vzorom stiahnutý nad riasenou sukňou.', z: 480 },
+        { x: 62, y: 71, t: 'Trukovka', d: 'Zlatá trukovka na čiernom saténe — autorský vzor inšpirovaný starými predlohami.', z: 380 },
+        { x: 28, y: 88, t: 'Čipka', d: 'Biela čipka na leme spodnej sukne.', z: 420 },
       ],
-      macro: { o: '50% 74%', z: 5, detail: 'img/basovsky-zastera.webp', pos: '50% 76%', label: 'Trukovka na smaragdovej zástere' },
+      macro: { o: '55% 71%', z: 5, detail: 'img/basovsky-zastera.webp', pos: '50% 76%', label: 'Trukovka na smaragdovej zástere' },
     },
     {
       key: 'modrotlac', title: 'Modrotlač', sub: 'Farba, ktorá má vlastnú pamäť.',
@@ -117,7 +117,7 @@
     { n: 'Podolie', lat: 48.6751, lon: 17.7739, img: 'img/rukavce-poster.jpg', photo: true, t: 'Detské podolské rukávce', a: 'end', dy: -4 },
     { n: 'Pobedim', lat: 48.6561, lon: 17.8072, img: 'img/zasterky-pobedim.webp', t: 'Zásterky na hody · workshop trukovania v škole', a: 'start', dy: -2 },
     { n: 'Očkov', lat: 48.6528, lon: 17.7647, img: 'img/kroj-ockovsky-detsky.webp', t: 'Detský kroj podľa rodinnej fotky', a: 'end', dy: 8 },
-    { n: 'Bašovce', lat: 48.6330, lon: 17.7974, img: 'img/kroj-basovsky.webp', t: 'Autorský trukovaný Bašovský kroj', a: 'start', dy: 12, main: true },
+    { n: 'Bašovce', lat: 48.6330, lon: 17.7974, img: 'img/kroj-basovsky-v2.webp', t: 'Autorský trukovaný Bašovský kroj', a: 'start', dy: 12, main: true },
     { n: 'Bučany', lat: 48.4190, lon: 17.6992, img: 'img/prucel-bucany.webp', t: 'Mužský prucel · Trnavský kroj', a: 'start' },
   ];
   const CTX = [
@@ -374,7 +374,7 @@
 
   /* ───────── kolekcia ───────── */
   const CARDS = [
-    { reg: 'Bašovce', t: 'Autorský trukovaný kroj', m: '2026 · ženský', img: 'img/kroj-basovsky.webp', f: 'zensky' },
+    { reg: 'Bašovce', t: 'Autorský trukovaný kroj', m: '2026 · ženský', img: 'img/kroj-basovsky-v2.webp', f: 'zensky' },
     { reg: 'Pobedim', t: 'Zásterky na hody', m: '2026 · ženské', img: 'img/zasterky-pobedim.webp', f: 'zensky', wide: true },
     { reg: 'Očkov', t: 'Detský kroj podľa fotky', m: 'na zákazku · detský', img: 'img/kroj-ockovsky-detsky.webp', f: 'detsky zakazka', wide: true },
     { reg: 'Bučany', t: 'Mužský prucel', m: 'Trnavský kroj · mužský', img: 'img/prucel-bucany.webp', f: 'muzsky zakazka', wide: true },
