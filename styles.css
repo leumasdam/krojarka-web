@@ -663,3 +663,10 @@ svg use { pointer-events: none; }
   .post-rev .post-grid { order: 0; }
   .post-grid { aspect-ratio: .95; }
 }
+
+/* logo navrchu — odsadenie od horného okraja */
+@media (min-width: 961px) {
+  .site-header:not(.is-scrolled) .logo { margin-top: 26px; }
+  .hero { padding-top: 140px; }
+}
+.logo { transition: margin .5s var(--ease); }
