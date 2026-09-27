@@ -362,7 +362,7 @@ svg use { pointer-events: none; }
 .chip { padding: 10px 22px; border-radius: 999px; background: #ece6da; font-family: var(--sans); font-size: 13px; transition: background .3s, color .3s; }
 .chip:hover { background: #e2dacb; }
 .chip.is-on { background: var(--accent); color: #fff; }
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .cards .card { aspect-ratio: 1 / 1.02; }
 .card { position: relative; background: var(--bg); aspect-ratio: 3 / 4.3; overflow: hidden; display: flex; flex-direction: column; padding: 22px; transition: opacity .5s, transform .6s var(--ease-out); }
 .card.is-hidden { display: none; }
@@ -571,7 +571,7 @@ svg use { pointer-events: none; }
   .col-head { grid-template-columns: 1fr; gap: 20px; }
   .chips { flex-wrap: nowrap; overflow-x: auto; margin: 0 calc(var(--pad) * -1) 26px; padding: 0 var(--pad); scrollbar-width: none; }
   .chip { flex: none; }
-  .cards { grid-template-columns: repeat(6, 72%); overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad); scrollbar-width: none; }
+  .cards { grid-template-columns: repeat(8, 72%); overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad); scrollbar-width: none; }
   .card { scroll-snap-align: start; }
   .regions { padding: 90px var(--pad); }
   .rpt text { font-size: 19px; }
@@ -636,4 +636,30 @@ svg use { pointer-events: none; }
   .order-head { grid-template-columns: 1fr; }
   .order-head p { justify-self: start; }
   .order-steps { grid-template-columns: 1fr 1fr; }
+}
+
+/* denník ateliéru */
+.diary { padding: 130px var(--pad) 60px; }
+.post { display: grid; grid-template-columns: 1.35fr 1fr; gap: 5vw; align-items: center; padding: 30px 0 110px; }
+.post-rev { grid-template-columns: 1fr 1.35fr; }
+.post-rev .post-grid { order: 2; }
+.post-grid { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: repeat(3, 1fr); gap: 12px; aspect-ratio: 1.15; }
+.post-grid figure { margin: 0; overflow: hidden; border-radius: 3px; background: #e9e2d4; }
+.post-grid .p-big { grid-row: 1 / -1; }
+.post-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.6s var(--ease-out); }
+.post-grid figure:hover img { transform: scale(1.06); }
+.post-num { font-family: var(--serif); font-size: clamp(64px, 7vw, 110px); line-height: .9; color: var(--accent); display: block; margin-bottom: 18px; }
+.post-copy .display-s { margin-bottom: 22px; }
+.post-copy blockquote { margin: 0 0 22px; font-family: var(--serif); font-style: italic; font-size: 21px; line-height: 1.4; color: #3e3832; border-left: 1px solid var(--accent); padding-left: 22px; }
+.post-copy p { color: #4a443d; max-width: 42ch; margin: 0 0 22px; }
+.post-meta { font-family: var(--sans); font-size: 10.5px !important; letter-spacing: .24em; text-transform: uppercase; color: var(--muted) !important; }
+.post-portrait { margin: 10px 0 0; display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: end; }
+.post-portrait img { width: 110px; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 25%; border-radius: 999px 999px 4px 4px; }
+.post-portrait figcaption { font-family: var(--sans); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); line-height: 1.7; }
+@media (max-width: 1180px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 960px) {
+  .diary { padding: 90px var(--pad) 30px; }
+  .post, .post-rev { grid-template-columns: 1fr; padding-bottom: 70px; }
+  .post-rev .post-grid { order: 0; }
+  .post-grid { aspect-ratio: .95; }
 }

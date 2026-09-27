@@ -39,6 +39,22 @@
       macro: { o: '55% 71%', z: 5, detail: 'img/trukovka-zlata.webp', pos: '50% 50%', label: 'Zlatá trukovka na čiernom saténe' },
     },
     {
+      key: 'cerveny', title: 'Zlatá retiazka', sub: 'Červený sviatočný kroj.',
+      txt: 'Červený živôtik so striebornými sponami, rukávce s trukovanými kolesami, vysoký zlatý golier a na čiernej sukni veľké zlaté kvety — jedna súvislá retiazka za druhou.',
+      cta: 'Pozrieť video', href: '#macro', real: true,
+      img: 'img/kroj-cerveny.webp', ar: 900 / 1323, amb: '#C8102E',
+      hs: [
+        { x: 50, y: 5, t: 'Golier', d: 'Vysoký nariasený golier v zlatej a oranžovej.', z: 520 },
+        { x: 50, y: 17, t: 'Živôtik', d: 'Červený živôtik so striebornými sponami a zlatou výšivkou po stranách.', z: 480 },
+        { x: 12, y: 22, t: 'Rukávce', d: 'Trukované kolesá v zlatej a červenej, na konci vykrajovaný lem.', z: 440 },
+        { x: 50, y: 29, t: 'Pás', d: 'Pestrá tkaná stuha s kvetmi, viazaná vzadu do veľkej mašle.', z: 460 },
+        { x: 32, y: 70, t: 'Trukovka', d: 'Veľké zlaté kvety a špirály na čiernej sukni — retiazka vedená rukou.', z: 380 },
+        { x: 60, y: 94, t: 'Čipka', d: 'Biela čipka s lomeným okrajom.', z: 420 },
+      ],
+      macro: { o: '40% 72%', z: 4.2, video: 'img/kroj-cerveny.mp4', poster: 'img/kroj-cerveny-poster.jpg', label: 'Kroj zblízka',
+        steps: ['Celý kroj', 'Sukňa', 'Trukovka', 'Mašľa', 'Na hodoch'] },
+    },
+    {
       key: 'modrotlac', title: 'Modrotlač', sub: 'Farba, ktorá má vlastnú pamäť.',
       txt: 'Modrotlač prepája tradičnú techniku, prírodu a ornament. Každý vzor mení obyčajnú látku na rozpoznateľný podpis kraja.',
       cta: 'Objaviť modrotlač', href: '#kroje',
@@ -404,6 +420,7 @@
   const CARDS = [
     { reg: 'Bašovce', t: 'Autorský trukovaný kroj', m: '2026 · ženský', img: 'img/kroj-basovsky-v2.webp', f: 'zensky' },
     { reg: 'Sviatočný', t: 'Kroj s fialovým brokátom', m: 'ženský', img: 'img/kroj-fialovy.webp', f: 'zensky' },
+    { reg: 'Sviatočný', t: 'Červený kroj so zlatou trukovkou', m: 'ženský', img: 'img/kroj-cerveny.webp', f: 'zensky' },
     { reg: 'Pobedim', t: 'Zásterky na hody', m: '2026 · ženské', img: 'img/zasterky-pobedim.webp', f: 'zensky', wide: true },
     { reg: 'Očkov', t: 'Detský kroj podľa fotky', m: 'na zákazku · detský', img: 'img/kroj-ockovsky-detsky.webp', f: 'detsky zakazka', wide: true },
     { reg: 'Bučany', t: 'Mužský prucel', m: 'Trnavský kroj · mužský', img: 'img/prucel-bucany.webp', f: 'muzsky zakazka', wide: true },
