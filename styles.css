@@ -76,12 +76,12 @@ svg use { pointer-events: none; }
 }
 .site-header.is-scrolled { height: 76px; background: rgba(243, 239, 230, .9); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--line); }
 .logo { display: grid; justify-items: center; width: max-content; }
-.logo-orn { width: 34px; height: 34px; color: var(--accent); transition: width .5s var(--ease), height .5s var(--ease), margin .5s; margin-bottom: -2px; }
-.logo-word { font-family: var(--serif); font-size: 40px; line-height: 1; letter-spacing: -.02em; transition: font-size .5s var(--ease); }
-.logo-tag { font-family: var(--sans); font-size: 8.5px; letter-spacing: .3em; text-transform: uppercase; text-align: center; margin-top: 6px; line-height: 1.5; transition: opacity .3s, height .3s; }
+.logo-orn { width: 44px; height: 43px; color: var(--text); transition: width .5s var(--ease), height .5s var(--ease), margin .5s; margin-bottom: -2px; }
+.logo-word { display: block; height: 38px; width: 133px; margin-top: 4px; transition: height .5s var(--ease), width .5s var(--ease); }
+.logo-tag { font-family: var(--body); font-size: 9px; letter-spacing: .32em; text-transform: uppercase; text-align: center; margin-top: 6px; line-height: 1.5; transition: opacity .3s, height .3s; }
 .is-scrolled .logo { grid-template-columns: auto auto; align-items: center; gap: 8px; }
-.is-scrolled .logo-orn { width: 24px; height: 24px; margin: 0; }
-.is-scrolled .logo-word { font-size: 30px; }
+.is-scrolled .logo-orn { width: 32px; height: 31px; margin: 0; }
+.is-scrolled .logo-word { height: 27px; width: 95px; margin: 0; }
 .is-scrolled .logo-tag { display: none; }
 
 .main-nav { display: flex; gap: 0; }
@@ -464,7 +464,7 @@ svg use { pointer-events: none; }
 .ft-cols a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .site-footer .btn-red { background: #f7ece6; color: var(--accent); }
 .site-footer .btn-red:hover { background: #fff; }
-.ft-word { font-family: var(--serif); font-size: 25vw; line-height: .8; letter-spacing: -.03em; margin: 80px 0 30px; text-align: center; color: rgba(247,236,230,.12); white-space: nowrap; }
+.ft-word { display: block; width: 100%; height: auto; margin: 80px 0 30px; color: rgba(247,236,230,.14); }
 .ft-bottom { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-family: var(--sans); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .8; border-top: 1px solid rgba(247,236,230,.25); padding-top: 22px; }
 
 /* ─── DRAWER ─── */
@@ -513,8 +513,8 @@ svg use { pointer-events: none; }
   .main-nav, .lang, .tools-sep { display: none; }
   .site-header { grid-template-columns: 1fr auto; height: 84px; }
   .logo { grid-template-columns: auto auto; align-items: center; gap: 8px; }
-  .logo-orn { width: 24px; height: 24px; margin: 0; }
-  .logo-word { font-size: 30px; }
+  .logo-orn { width: 32px; height: 31px; margin: 0; }
+  .logo-word { height: 27px; width: 95px; margin: 0; }
   .logo-tag { display: none; }
   .menu-btn { width: 50px; height: 50px; }
   .overlay-nav { clip-path: circle(0 at calc(100% - var(--pad) - 25px) 42px); }
