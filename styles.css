@@ -555,10 +555,10 @@ body.torn .site-header.is-scrolled::after { background: none; }
 .reveal.in { opacity: 1; transform: none; }
 
 /* ─── responsive ─── */
-/* Menu má sedem položiek plus tlačidlo Podporte nás a v plnej veľkosti
-   potrebuje okno široké 1448 px. Zúženie preto začína skoro, inak by
-   pod touto šírkou naráždalo do loga. */
-@media (max-width: 1460px) {
+/* Horná lišta má päť položiek plus tlačidlo Podporte nás a v plnej
+   veľkosti potrebuje okno široké 1210 px. Pod tým sa zužuje, inak by
+   narážala do loga. Mobilné menu pod ornamentom má aj tak všetko. */
+@media (max-width: 1240px) {
   .main-nav a { padding: 4px 14px; font-size: 16px; }
   .main-nav a::after { left: 14px; right: 14px; }
 }
