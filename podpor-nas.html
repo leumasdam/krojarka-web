@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=21">
-<link rel="stylesheet" href="motion.css?v=2">
+<link rel="stylesheet" href="motion.css?v=6">
 <link rel="stylesheet" href="podstranky.css?v=2">
 </head>
 <body>
@@ -73,19 +73,40 @@
 <section class="mz-hero">
   <div class="mz-img"><img src="img/gen/dom-usadlost.webp" alt="Vizualizácia hlineného domu — sedliacka usadlosť s ovocným sadom" fetchpriority="high"></div>
   <div class="mz-veil"></div>
-  <svg class="mz-draw" viewBox="0 0 900 520" aria-hidden="true">
-      <path d="M60 470 H840"/>
-      <path d="M120 470 V250 L450 80 L780 250 V470"/>
-      <path d="M150 250 H750"/>
-      <path d="M450 80 L450 250"/>
-      <path d="M620 150 V100 H660 V172"/>
-      <path d="M190 470 V330 H270 V470"/>
-      <path d="M330 300 H420 V380 H330 Z M375 300 V380 M330 340 H420"/>
-      <path d="M520 300 H610 V380 H520 Z M565 300 V380 M520 340 H610"/>
-      <path d="M660 300 H740 V380 H660 Z M700 300 V380 M660 340 H740"/>
-      <path class="rd" d="M300 250 C330 210 360 230 375 200 C390 170 420 200 450 180 C480 200 510 170 525 200 C540 230 570 210 600 250"/>
-      <path class="rd" d="M40 470 C60 440 80 450 90 470 M810 470 C830 440 850 450 860 470"/>
-    </svg>
+  <svg class="mz-draw" data-sketch="img/gen/dom-skica.svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="ln">
+      <!-- strecha: horná hrana s valbou, hrebeň až po štít stodoly -->
+      <path d="M622 490 L642 452 L704 410 L832 338 L960 266 L1100 195 L1256 148"/>
+      <!-- odkvap -->
+      <path d="M622 490 L768 468 L896 450 L1086 428"/>
+      <!-- štít stodoly -->
+      <path d="M1256 148 L1160 320 L1100 425"/>
+      <path d="M1256 148 L1305 192 L1355 256 L1410 320 L1445 360"/>
+      <path d="M1090 388 L1445 398"/>
+      <path d="M1086 430 L1445 452"/>
+      <!-- stena, sokel, roh, zem -->
+      <path d="M702 505 L702 700"/>
+      <path d="M1086 428 L1086 740"/>
+      <path d="M702 650 L900 646 L1086 660"/>
+      <path d="M702 700 L900 712 L1086 740"/>
+      <!-- komín -->
+      <path d="M950 300 L950 234 L990 234 L990 282"/>
+      <!-- okná -->
+      <path d="M786 507 L832 502 L832 604 L786 608 Z M809 504 V606 M786 552 H832"/>
+      <path d="M880 502 L928 497 L928 602 L880 606 Z M904 499 V604 M880 548 H928"/>
+      <!-- stĺpik so strieškou a brána -->
+      <path d="M1128 500 V740"/>
+      <path d="M1082 500 L1100 470 L1180 468 L1186 496"/>
+      <path d="M1155 487 L1410 480 L1412 765 L1155 768 Z M1285 484 V766"/>
+      <path d="M1150 480 L1415 474"/>
+      <path d="M1445 470 V760"/>
+      <!-- plot -->
+      <path d="M576 600 V700 M600 598 V700 M624 596 V700 M648 594 V700 M672 592 V700"/>
+      <path d="M566 598 L700 590"/>
+      <!-- ornament v jej červenej: výšivka na sokli, ruža v kríku, konár jablone -->
+      <path class="rd" d="M712 640 C760 622 800 656 850 638 C900 620 940 654 990 636 C1030 622 1060 648 1080 640"/>
+      <path class="rd" d="M648 628 C656 608 678 608 680 628 C682 648 660 652 648 628 Z"/>
+      <path class="rd" d="M400 420 C430 380 470 400 500 370"/>
+    </g></svg>
   <span class="mz-tag">Vizualizácia · OZ Tým správnym smerom</span>
   <div class="mz-copy">
     <div>
@@ -225,6 +246,6 @@
 <div class="progress-thread" aria-hidden="true"><i id="pt-fill"></i></div>
 
 <script src="podstranky.js?v=3"></script>
-<script src="motion.js?v=2"></script>
+<script src="motion.js?v=3"></script>
 </body>
 </html>

@@ -90,6 +90,15 @@
   /* ───────── scroll-viazané hodnoty ───────── */
   const zooms = $$('[data-zoom]');
   const mz = $('.mz-hero'), mzDraw = $('.mz-draw'), mzWrap = $('.mz-wrap');
+  let sk = [];   // ťahy skice (načítajú sa z externého SVG)
+  if (mzDraw && mzDraw.dataset.sketch) {
+    fetch(mzDraw.dataset.sketch).then(r => r.text()).then(t => {
+      const doc = new DOMParser().parseFromString(t, 'image/svg+xml');
+      const g = document.importNode(doc.querySelector('g'), true);
+      mzDraw.appendChild(g); mzDraw.classList.add('is-sk');
+      sk = [...g.querySelectorAll('path')]; onScroll();
+    }).catch(() => {});
+  }
   const sp = $('.sp-hero');
   const kt = $('.kt-hero'), ktSteps = $$('.kt-steps li'), ktSticky = $('.kt-sticky');
   const stepsThread = $('.steps-thread path');
@@ -113,8 +122,12 @@
     if (mz && mzDraw) {
       const r = mzWrap.getBoundingClientRect();
       const p = range(-r.top / Math.max(1, r.height - H), 0, 1);
-      const draw = range(p, 0, .55), veil = 1 - range(p, .45, .9), fade = 1 - range(p, .7, 1);
+      const draw = range(p, 0, .3), veil = 1 - range(p, .55, .92), fade = 1 - range(p, .75, 1);
       mzDraw.style.setProperty('--t', (1 - ease(draw)).toFixed(4));
+      if (sk.length) {   // skica: ťahy sa dokresľujú zľava doprava medzi 22 % a 70 %
+        const q = range(p, .22, .7) * sk.length;
+        for (let i = 0; i < sk.length; i++) sk[i].style.strokeDashoffset = clamp(1 - (q - i) / 6).toFixed(3);
+      }
       mz.style.setProperty('--veil', (reduce ? 0 : veil).toFixed(3));
       mzDraw.style.setProperty('--draw', fade.toFixed(3));
       mz.style.setProperty('--zm', (1.12 - range(p, .4, 1) * .12).toFixed(4));
