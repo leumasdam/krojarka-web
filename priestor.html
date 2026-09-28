@@ -10,8 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/krojarka-skola.webp">
+<link rel="preload" as="image" href="img/gen/dom-interier.webp">
 <link rel="stylesheet" href="styles.css?v=21">
+<link rel="stylesheet" href="motion.css?v=2">
 <link rel="stylesheet" href="podstranky.css?v=2">
 </head>
 <body>
@@ -68,15 +69,17 @@
 
 <!-- TODO pred spustením: doplniť meno budovy, rok, adresu a čísla v sekcii
      „Tvrdé údaje". Všade, kde je dnes „na dohodu", chýba reálny údaj. -->
-<section class="pg-hero">
-  <div class="pg-hero-copy">
-    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Prenájom priestoru</p>
-    <h1 class="display-l">Dom, ktorý<br>už raz žil.</h1>
-    <p class="lead">Historická budova pri ateliéri. Hrubé múry, drevo a ticho, aké sa v novostavbe nedá postaviť. Dá sa prenajať na workshop, skúšku súboru, výstavu aj fotenie.</p>
-  </div>
-  <div class="pg-hero-media">
-    <img data-par=".1" src="img/krojarka-skola.webp" alt="Workshop trukovania — ilustračný záber">
-    <span class="pg-hero-tag">Ilustračný záber · fotky budovy doplníme</span>
+<section class="sp-hero">
+  <img src="img/gen/dom-interier.webp" alt="Vizualizácia interiéru — hrubé biele múry, drevená podlaha, svetlo z okna" fetchpriority="high">
+  <div class="sp-light" aria-hidden="true"></div>
+  <div class="sp-shade" aria-hidden="true"></div>
+  <span class="sp-tag">Vizualizácia · fotky budovy doplníme</span>
+  <div class="sp-copy">
+    <div>
+      <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Prenájom priestoru</p>
+      <h1 data-words>Dom, ktorý<br>už raz žil.</h1>
+    </div>
+    <p class="lead">Historická budova pri ateliéri. Hrubé múry, drevo a ticho, aké sa v novostavbe nedá postaviť. Svetlo tu cez deň putuje po stenách — scrollujte a uvidíte.</p>
   </div>
 </section>
 
@@ -85,59 +88,64 @@
     <div class="reveal">
       <div class="sec-head">
         <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Čo to je</p>
-        <h2 class="display-m">Priestor, ktorý<br>si pamätá remeslo.</h2>
+        <h2 class="display-m" data-words>Priestor, ktorý<br>si pamätá remeslo.</h2>
       </div>
       <p>Budova stojí kúsok od ateliéru a roky slúžila remeslu. Zostali v nej pôvodné okná, drevené podlahy a svetlo, ktoré cez deň putuje po stenách. Nie je to konferenčná sála a ani sa ňou netvári.</p>
-      <p>Hodí sa všade tam, kde má prostredie niesť časť významu. Kroj vyzerá v takomto dome inak než pod žiarivkami v telocvični.</p>
     </div>
     <div class="reveal">
       <div class="sec-head">
         <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Na čo sa hodí</p>
-        <h2 class="display-m">Od skúšky<br>po fotenie.</h2>
+        <h2 class="display-m" data-words>Od skúšky<br>po fotenie.</h2>
       </div>
-      <p><b>Workshopy a kurzy.</b> Šitie, vyšívanie, trukovanie. Priestor na stoly aj na ukážku so strojom.</p>
-      <p><b>Skúšky folklórnych súborov.</b> Miesto na prezliekanie, zrkadlá a odkladanie krojov.</p>
-      <p><b>Výstavy a prezentácie.</b> Kroje, fotografie, komorné podujatia pre pozvaných.</p>
-      <p><b>Fotenie a nakrúcanie.</b> Denné svetlo, autentické pozadie, žiadne kulisy.</p>
+      <p>Hodí sa všade tam, kde má prostredie niesť časť významu. Kroj vyzerá v takomto dome inak než pod žiarivkami v telocvični.</p>
     </div>
   </div>
 </section>
 
 <section class="pg-sec tight">
+  <ul class="sp-uses stagger">
+    <li class="reveal"><img src="img/krojarka-skola.webp" alt="" loading="lazy"><span class="n">01</span><h3>Workshopy a kurzy</h3><p>Šitie, vyšívanie, trukovanie. Stoly aj ukážka so strojom.</p></li>
+    <li class="reveal"><img src="img/zasterky-pobedim.webp" alt="" loading="lazy" style="object-fit:contain;background:#e9e2d4;padding:8%"><span class="n">02</span><h3>Skúšky súborov</h3><p>Miesto na prezliekanie, zrkadlá a odkladanie krojov.</p></li>
+    <li class="reveal"><img src="img/kroj-basovsky-v2.webp" alt="" loading="lazy" style="object-fit:contain;background:#e9e2d4;padding:8%"><span class="n">03</span><h3>Výstavy a prezentácie</h3><p>Kroje, fotografie, komorné podujatia pre pozvaných.</p></li>
+    <li class="reveal"><img src="img/trukovka-zlata.webp" alt="" loading="lazy"><span class="n">04</span><h3>Fotenie a nakrúcanie</h3><p>Denné svetlo, autentické pozadie, žiadne kulisy.</p></li>
+  </ul>
+</section>
+
+<section class="pg-sec tight">
   <div class="sec-head reveal">
     <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Tvrdé údaje</p>
-    <h2 class="display-m">To, na čo sa<br>pýtate ako prvé.</h2>
+    <h2 class="display-m" data-words>To, na čo sa<br>pýtate ako prvé.</h2>
   </div>
-  <dl class="facts reveal">
-    <div><dt>Kapacita</dt><dd class="na">na dohodu</dd></div>
-    <div><dt>Počet miestností</dt><dd class="na">na dohodu</dd></div>
-    <div><dt>Kúrenie</dt><dd>áno, celoročne</dd></div>
-    <div><dt>Kuchynka</dt><dd>áno, bez varenia</dd></div>
-    <div><dt>Toalety</dt><dd>áno</dd></div>
-    <div><dt>Parkovanie</dt><dd>pri budove</dd></div>
-    <div><dt>Bezbariérový prístup</dt><dd class="na">na dohodu</dd></div>
-    <div><dt>Wi-Fi</dt><dd>áno</dd></div>
-    <div><dt>Stoly a stoličky</dt><dd>v cene</dd></div>
-    <div><dt>Ozvučenie</dt><dd class="na">po dohode</dd></div>
-    <div><dt>Prenájom</dt><dd>na hodiny aj na celý deň</dd></div>
-    <div><dt>Cena</dt><dd>podľa typu akcie, pošlem obratom</dd></div>
+  <dl class="facts stagger">
+    <div class="reveal"><dt>Kapacita</dt><dd class="na">na dohodu</dd></div>
+    <div class="reveal"><dt>Počet miestností</dt><dd class="na">na dohodu</dd></div>
+    <div class="reveal"><dt>Kúrenie</dt><dd>áno, celoročne</dd></div>
+    <div class="reveal"><dt>Kuchynka</dt><dd>áno, bez varenia</dd></div>
+    <div class="reveal"><dt>Toalety</dt><dd>áno</dd></div>
+    <div class="reveal"><dt>Parkovanie</dt><dd>pri budove</dd></div>
+    <div class="reveal"><dt>Bezbariérový prístup</dt><dd class="na">na dohodu</dd></div>
+    <div class="reveal"><dt>Wi-Fi</dt><dd>áno</dd></div>
+    <div class="reveal"><dt>Stoly a stoličky</dt><dd>v cene</dd></div>
+    <div class="reveal"><dt>Ozvučenie</dt><dd class="na">po dohode</dd></div>
+    <div class="reveal"><dt>Prenájom</dt><dd>na hodiny aj na celý deň</dd></div>
+    <div class="reveal"><dt>Cena</dt><dd>podľa typu akcie, pošlem obratom</dd></div>
   </dl>
 </section>
 
 <section class="pg-sec tight">
   <div class="sec-head reveal">
     <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Priestor v obrazoch</p>
-    <h2 class="display-m">Ako to tam<br>vyzerá.</h2>
+    <h2 class="display-m" data-words>Ako to tam<br>vyzerá.</h2>
   </div>
   <div class="shots reveal">
-    <figure><img data-par=".05" src="img/krojarka-stroj.webp" alt="Trukovací stroj pri práci" loading="lazy"></figure>
-    <figure><img src="img/kriezlo-niti.webp" alt="Nite a rozpracované kriezlo" loading="lazy"></figure>
-    <figure><img src="img/krojarka-skola.webp" alt="Workshop trukovania pre deti" loading="lazy"></figure>
-    <figure><img src="img/bielocierna-stroj.webp" alt="Ruka vedie zásteru pod ihlou" loading="lazy"></figure>
-    <figure><img data-par=".05" src="img/trukovka-zlata.webp" alt="Zlatá trukovka na čiernom saténe" loading="lazy"></figure>
-    <figure><img src="img/ruzove-cipka.webp" alt="Čipka a trukované zástery pri stroji" loading="lazy"></figure>
+    <figure data-zoom><img data-par=".05" src="img/krojarka-stroj.webp" alt="Trukovací stroj pri práci" loading="lazy"></figure>
+    <figure data-zoom><img src="img/kriezlo-niti.webp" alt="Nite a rozpracované kriezlo" loading="lazy"></figure>
+    <figure data-zoom><img src="img/krojarka-skola.webp" alt="Workshop trukovania pre deti" loading="lazy"></figure>
+    <figure data-zoom><img src="img/bielocierna-stroj.webp" alt="Ruka vedie zásteru pod ihlou" loading="lazy"></figure>
+    <figure data-zoom><img data-par=".05" src="img/trukovka-zlata.webp" alt="Zlatá trukovka na čiernom saténe" loading="lazy"></figure>
+    <figure data-zoom><img src="img/ruzove-cipka.webp" alt="Čipka a trukované zástery pri stroji" loading="lazy"></figure>
   </div>
-  <p class="hint" style="margin-top:14px;color:var(--muted);font-size:13px">Fotografie sú zatiaľ z ateliéru a podujatí. Nahradia ich zábery samotnej budovy.</p>
+  <p class="hint" style="margin-top:14px;color:var(--muted);font-size:13px">Hore je vizualizácia, dole zábery z ateliéru a podujatí. Nahradia ich fotky samotnej budovy.</p>
 </section>
 
 <section class="pg-sec tight">
@@ -150,9 +158,26 @@
 </section>
 
 <section class="pg-sec tight">
-  <div class="mapbox reveal">
-    <iframe title="Mapa — Piešťansko" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-      src="https://www.openstreetmap.org/export/embed.html?bbox=17.78%2C48.56%2C17.88%2C48.62&amp;layer=mapnik"></iframe>
+  <div class="mapbox km reveal">
+    <svg class="kmap" viewBox="0 0 600 740" role="img" aria-label="Mapa Piešťanska s obcami, pre ktoré Krojárka šila">
+<path class="km-river" pathLength="1" d="M478.9 -2.0 C463.6 20.1 403.6 88.2 387.4 130.9 C371.3 173.6 382.0 210.7 382.0 254.2 C382.0 297.7 391.0 349.2 387.4 391.9 C383.8 434.6 366.8 465.5 360.5 510.4 C354.2 555.2 362.3 610.2 349.8 660.9 C337.2 711.6 296.0 789.0 285.2 814.6"/>
+<text class="km-lbl" x="412" y="190">Váh</text>
+<g class="km-ctx"><circle cx="372.4" cy="130.9" r="3"/><text x="382.4" y="134.9">Nové Mesto n. V.</text></g>
+<g class="km-ctx"><circle cx="368.1" cy="396.7" r="3"/><text x="378.1" y="400.7">Piešťany</text></g>
+<g class="km-ctx"><circle cx="342.2" cy="660.9" r="3"/><text x="352.2" y="664.9">Hlohovec</text></g>
+<g class="km-pt" style="--i:0"><circle class="km-halo" cx="325.1" cy="200.1" r="16"/><circle class="km-dot" cx="325.1" cy="200.1" r="5"/><text x="312.1" y="204.1" text-anchor="end">Čachtice</text></g>
+<g class="km-pt" style="--i:1"><circle class="km-halo" cx="310.9" cy="262.0" r="16"/><circle class="km-dot" cx="310.9" cy="262.0" r="5"/><text x="297.9" y="264.0" text-anchor="end">Podolie</text></g>
+<g class="km-pt" style="--i:2"><circle class="km-halo" cx="346.8" cy="292.4" r="16"/><circle class="km-dot" cx="346.8" cy="292.4" r="5"/><text x="359.8" y="290.4" text-anchor="start">Pobedim</text></g>
+<g class="km-pt" style="--i:3"><circle class="km-halo" cx="301.0" cy="297.7" r="16"/><circle class="km-dot" cx="301.0" cy="297.7" r="5"/><text x="288.0" y="305.7" text-anchor="end">Očkov</text></g>
+<g class="km-pt km-main" style="--i:4"><circle class="km-halo" cx="336.2" cy="329.4" r="16"/><circle class="km-dot" cx="336.2" cy="329.4" r="7"/><text x="349.2" y="335.4" text-anchor="start">Bašovce</text></g>
+<g class="km-pt" style="--i:5"><circle class="km-halo" cx="305.4" cy="336.3" r="16"/><circle class="km-dot" cx="305.4" cy="336.3" r="5"/><text x="292.4" y="350.3" text-anchor="end">Ostrov</text></g>
+<g class="km-pt" style="--i:6"><circle class="km-halo" cx="264.5" cy="440.9" r="16"/><circle class="km-dot" cx="264.5" cy="440.9" r="5"/><text x="251.5" y="448.9" text-anchor="end">Rakovice</text></g>
+<g class="km-pt" style="--i:7"><circle class="km-halo" cx="230.5" cy="672.1" r="16"/><circle class="km-dot" cx="230.5" cy="672.1" r="5"/><text x="217.5" y="676.1" text-anchor="end">Bučany</text></g>
+<g class="km-pt" style="--i:8"><circle class="km-halo" cx="291.0" cy="606.3" r="16"/><circle class="km-dot" cx="291.0" cy="606.3" r="5"/><text x="304.0" y="610.3" text-anchor="start">Červeník</text></g>
+<g class="km-pt" style="--i:9"><circle class="km-halo" cx="518.6" cy="456.4" r="16"/><circle class="km-dot" cx="518.6" cy="456.4" r="5"/><text x="505.6" y="448.4" text-anchor="end">Nitrianska Blatnica</text></g>
+<g class="km-pt" style="--i:10"><circle class="km-halo" cx="443.1" cy="79.3" r="16"/><circle class="km-dot" cx="443.1" cy="79.3" r="5"/><text x="456.1" y="83.3" text-anchor="start">Beckov</text></g>
+<g class="km-pt" style="--i:11"><circle class="km-halo" cx="108.5" cy="739.8" r="16"/><circle class="km-dot" cx="108.5" cy="739.8" r="5"/><text x="121.5" y="743.8" text-anchor="start">Trnava</text></g>
+</svg>
   </div>
 </section>
 
@@ -178,5 +203,6 @@
 <div class="progress-thread" aria-hidden="true"><i id="pt-fill"></i></div>
 
 <script src="podstranky.js?v=3"></script>
+<script src="motion.js?v=2"></script>
 </body>
 </html>

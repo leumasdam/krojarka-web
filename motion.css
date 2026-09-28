@@ -1,0 +1,157 @@
+/* ─────────────────────────────────────────────────────────────
+   Motion podstránok + prechody medzi stránkami.
+   Rovnaký jazyk ako homepage: niť, makro zoom, lepkavé sekcie.
+   Scroll-viazané hodnoty (--zm, --t, --lx, --mz) nastavuje podstranky.js.
+   ───────────────────────────────────────────────────────────── */
+
+/* ─── prechody medzi stránkami (View Transitions, MPA) ───
+   Hlavička sa nehýbe, obsah odíde hore a nový príde zdola.
+   Prehliadač bez podpory to len ignoruje. */
+@view-transition { navigation: auto; }
+.site-header { view-transition-name: site-header; }
+::view-transition-old(root) { animation: vtOut .42s cubic-bezier(.32,.72,.2,1) both; }
+::view-transition-new(root) { animation: vtIn .6s cubic-bezier(.32,.72,.2,1) both; }
+@keyframes vtOut { to { opacity: 0; transform: translateY(-22px); } }
+@keyframes vtIn { from { opacity: 0; transform: translateY(30px); } }
+
+/* ─── slová nadpisu vychádzajú spod linky ─── */
+.wr .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .06em; margin-bottom: -.06em; }
+.wr .w > i { display: inline-block; font-style: inherit; transform: translateY(112%); transition: transform 1.1s cubic-bezier(.16,1,.3,1); transition-delay: calc(var(--i) * 70ms); }
+.wr.in .w > i { transform: none; }
+
+/* ─── scroll-viazaný zoom fotiek ─── */
+[data-zoom] { overflow: hidden; }
+[data-zoom] > img { transform: scale(var(--zm, 1.14)); transform-origin: 50% 50%; will-change: transform; }
+
+/* ─── stagger pre zoznamy ─── */
+.stagger > .reveal { transition-delay: calc(var(--i, 0) * 90ms); }
+
+/* ─── niť: kreslí sa podľa scrollu ─── */
+.thread { fill: none; stroke: var(--accent); stroke-width: 1.3; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: var(--t, 1); }
+
+/* ─── O Krojárke: niť pozdĺž časovej osi ─── */
+.ab-line::before { display: none; }
+.tl-thread { position: absolute; top: 0; bottom: 0; left: calc(clamp(70px, 9vw, 150px) - 14px); width: 28px; overflow: visible; pointer-events: none; }
+.ab-year { position: relative; }
+.ab-year::before { content: ""; position: absolute; left: calc(clamp(70px, 9vw, 150px) * -0 - 9px); top: .32em; width: 0; height: 0; }
+.ab-ev .ab-stitch { position: absolute; left: clamp(70px, 9vw, 150px); width: 9px; height: 9px; margin-left: -4px; margin-top: 12px; border-radius: 50%; background: var(--bg); border: 1.4px solid var(--accent); transform: scale(.5); opacity: 0; transition: transform .6s var(--ease-out), opacity .4s; }
+.ab-ev.in .ab-stitch { transform: none; opacity: 1; }
+.ab-ev { position: relative; }
+.ab-ev-img { transition: box-shadow .8s var(--ease-out); }
+.ab-ev:hover .ab-ev-img { box-shadow: 0 40px 70px rgba(24,22,20,.22); }
+
+/* ─── O Krojárke: stroj s hotspotmi ─── */
+.mach { padding: clamp(60px, 8vw, 120px) var(--pad); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(30px, 5vw, 90px); align-items: center; }
+.mach-fig { position: relative; margin: 0; border-radius: 4px; overflow: hidden; background: #e9e2d4; aspect-ratio: 3 / 4; box-shadow: 0 30px 60px rgba(24,22,20,.14); }
+.mach-fig img { width: 100%; height: 100%; object-fit: cover; transform: scale(var(--zm, 1.14)); transform-origin: 46% 44%; }
+.mh { position: absolute; left: var(--hx); top: var(--hy); width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; background: #fff; color: var(--accent); display: grid; place-items: center; box-shadow: 0 2px 10px rgba(24,22,20,.22); cursor: pointer; transition: background .3s, color .3s, transform .5s var(--ease-out); }
+.mh::before, .mh::after { content: ""; position: absolute; width: 12px; height: 1.5px; background: currentColor; }
+.mh::after { transform: rotate(90deg); }
+.mh .ring { position: absolute; inset: -6px; border-radius: 50%; border: 1px solid #fff; animation: pulse 2.4s var(--ease-out) infinite; }
+.mh:hover, .mh.is-on { background: var(--accent); color: #fff; transform: scale(1.08); }
+.mh.is-on::after { transform: rotate(0); }
+.mach-copy .display-m { margin: 10px 0 20px; }
+.mach-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.mach-list li { padding: 18px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 34px 1fr; gap: 14px; cursor: pointer; transition: padding-left .5s var(--ease-out); }
+.mach-list li .n { font-family: var(--serif); color: var(--accent); font-size: 20px; }
+.mach-list li h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; margin: 0 0 4px; }
+.mach-list li p { margin: 0; font-size: 15.5px; color: #4a443d; line-height: 1.6; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .6s var(--ease), opacity .4s; }
+.mach-list li.is-on { padding-left: 10px; }
+.mach-list li.is-on p { max-height: 120px; opacity: 1; }
+
+/* ─── Múzeum: hero, ktorý sa najprv nakreslí, potom sa objaví dom ─── */
+.mz-wrap { height: 175svh; }
+.mz-hero { position: sticky; top: 0; height: 100svh; display: grid; align-items: end; overflow: hidden; background: #e9e2d4; isolation: isolate; }
+.mz-hero .mz-img { position: absolute; inset: 0; }
+.mz-hero .mz-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; transform: scale(var(--zm, 1.12)); }
+.mz-hero .mz-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(243,239,230,.96) 0%, rgba(243,239,230,.55) 26%, rgba(243,239,230,0) 55%); }
+.mz-hero .mz-veil { position: absolute; inset: 0; background: var(--bg); opacity: var(--veil, 1); transition: none; }
+.mz-draw { position: absolute; left: 50%; top: 50%; width: min(70vw, 900px); transform: translate(-50%, -54%); overflow: visible; pointer-events: none; opacity: var(--draw, 1); }
+.mz-draw path { fill: none; stroke: var(--text); stroke-width: 1.4; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: var(--t, 1); }
+.mz-draw .rd { stroke: var(--accent); }
+.mz-copy { position: relative; z-index: 2; padding: 0 var(--pad) clamp(40px, 6vw, 80px); display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 4vw; align-items: end; }
+.mz-copy h1 { font-size: clamp(44px, 6.4vw, 110px); margin: 12px 0 0; color: var(--text); }
+.mz-copy .lead { max-width: 40ch; font-size: 17.5px; line-height: 1.65; color: #3b352e; margin: 0 0 8px; background: linear-gradient(to top, rgba(243,239,230,.92), rgba(243,239,230,.6)); padding: 18px 20px; border-radius: 4px; }
+.mz-tag { position: absolute; right: var(--pad); top: clamp(120px, 16vh, 170px); z-index: 2; font-family: var(--sans); font-size: 9.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+.needs-p b { font-variant-numeric: tabular-nums; }
+.pec-shot { position: relative; }
+.pec-shot figcaption { position: absolute; left: 14px; bottom: 12px; font-family: var(--sans); font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: #fbf8f1; text-shadow: 0 1px 10px rgba(24,22,20,.6); }
+
+/* ─── Priestor: svetlo, ktoré putuje po stenách ─── */
+.sp-hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; background: #1e1a17; }
+.sp-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(var(--zm, 1.1)); transform-origin: 50% 40%; }
+.sp-light { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light; background: linear-gradient(105deg, transparent calc(var(--lx, 20%) - 18%), rgba(255,236,200,.95) var(--lx, 20%), transparent calc(var(--lx, 20%) + 18%)); opacity: .9; }
+.sp-shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(24,22,20,.72) 0%, rgba(24,22,20,.15) 45%, rgba(24,22,20,0) 70%), linear-gradient(to bottom, rgba(24,22,20,.35), transparent 30%); }
+.sp-copy { position: absolute; left: var(--pad); right: var(--pad); bottom: clamp(40px, 7vh, 90px); color: #f3efe6; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 4vw; align-items: end; }
+.sp-copy .eyebrow { color: #e0545c; }
+.sp-copy h1 { font-size: clamp(44px, 6.4vw, 110px); margin: 12px 0 0; }
+.sp-copy .lead { max-width: 40ch; font-size: 17px; line-height: 1.65; color: rgba(243,239,230,.85); margin: 0 0 6px; }
+.sp-tag { position: absolute; right: var(--pad); top: clamp(120px, 16vh, 170px); font-family: var(--sans); font-size: 9.5px; letter-spacing: .24em; text-transform: uppercase; color: rgba(243,239,230,.7); }
+.sp-uses { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.6vw, 22px); }
+.sp-uses li { position: relative; aspect-ratio: 3 / 4; border-radius: 4px; overflow: hidden; background: #e9e2d4; color: #f3efe6; display: grid; align-content: end; padding: 22px; isolation: isolate; }
+.sp-uses img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; transform: scale(1.04); transition: transform 1.6s var(--ease-out); }
+.sp-uses li::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(24,22,20,.78), rgba(24,22,20,0) 60%); }
+.sp-uses li:hover img { transform: scale(1.12); }
+.sp-uses .n { font-family: var(--serif); font-size: 20px; color: #e0545c; }
+.sp-uses h3 { font-family: var(--serif); font-weight: 400; font-size: 24px; margin: 4px 0 4px; line-height: 1.05; }
+.sp-uses p { margin: 0; font-size: 14px; color: rgba(243,239,230,.8); line-height: 1.5; }
+.facts.stagger div { transition-delay: calc(var(--i, 0) * 45ms); }
+.facts div.reveal { transform: translateX(-14px); }
+.facts div.reveal.in { transform: none; }
+
+/* ─── Kontakt: makro zoom na ihlu ─── */
+.kt-hero { position: relative; height: 200vh; }
+.kt-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #1e1a17; }
+.kt-sticky img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; transform: scale(var(--mz, 1)); transform-origin: 41% 52%; will-change: transform; }
+.kt-shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(24,22,20,.7), rgba(24,22,20,0) 55%); }
+.kt-copy { position: absolute; left: var(--pad); right: var(--pad); bottom: clamp(40px, 7vh, 90px); color: #f3efe6; opacity: var(--co, 1); transform: translateY(calc((1 - var(--co, 1)) * -30px)); }
+.kt-copy .eyebrow { color: #e0545c; }
+.kt-copy h1 { font-size: clamp(44px, 6.4vw, 110px); margin: 12px 0 14px; }
+.kt-copy .lead { max-width: 44ch; font-size: 17px; line-height: 1.65; color: rgba(243,239,230,.85); margin: 0; }
+.kt-steps { position: absolute; left: var(--pad); top: 50%; transform: translateY(-50%); list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.kt-steps li { font-family: var(--sans); font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: rgba(243,239,230,.55); display: flex; align-items: center; gap: 14px; transition: color .4s; }
+.kt-steps li::before { content: ""; width: 18px; height: 1px; background: currentColor; transition: width .5s var(--ease-out); }
+.kt-steps li.is-on { color: #f3efe6; }
+.kt-steps li.is-on::before { width: 44px; background: #e0545c; }
+.steps { position: relative; }
+.steps-thread { position: absolute; left: 0; right: 0; top: -14px; height: 40px; pointer-events: none; }
+.form input:focus, .form textarea:focus, .form select:focus { box-shadow: 0 0 0 4px rgba(167,15,25,.08); }
+.form .btn-red { transition: transform .5s var(--ease-out), background .3s; }
+.form .btn-red:hover { transform: translateY(-2px); }
+
+/* ─── mapa (statické SVG, rovnaké ako na homepage) ─── */
+.mapbox.km { padding: 18px 10px 6px; background: var(--surface); }
+.kmap { width: 100%; height: auto; max-height: 520px; display: block; overflow: visible; }
+.km-river { fill: none; stroke: var(--accent); stroke-width: 1.2; opacity: .6; stroke-dasharray: 1; stroke-dashoffset: var(--t, 1); transition: stroke-dashoffset 2.4s var(--ease); }
+.mapbox.in .km-river { --t: 0; }
+.km-lbl { font-family: var(--serif); font-style: italic; font-size: 20px; fill: var(--muted); }
+.km-ctx circle { fill: var(--bg); stroke: var(--muted); stroke-width: 1; }
+.km-ctx text { font-family: var(--sans); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; fill: var(--muted); }
+.km-pt { opacity: 0; transform: translateY(6px); transition: opacity .6s var(--ease-out), transform .8s var(--ease-out); transition-delay: calc(.5s + var(--i) * 90ms); }
+.mapbox.in .km-pt { opacity: 1; transform: none; }
+.km-halo { fill: var(--accent); opacity: .1; }
+.km-dot { fill: var(--accent); }
+.km-pt text { font-family: var(--sans); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; fill: var(--text); }
+.km-main text { font-weight: 500; }
+
+/* ─── responzív ─── */
+@media (max-width: 960px) {
+  .mach { grid-template-columns: 1fr; }
+  .mz-copy, .sp-copy { grid-template-columns: 1fr; }
+  .mz-draw { width: 88vw; }
+  .sp-uses { grid-template-columns: 1fr 1fr; }
+  .kt-hero { height: 150vh; }
+  .kt-steps { display: none; }
+  .tl-thread { display: none; }
+  .ab-stitch { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
+  .wr .w > i { transform: none !important; transition: none; }
+  [data-zoom] > img, .mach-fig img, .mz-hero .mz-img img, .sp-hero img, .kt-sticky img { transform: none !important; }
+  .mz-draw path, .thread, .km-river { stroke-dashoffset: 0 !important; }
+  .mz-hero .mz-veil { opacity: 0 !important; }
+  .sp-light { display: none; }
+  .kt-hero { height: auto; }
+  .kt-sticky { height: 80svh; }
+}

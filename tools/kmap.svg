@@ -1,0 +1,19 @@
+<svg class="kmap" viewBox="0 0 600 740" role="img" aria-label="Mapa Piešťanska s obcami, pre ktoré Krojárka šila">
+<path class="km-river" pathLength="1" d="M478.9 -2.0 C463.6 20.1 403.6 88.2 387.4 130.9 C371.3 173.6 382.0 210.7 382.0 254.2 C382.0 297.7 391.0 349.2 387.4 391.9 C383.8 434.6 366.8 465.5 360.5 510.4 C354.2 555.2 362.3 610.2 349.8 660.9 C337.2 711.6 296.0 789.0 285.2 814.6"/>
+<text class="km-lbl" x="412" y="190">Váh</text>
+<g class="km-ctx"><circle cx="372.4" cy="130.9" r="3"/><text x="382.4" y="134.9">Nové Mesto n. V.</text></g>
+<g class="km-ctx"><circle cx="368.1" cy="396.7" r="3"/><text x="378.1" y="400.7">Piešťany</text></g>
+<g class="km-ctx"><circle cx="342.2" cy="660.9" r="3"/><text x="352.2" y="664.9">Hlohovec</text></g>
+<g class="km-pt" style="--i:0"><circle class="km-halo" cx="325.1" cy="200.1" r="16"/><circle class="km-dot" cx="325.1" cy="200.1" r="5"/><text x="312.1" y="204.1" text-anchor="end">Čachtice</text></g>
+<g class="km-pt" style="--i:1"><circle class="km-halo" cx="310.9" cy="262.0" r="16"/><circle class="km-dot" cx="310.9" cy="262.0" r="5"/><text x="297.9" y="264.0" text-anchor="end">Podolie</text></g>
+<g class="km-pt" style="--i:2"><circle class="km-halo" cx="346.8" cy="292.4" r="16"/><circle class="km-dot" cx="346.8" cy="292.4" r="5"/><text x="359.8" y="290.4" text-anchor="start">Pobedim</text></g>
+<g class="km-pt" style="--i:3"><circle class="km-halo" cx="301.0" cy="297.7" r="16"/><circle class="km-dot" cx="301.0" cy="297.7" r="5"/><text x="288.0" y="305.7" text-anchor="end">Očkov</text></g>
+<g class="km-pt km-main" style="--i:4"><circle class="km-halo" cx="336.2" cy="329.4" r="16"/><circle class="km-dot" cx="336.2" cy="329.4" r="7"/><text x="349.2" y="335.4" text-anchor="start">Bašovce</text></g>
+<g class="km-pt" style="--i:5"><circle class="km-halo" cx="305.4" cy="336.3" r="16"/><circle class="km-dot" cx="305.4" cy="336.3" r="5"/><text x="292.4" y="350.3" text-anchor="end">Ostrov</text></g>
+<g class="km-pt" style="--i:6"><circle class="km-halo" cx="264.5" cy="440.9" r="16"/><circle class="km-dot" cx="264.5" cy="440.9" r="5"/><text x="251.5" y="448.9" text-anchor="end">Rakovice</text></g>
+<g class="km-pt" style="--i:7"><circle class="km-halo" cx="230.5" cy="672.1" r="16"/><circle class="km-dot" cx="230.5" cy="672.1" r="5"/><text x="217.5" y="676.1" text-anchor="end">Bučany</text></g>
+<g class="km-pt" style="--i:8"><circle class="km-halo" cx="291.0" cy="606.3" r="16"/><circle class="km-dot" cx="291.0" cy="606.3" r="5"/><text x="304.0" y="610.3" text-anchor="start">Červeník</text></g>
+<g class="km-pt" style="--i:9"><circle class="km-halo" cx="518.6" cy="456.4" r="16"/><circle class="km-dot" cx="518.6" cy="456.4" r="5"/><text x="505.6" y="448.4" text-anchor="end">Nitrianska Blatnica</text></g>
+<g class="km-pt" style="--i:10"><circle class="km-halo" cx="443.1" cy="79.3" r="16"/><circle class="km-dot" cx="443.1" cy="79.3" r="5"/><text x="456.1" y="83.3" text-anchor="start">Beckov</text></g>
+<g class="km-pt" style="--i:11"><circle class="km-halo" cx="108.5" cy="739.8" r="16"/><circle class="km-dot" cx="108.5" cy="739.8" r="5"/><text x="121.5" y="743.8" text-anchor="start">Trnava</text></g>
+</svg>

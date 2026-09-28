@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=21">
+<link rel="stylesheet" href="motion.css?v=2">
 <link rel="stylesheet" href="podstranky.css?v=2">
 </head>
 <body>
@@ -68,23 +69,39 @@
 <!-- TODO pred spustením: doplniť skutočný IBAN, presný názov príjemcu,
      variabilný symbol, IČO a odkaz na darovaciu stránku. QR kódy sa
      vygenerujú znova cez tools/pay_by_square.py už bez prepínača --ukazka. -->
-<section class="pg-hero">
-  <div class="pg-hero-copy">
-    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Podporte múzeum</p>
-    <h1 class="display-l">Z hlineného<br>domu múzeum.</h1>
-    <p class="lead">Zo stoštyridsaťročnej sedliackej usadlosti robíme interaktívne múzeum krojov. Každý dar ide do konkrétnej veci, nie do fondu.</p>
-  </div>
-  <div class="pg-hero-media">
-    <img data-par=".1" src="img/krojarka-skola.webp" alt="Ukážka trukovania pre deti">
-    <span class="pg-hero-tag">Čachtice · OZ Tým správnym smerom</span>
+<div class="mz-wrap">
+<section class="mz-hero">
+  <div class="mz-img"><img src="img/gen/dom-usadlost.webp" alt="Vizualizácia hlineného domu — sedliacka usadlosť s ovocným sadom" fetchpriority="high"></div>
+  <div class="mz-veil"></div>
+  <svg class="mz-draw" viewBox="0 0 900 520" aria-hidden="true">
+      <path d="M60 470 H840"/>
+      <path d="M120 470 V250 L450 80 L780 250 V470"/>
+      <path d="M150 250 H750"/>
+      <path d="M450 80 L450 250"/>
+      <path d="M620 150 V100 H660 V172"/>
+      <path d="M190 470 V330 H270 V470"/>
+      <path d="M330 300 H420 V380 H330 Z M375 300 V380 M330 340 H420"/>
+      <path d="M520 300 H610 V380 H520 Z M565 300 V380 M520 340 H610"/>
+      <path d="M660 300 H740 V380 H660 Z M700 300 V380 M660 340 H740"/>
+      <path class="rd" d="M300 250 C330 210 360 230 375 200 C390 170 420 200 450 180 C480 200 510 170 525 200 C540 230 570 210 600 250"/>
+      <path class="rd" d="M40 470 C60 440 80 450 90 470 M810 470 C830 440 850 450 860 470"/>
+    </svg>
+  <span class="mz-tag">Vizualizácia · OZ Tým správnym smerom</span>
+  <div class="mz-copy">
+    <div>
+      <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Múzeum krojov</p>
+      <h1 data-words>Z hlineného<br>domu múzeum.</h1>
+    </div>
+    <p class="lead">Zo stoštyridsaťročnej sedliackej usadlosti v Čachticiach robíme interaktívne múzeum krojov. Každý dar ide do konkrétnej veci, nie do fondu.</p>
   </div>
 </section>
+</div>
 
 <!-- ─── tri cesty ─── -->
 <section class="pg-sec" id="podporit">
   <div class="sec-head reveal">
     <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Ako pomôcť</p>
-    <h2 class="display-m">Tri cesty,<br>vyberte si svoju.</h2>
+    <h2 class="display-m" data-words>Tri cesty,<br>vyberte si svoju.</h2>
   </div>
 
   <div class="give">
@@ -144,16 +161,16 @@
 <section class="pg-sec tight">
   <div class="sec-head reveal">
     <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Na čo dar ide</p>
-    <h2 class="display-m">Konkrétne veci,<br>nie fond.</h2>
+    <h2 class="display-m" data-words>Konkrétne veci,<br>nie fond.</h2>
   </div>
-  <ul class="needs reveal">
-    <li><span class="needs-p">doplníme</span><h3>Krojárkina pec</h3><p>Vysnívaná pec do hlineného domu — tá, o ktorej sama písala ako o sne. Sumu doplní združenie.</p></li>
-    <li><span class="needs-p">15 €</span><h3>Jeden strom do sadu</h3><p>Stará odroda jablone alebo hrušky, aké sa tu pestovali pred sto rokmi.</p></li>
-    <li><span class="needs-p">40 €</span><h3>Vrece hliny a slamy</h3><p>Materiál na omietku, ktorá musí byť pôvodná, inak steny nedýchajú.</p></li>
-    <li><span class="needs-p">120 €</span><h3>Deň lektora pri stroji</h3><p>Ukážka trukovania pre jednu školskú triedu vrátane materiálu.</p></li>
-    <li><span class="needs-p">300 €</span><h3>Jedno okno do hlineného domu</h3><p>Drevené okno na mieru podľa pôvodného, aj s osadením.</p></li>
-    <li><span class="needs-p">900 €</span><h3>Oprava časti strechy stodoly</h3><p>Stodola drží pôvodné hospodárske mechanizmy, ktoré nesmú zmoknúť.</p></li>
-    <li><span class="needs-p">na dohodu</span><h3>Materiál a náradie</h3><p>Ak máte drevo, tehly alebo staré náradie, ozvite sa. Dar nemusí byť v peniazoch.</p></li>
+  <ul class="needs stagger">
+    <li class="reveal"><span class="needs-p">doplníme</span><h3>Krojárkina pec</h3><p>Vysnívaná pec do hlineného domu — tá, o ktorej sama písala ako o sne. Sumu doplní združenie.</p></li>
+    <li class="reveal"><span class="needs-p" data-count="15">15 €</span><h3>Jeden strom do sadu</h3><p>Stará odroda jablone alebo hrušky, aké sa tu pestovali pred sto rokmi.</p></li>
+    <li class="reveal"><span class="needs-p" data-count="40">40 €</span><h3>Vrece hliny a slamy</h3><p>Materiál na omietku, ktorá musí byť pôvodná, inak steny nedýchajú.</p></li>
+    <li class="reveal"><span class="needs-p" data-count="120">120 €</span><h3>Deň lektora pri stroji</h3><p>Ukážka trukovania pre jednu školskú triedu vrátane materiálu.</p></li>
+    <li class="reveal"><span class="needs-p" data-count="300">300 €</span><h3>Jedno okno do hlineného domu</h3><p>Drevené okno na mieru podľa pôvodného, aj s osadením.</p></li>
+    <li class="reveal"><span class="needs-p" data-count="900">900 €</span><h3>Oprava časti strechy stodoly</h3><p>Stodola drží pôvodné hospodárske mechanizmy, ktoré nesmú zmoknúť.</p></li>
+    <li class="reveal"><span class="needs-p">na dohodu</span><h3>Materiál a náradie</h3><p>Ak máte drevo, tehly alebo staré náradie, ozvite sa. Dar nemusí byť v peniazoch.</p></li>
   </ul>
   <p class="hint" style="margin-top:16px">Sumy sú orientačné a ukazujú, čo sa za dar reálne kúpi. Presné ceny sa menia podľa dodávateľa.</p>
 </section>
@@ -164,15 +181,15 @@
     <div class="reveal">
       <div class="sec-head">
         <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Čo je za nami</p>
-        <h2 class="display-m">Kde sme<br>teraz.</h2>
+        <h2 class="display-m" data-words>Kde sme<br>teraz.</h2>
       </div>
       <p>Usadlosť stojí, trukovací stroj beží a ukážky pre školy už prebiehajú — v Pobedime si deti trukovanie skúšali priamo pri stroji. Kroje, ktoré v múzeu uvidíte, nie sú kulisy, ale kusy ušité tu.</p>
       <p>Pred nami je stodola s pôvodnými hospodárskymi mechanizmami, sad so starými odrodami, náučný chodník a zázemie, kde sa dá posedieť.</p>
       <a class="link-arrow" href="o-krojarke.html">Celý príbeh <svg><use href="#arrow"/></svg></a>
     </div>
     <div class="shots reveal" style="grid-template-columns:1fr 1fr">
-      <figure><img data-par=".05" src="img/krojarka-stroj.webp" alt="Trukovací stroj v prevádzke" loading="lazy"></figure>
-      <figure><img src="img/cepcenie.webp" alt="Ukážka čepčenia" loading="lazy"></figure>
+      <figure class="pec-shot" data-zoom><img src="img/gen/krojarkina-pec.webp" alt="Vizualizácia Krojárkinej pece v hlinenom dome" loading="lazy"><figcaption>Vizualizácia · Krojárkina pec</figcaption></figure>
+      <figure data-zoom><img src="img/krojarka-skola.webp" alt="Ukážka trukovania pre deti" loading="lazy"></figure>
     </div>
   </div>
 </section>
@@ -208,5 +225,6 @@
 <div class="progress-thread" aria-hidden="true"><i id="pt-fill"></i></div>
 
 <script src="podstranky.js?v=3"></script>
+<script src="motion.js?v=2"></script>
 </body>
 </html>
