@@ -1,0 +1,112 @@
+/* ─────────────────────────────────────────────────────────────
+   Spoločné časti podstránok Kontakt a Priestor.
+   Stavia na styles.css, premenné a typografia sú spoločné.
+   Parallax beží cez --py, ktoré nastavuje podstranky.js.
+   ───────────────────────────────────────────────────────────── */
+
+[data-par] { transform: translate3d(0, var(--py, 0px), 0); }
+
+/* Nadpis sekcie je p, inak ho chytí .sec-head p { justify-self: end } */
+.sec-head .eyebrow { justify-self: start; }
+
+/* ─── hlavička stránky ─── */
+.pg-hero {
+  display: grid; grid-template-columns: 1fr 1.02fr; align-items: stretch;
+  min-height: 74svh; background: var(--bg);
+}
+.pg-hero-copy { align-self: center; padding: 150px clamp(30px, 4vw, 70px) 80px var(--pad); }
+.pg-hero-copy .eyebrow { white-space: nowrap; }
+.pg-hero-copy h1 { font-size: clamp(40px, 4.4vw, 82px); margin: 14px 0 24px; }
+.pg-hero-copy .lead { max-width: 44ch; font-size: 17.5px; line-height: 1.65; color: #3b352e; margin: 0; }
+.pg-hero-media { position: relative; overflow: hidden; background: #e9e2d4; }
+.pg-hero-media img { position: absolute; left: 0; top: -8%; width: 100%; height: 116%; object-fit: cover; }
+/* Hlavička je hore priehľadná, pod logo preto ide krémový závoj. */
+.pg-hero-media::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 180px; z-index: 1; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(243,239,230,.95), rgba(243,239,230,0));
+}
+.pg-hero-tag {
+  position: absolute; left: 22px; bottom: 20px; z-index: 2;
+  font-family: var(--sans); font-size: 9.5px; letter-spacing: .24em; text-transform: uppercase;
+  color: #fbf8f1; text-shadow: 0 1px 12px rgba(24,22,20,.55);
+}
+
+/* ─── bloky ─── */
+.pg-sec { padding: clamp(60px, 8vw, 120px) var(--pad); }
+.pg-sec.tight { padding-block: clamp(40px, 5vw, 76px); }
+.pg-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(26px, 5vw, 80px); align-items: start; }
+.pg-split p { font-size: 16.5px; line-height: 1.7; color: #3b352e; max-width: 46ch; }
+.pg-split p:first-child { margin-top: 0; }
+
+/* ─── kontaktné údaje ─── */
+.contact-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 3vw, 44px); }
+.contact-cols h3 {
+  font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--accent); margin: 0 0 12px;
+}
+.contact-cols p { margin: 0; font-size: 17px; line-height: 1.7; }
+.contact-cols a { border-bottom: 1px solid var(--line); }
+.contact-cols a:hover { border-color: var(--accent); }
+
+/* ─── tvrdé údaje ─── */
+.facts { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(24px, 4vw, 60px); }
+.facts div { display: flex; justify-content: space-between; gap: 18px; align-items: baseline; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.facts dt { font-size: 15.5px; color: #4a443d; }
+.facts dd { margin: 0; font-size: 15.5px; text-align: right; }
+.facts dd.na { color: var(--muted); }
+
+/* ─── kroky ─── */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2.4vw, 34px); }
+.steps li { border-top: 1px solid var(--line); padding-top: 16px; }
+.steps .n { font-family: var(--serif); font-size: 26px; color: var(--accent); display: block; line-height: 1; }
+.steps h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; margin: 8px 0 8px; }
+.steps p { font-size: 15.5px; line-height: 1.6; color: #4a443d; margin: 0; }
+
+/* ─── galéria ─── */
+.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(10px, 1.4vw, 20px); }
+.shots figure { margin: 0; overflow: hidden; border-radius: 3px; background: #e9e2d4; aspect-ratio: 4 / 5; }
+.shots figure:nth-child(3n+1) { aspect-ratio: 4 / 3; }
+.shots img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ─── formulár ─── */
+.form { display: grid; gap: 16px; max-width: 560px; }
+.form .row { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+.form label { display: grid; gap: 7px; font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.form input, .form textarea, .form select {
+  font: inherit; font-size: 16px; color: var(--text); background: rgba(255,255,255,.6);
+  border: 1px solid var(--line); border-radius: 3px; padding: 11px 13px; width: 100%;
+}
+.form textarea { min-height: 130px; resize: vertical; }
+.form input:focus, .form textarea:focus, .form select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+.form .hint { font-size: 13px; color: var(--muted); margin: 0; }
+
+/* ─── mapa ─── */
+.mapbox { border: 1px solid var(--line); border-radius: 3px; overflow: hidden; background: #e9e2d4; }
+.mapbox iframe { display: block; width: 100%; height: clamp(280px, 38vw, 440px); border: 0; }
+
+/* ─── pás s výzvou ─── */
+.band {
+  background: #1e1a17; color: #f3efe6; border-radius: 4px;
+  padding: clamp(32px, 5vw, 64px); display: grid; gap: 18px; justify-items: start;
+}
+.band h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 52px); margin: 0; line-height: 1.05; }
+.band p { margin: 0; max-width: 52ch; color: #cdc5b8; font-size: 16.5px; line-height: 1.65; }
+.band .eyebrow { color: #c98b90; }
+
+/* ─── responzív ─── */
+@media (max-width: 1000px) {
+  .contact-cols { grid-template-columns: 1fr 1fr; }
+  .steps { grid-template-columns: 1fr; }
+}
+@media (max-width: 860px) {
+  .pg-hero { grid-template-columns: 1fr; min-height: 0; }
+  .pg-hero-media { height: 46svh; order: -1; }
+  .pg-hero-copy { padding: 40px var(--pad) 60px; }
+  .pg-split { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr; }
+  .contact-cols { grid-template-columns: 1fr; }
+  .shots { grid-template-columns: 1fr 1fr; }
+  .form .row { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) { [data-par] { transform: none !important; } }

@@ -1,8 +1,10 @@
 /* ─────────────────────────────────────────────────────────────
-   O Krojárke — správanie podstránky.
+   Spoločné správanie podstránok (O Krojárke, Kontakt, Priestor).
    Hlavička a menu sa správajú rovnako ako na homepage, zvyšok je
    parallax, odkrývanie a prepínanie fotiek v lepkavej sekcii.
-   main.js sa sem zámerne nenačítava, hľadal by prvky, ktoré tu nie sú.
+   Každá časť si najprv overí, či na stránke vôbec je, takže sa dá
+   načítať na ktorúkoľvek podstránku. main.js sa sem zámerne
+   nenačítava, hľadal by prvky homepage a spadol by.
    ───────────────────────────────────────────────────────────── */
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
@@ -58,6 +60,27 @@
       el.style.setProperty('--py', Math.round(-off * k * 100) / 100 + 'px');
     });
   };
+
+  /* ───────── formulár dopytu ─────────
+     Stránka beží bez servera, preto sa správa poskladá a otvorí sa
+     poštový klient. Nič sa neodosiela na pozadí a nič sa nikam neukladá. */
+  $$('form[data-mailto]').forEach(form => {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const d = new FormData(form);
+      const telo = [
+        'Meno: ' + (d.get('meno') || ''),
+        'Kontakt: ' + (d.get('kontakt') || ''),
+        'Typ: ' + (d.get('typ') || ''),
+        '',
+        d.get('sprava') || ''
+      ].join('\n');
+      const url = 'mailto:' + form.dataset.mailto +
+        '?subject=' + encodeURIComponent(form.dataset.subject || 'Dopyt z webu') +
+        '&body=' + encodeURIComponent(telo);
+      location.href = url;
+    });
+  });
 
   /* ───────── niť postupu v päte stránky ───────── */
   const pt = $('#pt-fill');

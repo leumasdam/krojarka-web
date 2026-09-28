@@ -536,15 +536,34 @@ body.torn .site-header.is-scrolled::after { background: none; }
 .progress-thread i { position: absolute; left: 0; top: 0; width: 1px; height: 100%; background: var(--accent); transform-origin: top; transform: scaleY(var(--p, 0)); }
 .progress-thread i::after { content: ""; position: absolute; left: -3px; bottom: -3px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); transform: scaleY(calc(1 / max(var(--p, 1), .01))); }
 
+/* ─── prenájom priestoru: pás medzi ateliérom a udalosťami ─── */
+.rent {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center; gap: clamp(26px, 4vw, 70px);
+  padding: clamp(50px, 7vw, 110px) var(--pad);
+}
+.rent-img { margin: 0; overflow: hidden; border-radius: 3px; background: #e9e2d4; aspect-ratio: 3 / 2; }
+.rent-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.6s var(--ease-out); }
+.rent:hover .rent-img img { transform: scale(1.03); }
+.rent-copy { max-width: 46ch; }
+.rent-copy .display-m { margin: 10px 0 16px; }
+.rent-copy p { font-size: 16.5px; line-height: 1.7; color: #3b352e; margin: 0 0 22px; }
+@media (max-width: 860px) { .rent { grid-template-columns: 1fr; } }
+
 /* reveal */
 .reveal { opacity: 0; transform: translateY(34px); transition: opacity 1s var(--ease-out), transform 1.2s var(--ease-out); }
 .reveal.in { opacity: 1; transform: none; }
 
 /* ─── responsive ─── */
-@media (max-width: 1180px) {
+/* Menu má sedem položiek a v plnej veľkosti potrebuje okno široké aspoň
+   1294 px. Zúženie preto začína skôr, inak by medzi 1180 a 1294 px
+   naráždalo do loga. */
+@media (max-width: 1320px) {
   .main-nav a { padding: 4px 14px; font-size: 16px; }
   .main-nav a::after { left: 14px; right: 14px; }
-    .cards { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 1180px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
   .process-list { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 960px) {

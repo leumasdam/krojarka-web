@@ -3,16 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>O Krojárke — Lenka Černoková</title>
-<meta name="description" content="Ateliér, príbeh, ocenenia a spolupráce Krojárky. Kroje šité a trukované na zákazku, na hody, pre folklórne súbory aj podľa rodinných fotografií.">
+<title>Kontakt — Krojárka</title>
+<meta name="description" content="Kontakt na Krojárku. Kroje na zákazku, opravy, doplnky a workshopy trukovania. Ateliér na Piešťansku, stretnutie po dohode.">
 <link rel="icon" href="logo/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="logo/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/basovsky-atelier.webp">
 <link rel="stylesheet" href="styles.css?v=18">
-<link rel="stylesheet" href="o-krojarke.css?v=1">
+<link rel="stylesheet" href="podstranky.css?v=1">
 </head>
 <body>
 
@@ -27,7 +26,6 @@
   </defs>
 </svg>
 
-<!-- ───────── HEADER ───────── -->
 <header class="site-header" id="top">
   <a class="logo" href="index.html" aria-label="Krojárka — domov">
     <svg class="logo-orn" viewBox="0 0 124.88 120.88"><use href="#orn"/></svg>
@@ -39,9 +37,9 @@
     <a href="index.html#pribehy">Príbehy</a>
     <a href="index.html#remeslo">Remeslo</a>
     <a href="index.html#regiony">Regióny</a>
-    <a href="o-krojarke.html" aria-current="page">O projekte</a>
+    <a href="o-krojarke.html">O projekte</a>
     <a href="priestor.html">Priestor</a>
-    <a href="kontakt.html">Kontakt</a>
+    <a href="kontakt.html" aria-current="page">Kontakt</a>
   </nav>
   <div class="header-tools">
     <button class="icon-btn" aria-label="Hľadať"><svg viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="1.4"/></svg></button>
@@ -66,144 +64,109 @@
 
 <main>
 
-<!-- ───────── HERO ─────────
-     Tri vrstvy s rôznou rýchlosťou: fotka ateliéru vzadu ide najpomalšie,
-     text stredne, portrét vpredu najrýchlejšie. Tým vznikne hĺbka. -->
-<section class="ab-hero">
-  <div class="ab-hero-media">
-    <img class="ab-hero-shot" data-par=".12" src="img/krojarka.webp" alt="Lenka Černoková pri práci v ateliéri" fetchpriority="high">
-    <span class="ab-hero-tag">Ateliér · Piešťansko</span>
+<section class="pg-hero">
+  <div class="pg-hero-copy">
+    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Kontakt</p>
+    <h1 class="display-l">Napíšte,<br>ozvem sa.</h1>
+    <p class="lead">Kroj na zákazku, oprava, doplnok alebo workshop trukovania. Najlepšie začať tým, že napíšete, o čo ide a dokedy to potrebujete.</p>
   </div>
-
-  <div class="ab-hero-copy">
-    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Krojárka · Lenka Černoková</p>
-    <h1 class="display-l">Ruka,<br>ktorá vedie<br>retiazku.</h1>
-    <p class="lead">Kroje šije a trukuje na zákazku. Na hody, pre folklórne súbory aj podľa rodinných fotografií, ktoré niekto našiel v škatuli po starej mame.</p>
-    <ul class="ab-jump">
-      <li><a href="#atelier">Ateliér</a></li>
-      <li><a href="#pribeh">Môj príbeh</a></li>
-      <li><a href="#ocenenia">Ocenenia</a></li>
-      <li><a href="#spolupraca">Spolupráce</a></li>
-    </ul>
+  <div class="pg-hero-media">
+    <img data-par=".1" src="img/basovsky-atelier.webp" alt="Ateliér Krojárky">
+    <span class="pg-hero-tag">Ateliér · Piešťansko</span>
   </div>
-
-  <a class="ab-scroll" href="#atelier"><span></span>Ďalej</a>
 </section>
 
-<!-- ───────── CITÁT ───────── -->
-<section class="ab-claim">
-  <img class="ab-ph ph-l" data-par=".22" src="img/detail-vysivka.webp" srcset="img/detail-vysivka.webp 1x, img/detail-vysivka@2x.webp 2x" alt="" aria-hidden="true" loading="lazy">
-  <p class="ab-quote reveal">Kroj nie je kostým.<br>Je to <em>rodokmeň</em>, ktorý sa dá obliecť.</p>
-  <img class="ab-ph ph-r" data-par=".3" src="img/kriezlo-detail.webp" alt="" aria-hidden="true" loading="lazy">
-</section>
-
-<!-- ───────── ATELIÉR: lepkavá fotka, texty idú okolo ───────── -->
-<section class="ab-sticky" id="atelier">
-  <div class="abs-media">
-    <div class="abs-stack">
-      <img class="is-on" src="img/krojarka-stroj.webp" alt="Historický trukovací stroj Lintz &amp; Eckhardt" data-cap="Stroj Lintz &amp; Eckhardt, Berlín">
-      <img src="img/kriezlo-niti.webp" alt="Nite pripravené na prácu" data-cap="Nite podľa predlohy, odtieň po odtieni" loading="lazy">
-      <img src="img/kriezlo-rozpracovane.webp" alt="Rozpracované krieželo" data-cap="Rozpracované krieželo" loading="lazy">
-      <img src="img/krojarka-skola.webp" alt="Ukážka trukovania v škole" data-cap="Ukážka pre deti, aby videli, ako retiazka vzniká" loading="lazy">
+<section class="pg-sec">
+  <div class="contact-cols">
+    <div>
+      <h3>Ateliér</h3>
+      <p>Piešťansko<br>Stretnutie po dohode</p>
     </div>
-    <p class="abs-cap" id="abs-cap">Stroj Lintz &amp; Eckhardt, Berlín</p>
-  </div>
-
-  <div class="abs-steps">
-    <article class="abs-step">
-      <p class="eyebrow">01 · Ateliér</p>
-      <h2 class="display-s">Jedna miestnosť,<br>jeden stroj.</h2>
-      <p>Ateliér je malý a tichý. Stroj je starší ako republika a stále beží, lebo sa oň niekto stará. Každá retiazka ide rukou, nie programom.</p>
-    </article>
-    <article class="abs-step">
-      <p class="eyebrow">02 · Materiál</p>
-      <h2 class="display-s">Najskôr<br>sa hľadá niť.</h2>
-      <p>Odtieň sa nevyberá z katalógu, ale podľa predlohy. Pri starých fotografiách to znamená hádať z čiernobielej a overovať si to v múzeu aj u pamätníkov.</p>
-    </article>
-    <article class="abs-step">
-      <p class="eyebrow">03 · Práca</p>
-      <h2 class="display-s">Vzor sa vedie<br>bez predkreslenia.</h2>
-      <p>Trukovanie je retiazkový steh vedený rukou. Kde iní tlačia tlačidlo, tu sa otáča látkou. Jeden oblúk je jedna súvislá retiazka, ktorá sa nedá opraviť.</p>
-    </article>
-    <article class="abs-step">
-      <p class="eyebrow">04 · Odovzdávanie</p>
-      <h2 class="display-s">So strojom<br>chodí aj do škôl.</h2>
-      <p>Remeslo žije, kým ho má kto odovzdávať. Deti vidia, ako vzor vzniká, a môžu si skúsiť viesť látku. Väčšinou zistia, že to nie je také ľahké.</p>
-    </article>
+    <div>
+      <h3>Napíšte</h3>
+      <p><a href="mailto:ahoj@krojarka.sk">ahoj@krojarka.sk</a><br><a href="tel:+421900000000">+421 900 000 000</a></p>
+    </div>
+    <div>
+      <h3>Sledujte</h3>
+      <p><a href="https://www.facebook.com/lenka.cernokova" rel="noopener">Facebook</a><br><a href="#">Instagram</a></p>
+    </div>
   </div>
 </section>
 
-<!-- ───────── PRÍBEH: časová os ───────── -->
-<section class="ab-time" id="pribeh">
+<section class="pg-sec tight">
   <div class="sec-head reveal">
-    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Môj príbeh</p>
-    <h2 class="display-m">Od prvej zástery<br>po autorský kroj.</h2>
+    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Ako prebieha zákazka</p>
+    <h2 class="display-m">Od prvej správy<br>po hotový kroj.</h2>
   </div>
-
-  <ol class="ab-line">
-    <li class="ab-ev reveal">
-      <span class="ab-year" data-par=".1">2009</span>
-      <div class="ab-ev-txt">
-        <h3>Prvá zástera</h3>
-        <p>Ušitá pre vlastnú dcéru na hody. Vzor odkreslený z fotografie starej mamy. Vtedy to ešte nebolo remeslo, len tvrdohlavosť.</p>
-      </div>
-      <figure class="ab-ev-img" data-par=".18"><img src="img/basovsky-zastera.webp" alt="" loading="lazy"></figure>
+  <ol class="steps">
+    <li class="reveal">
+      <span class="n">01</span>
+      <h3>Ozvete sa</h3>
+      <p>Napíšte, o aký kus ide, pre koho je a dokedy ho potrebujete. Ak máte starú fotografiu alebo kus kroja po rodine, pošlite ju rovno, veľa napovie.</p>
     </li>
-    <li class="ab-ev reveal">
-      <span class="ab-year" data-par=".1">2014</span>
-      <div class="ab-ev-txt">
-        <h3>Stroj z pozostalosti</h3>
-        <p>Lintz &amp; Eckhardt prišiel rozobratý v debne. Po oprave sa ukázalo, že vie to, čo dnešné stroje nevedia, viesť retiazku voľnou rukou.</p>
-      </div>
-      <figure class="ab-ev-img" data-par=".24"><img src="img/krojarka-stroj.webp" alt="" loading="lazy"></figure>
+    <li class="reveal">
+      <span class="n">02</span>
+      <h3>Stretnutie a miery</h3>
+      <p>Prejdeme materiál, vzor aj región. Odoberú sa miery a dohodne sa cena a termín. Pri zákazkách na hody treba počítať s niekoľkými mesiacmi dopredu.</p>
     </li>
-    <li class="ab-ev reveal">
-      <span class="ab-year" data-par=".1">2019</span>
-      <div class="ab-ev-txt">
-        <h3>Kroje pre súbory</h3>
-        <p>Prvé väčšie zákazky pre folklórne súbory. Nie jeden kroj, ale celá sada, v ktorej musí každý kus sedieť k ostatným.</p>
-      </div>
-      <figure class="ab-ev-img" data-par=".18"><img src="img/kroj-regiony.webp" alt="" loading="lazy"></figure>
-    </li>
-    <li class="ab-ev reveal">
-      <span class="ab-year" data-par=".1">2026</span>
-      <div class="ab-ev-txt">
-        <h3>Autorský Bašovský kroj</h3>
-        <p>Vlastný vzor postavený na starých predlohách. Zlatá trukovka na čiernom saténe, ktorá v kraji predtým takto nikdy nevyzerala.</p>
-      </div>
-      <figure class="ab-ev-img" data-par=".24"><img src="img/kroj-basovsky-v2.webp" alt="" loading="lazy"></figure>
+    <li class="reveal">
+      <span class="n">03</span>
+      <h3>Šitie a odovzdanie</h3>
+      <p>Počas práce posielam priebežné fotky. Pri odovzdaní sa kroj doladí na mieste, aby sedel presne tak, ako má.</p>
     </li>
   </ol>
 </section>
 
-<!-- ───────── OCENENIA ─────────
-     TODO: čísla a názvy sú zástupné, treba doplniť reálne. -->
-<section class="ab-awards" id="ocenenia">
-  <div class="sec-head reveal">
-    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Ocenenia a uznania</p>
-    <h2 class="display-m">Čo sa k tomu<br>popri práci prilepilo.</h2>
+<section class="pg-sec tight">
+  <div class="pg-split">
+    <div>
+      <div class="sec-head reveal">
+        <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Dopyt</p>
+        <h2 class="display-m">Napíšte<br>rovno odtiaľto.</h2>
+      </div>
+      <!-- Formulár otvorí poštového klienta s predvyplnenou správou.
+           Stránka beží bez servera, takže sa nedá odosielať na pozadí. -->
+      <form class="form" id="dopyt" data-mailto="ahoj@krojarka.sk" data-subject="Dopyt z webu">
+        <div class="row">
+          <label for="f-meno">Meno<input id="f-meno" name="meno" type="text" autocomplete="name" required></label>
+          <label for="f-mail">E-mail alebo telefón<input id="f-mail" name="kontakt" type="text" autocomplete="email" required></label>
+        </div>
+        <label for="f-typ">O čo ide
+          <select id="f-typ" name="typ">
+            <option>Kroj na zákazku</option>
+            <option>Oprava alebo úprava</option>
+            <option>Doplnok — zástera, rukávce, čepiec</option>
+            <option>Workshop trukovania</option>
+            <option>Prenájom priestoru</option>
+            <option>Niečo iné</option>
+          </select>
+        </label>
+        <label for="f-text">Správa<textarea id="f-text" name="sprava" placeholder="Pre koho, do akého termínu, z akého regiónu." required></textarea></label>
+        <button class="btn-red" type="submit">Odoslať dopyt <svg><use href="#arrow"/></svg></button>
+        <p class="hint">Otvorí sa vám poštový program s vyplnenou správou. Ak ho nemáte nastavený, napíšte priamo na <a href="mailto:ahoj@krojarka.sk">ahoj@krojarka.sk</a>.</p>
+      </form>
+    </div>
+    <div>
+      <div class="sec-head reveal">
+        <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Kde nás nájdete</p>
+        <h2 class="display-m">Ateliér<br>na Piešťansku.</h2>
+      </div>
+      <div class="mapbox reveal">
+        <iframe title="Mapa — Piešťansko" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=17.78%2C48.56%2C17.88%2C48.62&amp;layer=mapnik"></iframe>
+      </div>
+      <p class="hint" style="margin-top:10px">Presnú adresu pošlem pri dohodnutí stretnutia.</p>
+    </div>
   </div>
-  <ul class="ab-award-list">
-    <li class="reveal"><span class="ab-aw-y">2025</span><span class="ab-aw-t">Cena za zachovanie remesla</span><span class="ab-aw-m">zástupný záznam</span></li>
-    <li class="reveal"><span class="ab-aw-y">2024</span><span class="ab-aw-t">Výstava krojov · regionálne múzeum</span><span class="ab-aw-m">zástupný záznam</span></li>
-    <li class="reveal"><span class="ab-aw-y">2023</span><span class="ab-aw-t">Workshop trukovania pre školy</span><span class="ab-aw-m">zástupný záznam</span></li>
-    <li class="reveal"><span class="ab-aw-y">2021</span><span class="ab-aw-t">Rekonštrukcia kroja podľa rodinnej fotografie</span><span class="ab-aw-m">zástupný záznam</span></li>
-  </ul>
 </section>
 
-<!-- ───────── SPOLUPRÁCE ───────── -->
-<section class="ab-partners" id="spolupraca">
-  <div class="sec-head reveal">
-    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Spolupráce</p>
-    <h2 class="display-m">S kým to má<br>zmysel robiť.</h2>
+<section class="pg-sec tight">
+  <div class="band reveal">
+    <p class="eyebrow">Prenájom</p>
+    <h2>Hľadáte priestor<br>na akciu?</h2>
+    <p>Historická budova pri ateliéri sa dá prenajať na workshopy, skúšky súborov, výstavy aj fotenie.</p>
+    <a class="btn-red" href="priestor.html">Pozrieť priestor <svg><use href="#arrow"/></svg></a>
   </div>
-  <div class="ab-part-grid">
-    <article class="ab-part reveal"><svg class="ab-part-orn"><use href="#orn"/></svg><h3>Folklórne súbory</h3><p>Kompletné sady krojov, opravy a doplnky pred sezónou.</p></article>
-    <article class="ab-part reveal"><svg class="ab-part-orn"><use href="#orn"/></svg><h3>Múzeá a zbierky</h3><p>Rekonštrukcie podľa zbierkových predmetov a archívnych fotografií.</p></article>
-    <article class="ab-part reveal"><svg class="ab-part-orn"><use href="#orn"/></svg><h3>Školy</h3><p>Ukážky trukovania so strojom priamo v triede.</p></article>
-    <article class="ab-part reveal"><svg class="ab-part-orn"><use href="#orn"/></svg><h3>Rodiny</h3><p>Kroj na mieru podľa toho, čo sa v rodine zachovalo.</p></article>
-  </div>
-  <a class="cta-round" href="index.html#kontakt"><span class="dot"><svg><use href="#arrow"/></svg></span>Napísať Krojárke<span class="cta-line"></span></a>
 </section>
 
 </main>
@@ -222,7 +185,7 @@
     <a class="btn-red" href="mailto:ahoj@krojarka.sk">Kontaktovať <svg><use href="#arrow"/></svg></a>
   </div>
   <svg class="ft-word" viewBox="0 0 235.50 67.25" aria-hidden="true"><use href="#wordmark"/></svg>
-  <div class="ft-bottom"><span>© 2026 Krojárka</span><span>Workshopy · Výstavy · Spolupráce · Médiá</span><a href="#top">Hore ↑</a></div>
+  <div class="ft-bottom"><span>© 2026 Krojárka</span><span><a href="priestor.html">Prenájom priestoru</a> · <a href="o-krojarke.html">O Krojárke</a></span><a href="#top">Hore ↑</a></div>
 </footer>
 
 <div class="progress-thread" aria-hidden="true"><i id="pt-fill"></i></div>
