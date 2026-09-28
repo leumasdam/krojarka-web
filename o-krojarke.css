@@ -1,0 +1,171 @@
+/* ─────────────────────────────────────────────────────────────
+   O Krojárke — štýly podstránky.
+   Stavia na styles.css, premenné a typografia sú spoločné.
+   Parallax beží cez --py, ktoré v JS nastavuje o-krojarke.js.
+   ───────────────────────────────────────────────────────────── */
+
+/* ─── spoločné ─── */
+.ab-par { will-change: transform; }
+[data-par] { transform: translate3d(0, var(--py, 0px), 0); }
+
+.sec-head { margin: 0 0 clamp(40px, 6vw, 88px); }
+.sec-head .display-m { margin-top: 10px; }
+/* Nadpis sekcie je p, takže ho inak chytí pravidlo .sec-head p { justify-self: end }
+   zo styles.css a odsunie ho doprava. */
+.sec-head .eyebrow { justify-self: start; }
+
+/* ─── hero ─────────────────────────────────────────────
+   Delené plátno: vľavo fotka cez celú výšku, vpravo text na krémovej.
+   Fotka je v ráme vyššia než rám a vnútri sa posúva, čím vzniká parallax
+   bez toho, aby sa kdekoľvek odkryl prázdny okraj. */
+.ab-hero {
+  position: relative; min-height: 100svh;
+  display: grid; grid-template-columns: 1.04fr 1fr; align-items: stretch;
+  background: var(--bg);
+}
+.ab-hero-media { position: relative; overflow: hidden; background: #e9e2d4; }
+/* Hlavička je hore priehľadná a logo aj menu by na tmavej fotke zanikli,
+   preto pod ne ide krémový závoj. */
+.ab-hero-media::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 190px; z-index: 1; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(243,239,230,.96) 0%, rgba(243,239,230,.72) 42%, rgba(243,239,230,0) 100%);
+}
+.ab-hero-shot {
+  position: absolute; left: 0; top: -9%; width: 100%; height: 118%;
+  object-fit: cover; object-position: 52% 45%;
+}
+.ab-hero-tag {
+  position: absolute; left: 26px; bottom: 24px; z-index: 2;
+  font-family: var(--sans); font-size: 9.5px; letter-spacing: .24em; text-transform: uppercase;
+  color: #fbf8f1; text-shadow: 0 1px 12px rgba(24,22,20,.5);
+}
+.ab-hero-copy {
+  position: relative; z-index: 3; align-self: center;
+  padding: 150px var(--pad) 110px clamp(34px, 5vw, 86px);
+}
+.ab-hero-copy .eyebrow { white-space: nowrap; }
+.ab-hero-copy .display-l { font-size: clamp(42px, 4.6vw, 86px); margin: 14px 0 26px; }
+.ab-hero-copy .lead { max-width: 42ch; font-size: 17.5px; line-height: 1.65; color: #3b352e; margin: 0 0 34px; }
+
+.ab-jump { list-style: none; display: flex; flex-wrap: wrap; gap: 26px; margin: 0; padding: 26px 0 0; border-top: 1px solid var(--line); max-width: 640px; }
+.ab-jump a {
+  font-family: var(--sans); font-size: 10.5px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--muted); position: relative; padding-bottom: 4px;
+}
+.ab-jump a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--accent); transition: right .45s var(--ease-out); }
+.ab-jump a:hover { color: var(--text); }
+.ab-jump a:hover::after { right: 0; }
+
+.ab-scroll {
+  position: absolute; z-index: 3; left: clamp(34px, 5vw, 86px); bottom: 38px;
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--sans); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--muted);
+}
+.ab-scroll span { width: 46px; height: 1px; background: var(--line); position: relative; overflow: hidden; }
+.ab-scroll span::after { content: ""; position: absolute; inset: 0; background: var(--accent); animation: abRun 2.6s var(--ease) infinite; }
+@keyframes abRun { 0% { transform: translateX(-100%); } 55%, 100% { transform: translateX(100%); } }
+
+/* ─── citát ─── */
+.ab-claim {
+  position: relative; padding: clamp(110px, 16vw, 220px) var(--pad);
+  display: grid; place-items: center; overflow: hidden;
+}
+.ab-quote {
+  font-family: var(--serif); font-weight: 400; line-height: 1.12; text-align: center;
+  font-size: clamp(30px, 4.6vw, 68px); max-width: 18ch; margin: 0; position: relative; z-index: 2;
+}
+.ab-quote em { font-style: italic; color: var(--accent); }
+.ab-ph { position: absolute; z-index: 1; width: clamp(130px, 17vw, 280px); aspect-ratio: 1; object-fit: cover; border-radius: 3px; box-shadow: 0 30px 60px rgba(24,22,20,.16); }
+.ab-ph.ph-l { left: max(2vw, 40px); top: 12%; transform: rotate(-4deg) translate3d(0, var(--py, 0px), 0); }
+.ab-ph.ph-r { right: max(2vw, 40px); bottom: 10%; transform: rotate(5deg) translate3d(0, var(--py, 0px), 0); }
+
+/* ─── ateliér: lepkavá fotka ─── */
+/* Stĺpce sa zámerne neťahujú na start: lepkavá fotka potrebuje, aby jej
+   bunka v gride mala plnú výšku sekcie, inak sa odlepí hneď po vlastnej
+   výške a zvyšok textu odroluje bez nej. */
+.ab-sticky {
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(30px, 5vw, 90px);
+  padding: 0 var(--pad) clamp(80px, 10vw, 160px);
+}
+.abs-media { position: sticky; top: 118px; height: calc(100svh - 170px); display: flex; flex-direction: column; gap: 14px; }
+.abs-stack { position: relative; flex: 1; border-radius: 4px; overflow: hidden; background: #e9e2d4; }
+.abs-stack img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transform: scale(1.06); transition: opacity 1s var(--ease-out), transform 1.6s var(--ease-out);
+}
+.abs-stack img.is-on { opacity: 1; transform: none; }
+.abs-cap { font-family: var(--sans); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin: 0; min-height: 2.4em; }
+
+.abs-steps { display: grid; }
+.abs-step { min-height: 92svh; display: flex; flex-direction: column; justify-content: center; max-width: 46ch; }
+.abs-step .display-s { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3.2vw, 50px); line-height: 1.04; margin: 12px 0 18px; }
+.abs-step p { font-size: 17px; line-height: 1.68; color: #3b352e; margin: 0; }
+.abs-step .eyebrow { color: var(--accent); }
+
+/* ─── časová os ─── */
+.ab-time { padding: clamp(80px, 10vw, 150px) var(--pad); position: relative; }
+.ab-line { list-style: none; margin: 0; padding: 0; position: relative; }
+.ab-line::before { content: ""; position: absolute; left: clamp(70px, 9vw, 150px); top: 0; bottom: 0; width: 1px; background: var(--line); }
+.ab-ev {
+  display: grid; grid-template-columns: clamp(70px, 9vw, 150px) minmax(0, 1fr) clamp(180px, 24vw, 380px);
+  gap: clamp(24px, 4vw, 70px); align-items: start; padding: clamp(40px, 6vw, 90px) 0;
+}
+.ab-year { font-family: var(--serif); font-size: clamp(26px, 2.6vw, 40px); color: var(--accent); line-height: 1; display: block; }
+.ab-ev-txt { padding-left: clamp(20px, 3vw, 50px); }
+.ab-ev-txt h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.6vw, 38px); margin: 0 0 12px; }
+.ab-ev-txt p { font-size: 16.5px; line-height: 1.68; color: #3b352e; margin: 0; max-width: 46ch; }
+.ab-ev-img { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 3px; background: #e9e2d4; box-shadow: 0 26px 50px rgba(24,22,20,.14); }
+.ab-ev-img img { width: 100%; height: 100%; object-fit: cover; }
+.ab-ev:nth-child(even) .ab-ev-img { aspect-ratio: 1; }
+
+/* ─── ocenenia ─── */
+.ab-awards { padding: clamp(60px, 8vw, 120px) var(--pad); }
+.ab-award-list { list-style: none; margin: 0; padding: 0; }
+.ab-award-list li {
+  display: grid; grid-template-columns: 90px minmax(0, 1fr) auto; gap: 24px; align-items: baseline;
+  padding: 26px 0; border-top: 1px solid var(--line);
+}
+.ab-award-list li:last-child { border-bottom: 1px solid var(--line); }
+.ab-aw-y { font-family: var(--serif); font-size: 22px; color: var(--accent); }
+.ab-aw-t { font-size: 19px; }
+.ab-aw-m { font-family: var(--sans); font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+
+/* ─── spolupráce ─── */
+.ab-partners { padding: clamp(60px, 8vw, 120px) var(--pad) clamp(90px, 12vw, 170px); }
+.ab-part-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2vw, 30px); margin-bottom: clamp(40px, 6vw, 80px); }
+.ab-part { border: 1px solid var(--line); border-radius: 4px; padding: 30px 26px 34px; background: rgba(255,255,255,.35); }
+.ab-part-orn { width: 26px; height: 25px; color: var(--accent); display: block; margin-bottom: 18px; }
+.ab-part h3 { font-family: var(--serif); font-weight: 400; font-size: 24px; margin: 0 0 10px; }
+.ab-part p { font-size: 15.5px; line-height: 1.6; color: #4a443d; margin: 0; }
+
+/* ─── responzív ─── */
+@media (max-width: 1100px) {
+  .ab-hero { grid-template-columns: 1fr 1.1fr; }
+  .ab-part-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 860px) {
+  .ab-hero { grid-template-columns: 1fr; min-height: 0; }
+  .ab-hero-media { height: 54svh; }
+  .ab-hero-copy { padding: 44px var(--pad) 80px; }
+  .ab-scroll { display: none; }
+  .ab-sticky { grid-template-columns: 1fr; }
+  .abs-media { position: relative; top: 0; height: 58svh; margin-bottom: 30px; }
+  .abs-step { min-height: 0; padding: 40px 0; }
+  .ab-ev { grid-template-columns: 1fr; gap: 18px; }
+  .ab-line::before { display: none; }
+  .ab-ev-txt { padding-left: 0; }
+  .ab-ev-img { aspect-ratio: 3 / 2 !important; }
+  .ab-ph { display: none; }
+  .ab-award-list li { grid-template-columns: 70px 1fr; }
+  .ab-aw-m { display: none; }
+}
+@media (max-width: 560px) {
+  .ab-part-grid { grid-template-columns: 1fr; }
+}
+
+/* Kto má vypnuté animácie, dostane statickú stránku bez posunov. */
+@media (prefers-reduced-motion: reduce) {
+  [data-par] { transform: none !important; }
+  .abs-stack img { transition: opacity .01s; transform: none; }
+  .ab-scroll span::after { animation: none; }
+}
