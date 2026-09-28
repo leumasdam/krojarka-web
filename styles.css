@@ -120,14 +120,17 @@ body.torn .site-header.is-scrolled::after { background: none; }
 .is-scrolled .logo-tag { display: none; }
 
 .main-nav { display: flex; gap: 0; }
-.main-nav a { font-family: var(--body); font-size: 16px; padding: 4px 26px; position: relative; }
+/* Farba je #181614 na krémovej, kontrast 15,7 : 1, takže problém nikdy nebol
+   v kontraste. Newsreader vo váhe 350 má len také tenké ťahy, že odkazy
+   opticky zmizli. Váha 500 je v načítanom variabilnom reze, nie dopočítaná. */
+.main-nav a { font-family: var(--body); font-size: 17px; font-weight: 500; letter-spacing: .012em; padding: 4px 26px; position: relative; }
 .main-nav a + a::before { content: ""; position: absolute; left: 0; top: 50%; height: 14px; width: 1px; background: var(--line); transform: translateY(-50%); }
 .main-nav a::after { content: ""; position: absolute; left: 26px; right: 26px; bottom: -2px; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .45s var(--ease-out); }
 .main-nav a:hover::after { transform: scaleX(1); }
 
 .header-tools { display: flex; align-items: center; gap: 20px; justify-self: end; }
 .tools-sep { width: 1px; height: 20px; background: var(--line); }
-.lang { display: flex; align-items: center; gap: 8px; font-size: 16px; }
+.lang { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 500; }
 .menu-btn { width: 62px; height: 62px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; transition: transform .6s var(--ease-out); }
 .menu-btn svg { width: 28px; height: 28px; }
 .menu-btn:hover { transform: rotate(45deg); }
@@ -539,7 +542,7 @@ body.torn .site-header.is-scrolled::after { background: none; }
 
 /* ─── responsive ─── */
 @media (max-width: 1180px) {
-  .main-nav a { padding: 4px 14px; font-size: 15px; }
+  .main-nav a { padding: 4px 14px; font-size: 16px; }
   .main-nav a::after { left: 14px; right: 14px; }
     .cards { grid-template-columns: repeat(3, 1fr); }
   .process-list { grid-template-columns: repeat(3, 1fr); }
