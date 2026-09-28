@@ -5,6 +5,24 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const pad = n => String(n).padStart(2, '0');
 
+  /* ───────── veľké verzie fotiek pre zoom ─────────
+     Hero fotky majú 2,5× variant (tools/upscale.py), detaily a galéria 2×.
+     CSS transform: scale() nemení výber cez srcset, preto sa veľká verzia
+     vymieňa ručne až vtedy, keď sa na ňu naozaj zoomuje. */
+  const big = (src, suf = '@2-5x') => src.replace(/\.webp$/, suf + '.webp');
+  /* Vymení fotku až keď je načítaná, aby zoom neprebliklo prázdnym miestom.
+     Obrázok sa drží v pending, inak ho vie zberač pamäte zlikvidovať skôr,
+     než sa načítanie dokončí. Zámerne bez img.decode(): pri týchto veľkých
+     webp sa v Chrome nedokončí a výmena by sa nikdy nespustila. */
+  const pending = new Set();
+  const swapWhenReady = (url, apply) => {
+    const im = new Image();
+    pending.add(im);
+    im.onload = () => { pending.delete(im); apply(url); };
+    im.onerror = () => pending.delete(im);
+    im.src = url;
+  };
+
   /* ───────── dáta: 7 príbehov hero ─────────
      real: true = skutočná práca Krojárky (FB), inak ilustračný AI vizuál z referencií
      macro: kam sa zoomuje v sekcii pod hero (o = transform-origin, detail = obrázok/video na konci) */
@@ -21,7 +39,7 @@
         { x: 66, y: 50, t: 'Stuha', d: 'Dlhá stuha s kvetinovým ornamentom po celej dĺžke.', z: 480 },
         { x: 34, y: 76, t: 'Sukňa', d: 'Čierna sukňa s pásmi výšivky a čipkovým lemom.', z: 380 },
       ],
-      macro: { o: '16% 26%', z: 7.5, detail: 'img/detail-vysivka.webp', pos: '50% 50%', contain: true, rot: 10, label: 'Od kroja k stehu',
+      macro: { o: '16% 26%', z: 5, detail: 'img/detail-vysivka.webp', pos: '50% 50%', contain: true, rot: 10, label: 'Od kroja k stehu',
         steps: ['Celý kroj', 'Živôtik', 'Rukáv', 'Výšivka', 'Jeden steh'] },
     },
     {
@@ -342,6 +360,7 @@
   function setMacro(s) {
     const m = s.macro;
     mk.src = s.img; mk.alt = '';
+    mk.dataset.big = big(s.img);
     mk.style.setProperty('--ar', s.ar);
     mk.style.transformOrigin = m.o;
     mk.classList.toggle('photo', !!s.photo);
@@ -352,19 +371,43 @@
     $$('.macro-steps li').forEach((li, i) => (li.textContent = labels[i]));
     macro.classList.toggle('is-gallery', !!m.gallery);
     mDetail.innerHTML = m.gallery
-      ? m.gallery.map((g, i) => `<img src="${g.src}" alt="${g.label}" data-label="${g.label}" loading="lazy" class="${i ? '' : 'is-on'}">`).join('')
+      ? m.gallery.map((g, i) => `<img src="${g.src}" srcset="${g.src} 1x, ${big(g.src, '@2x')} 2x" alt="${g.label}" data-label="${g.label}" loading="lazy" class="${i ? '' : 'is-on'}">`).join('')
       : m.video
       ? `<video src="${m.video}" poster="${m.poster}" muted loop playsinline preload="none" aria-label="${m.label}"></video>`
-      : `<img src="${m.detail}" alt="${m.label}" style="object-position:${m.pos}" loading="lazy">`;
+      : `<img src="${m.detail}" srcset="${m.detail} 1x, ${big(m.detail, '@2x')} 2x" alt="${m.label}" style="object-position:${m.pos}" loading="lazy">`;
     mLabel.textContent = m.label + (s.real ? ' · z ateliéru' : '');
+    upgradeMacro();
   }
+
+  /* veľkú verziu kroja načítaj, až keď sa makro blíži do zorného poľa */
+  let macroNear = false;
+  function upgradeMacro() {
+    const url = mk.dataset.big;
+    if (!macroNear || !url || mk.dataset.loaded === url) return;
+    swapWhenReady(url, u => {
+      if (mk.dataset.big !== u) return;   // medzitým sa prepol kroj
+      mk.src = u; mk.dataset.loaded = u;
+    });
+  }
+  new IntersectionObserver(es => {
+    macroNear = es[0].isIntersecting;
+    upgradeMacro();
+  }, { rootMargin: '60% 0px' }).observe(macro);
 
   /* ───────── hotspot drawer ───────── */
   const drawer = $('#drawer'), scrim = $('#scrim'), zoom = $('#dr-zoom'), thumbs = $('#dr-thumbs');
   const setZoom = (s, h) => {
-    zoom.style.backgroundImage = `url(${s.img})`;
+    const want = big(s.img);
+    zoom.dataset.want = want;
+    zoom.style.backgroundImage = `url(${zoom.dataset.loaded === want ? want : s.img})`;
     zoom.style.setProperty('--z', h.z + '%');
     zoom.style.setProperty('--pos', `${h.x}% ${h.y}%`);
+    /* zásuvka zväčšuje fotku na 380 až 520 %, malá verzia by tu bola mäkká */
+    swapWhenReady(want, u => {
+      if (zoom.dataset.want !== u || !drawer.classList.contains('is-open')) return;
+      zoom.style.backgroundImage = `url(${u})`;
+      zoom.dataset.loaded = u;
+    });
   };
   const openDrawer = (si, hi) => {
     const s = SLIDES[si], h = s.hs[hi];
