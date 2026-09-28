@@ -57,6 +57,7 @@
       sc.style.setProperty('--c', ease(c).toFixed(4));
       const on = r.top <= H * .5 && c < .5;
       sc.classList.toggle('is-on', on);
+      if (on) $$('.wr', sc).forEach(w => w.classList.add('in'));
       if (r.top <= H * .5) cur = i;
       /* parallax vrstvy podľa postupu scény */
       $$('[data-depth]', sc).forEach(el => {
