@@ -670,3 +670,38 @@ svg use { pointer-events: none; }
   .hero { padding-top: 140px; }
 }
 .logo { transition: margin .5s var(--ease); }
+
+/* služby */
+.services { padding: 120px var(--pad) 110px; border-top: 1px solid var(--line); }
+.svc-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+.svc-list li { padding: 34px 34px 38px 0; border-bottom: 1px solid var(--line); }
+.svc-list li:not(:nth-child(3n + 1)) { padding-left: 34px; border-left: 1px solid var(--line); }
+.svc-list .n { font-family: var(--serif); font-size: 24px; color: var(--accent); }
+.svc-list h3 { font-family: var(--serif); font-weight: 400; font-size: 30px; line-height: 1.05; margin: 6px 0 10px; }
+.svc-list p { margin: 0; color: #4a443d; font-size: 16px; max-width: 34ch; }
+.svc-quote { margin: 70px auto 0; max-width: 900px; text-align: center; }
+.svc-quote p { font-family: var(--serif); font-style: italic; font-size: clamp(28px, 3vw, 44px); line-height: 1.12; margin: 0 0 16px; }
+.svc-quote footer { font-family: var(--sans); font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+.at-quote { margin: 0 0 30px; padding-left: 20px; border-left: 1px solid var(--accent); font-family: var(--serif); font-style: italic; font-size: 20px; line-height: 1.4; color: #3e3832; max-width: 40ch; }
+.ev-tag { font-family: var(--sans); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(167,15,25,.35); border-radius: 999px; padding: 7px 14px; justify-self: end; }
+.ev-list time { font-size: 28px; }
+.ev-cta { margin-top: 44px; }
+/* mapa: legenda + naživo */
+.reg-legend { list-style: none; padding: 0; margin: -18px 0 34px; display: flex; gap: 26px; font-family: var(--sans); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.reg-legend li { display: flex; align-items: center; gap: 10px; }
+.reg-legend i { width: 11px; height: 11px; border-radius: 50%; border: 1.4px solid var(--accent); background: var(--accent); }
+.reg-legend .lg-live { background: transparent; border-style: dashed; }
+.rpt.live .dot { stroke-dasharray: 2.5 2; fill: var(--bg); }
+.rpt.live text { font-style: italic; }
+.map-pts circle.live { fill: none; stroke: var(--accent); }
+.reg-live { width: 120px; height: 160px; display: grid; place-items: center; background: #ece6da; border-radius: 999px 999px 4px 4px; }
+.reg-live svg { width: 54px; height: 54px; color: var(--accent); }
+@media (max-width: 960px) {
+  .svc-list { grid-template-columns: 1fr; }
+  .svc-list li, .svc-list li:not(:nth-child(3n + 1)) { padding: 26px 0; border-left: 0; }
+  .ev-tag { justify-self: start; }
+  .reg-live { width: 90px; height: 130px; }
+}
+.sec-head .eyebrow { justify-self: start; }
+.rpt:not(.live):not(.ctx) .dot { fill: var(--accent); }
+.rpt:not(.live):not(.ctx).is-on .dot, .rpt:not(.live):not(.ctx):hover .dot { fill: var(--text); stroke: var(--text); }
