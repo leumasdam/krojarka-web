@@ -12,22 +12,23 @@
   position: sticky; top: 0; height: 100svh; overflow: hidden; isolation: isolate;
   transform: scale(calc(1 - var(--c, 0) * .06)) translateY(calc(var(--c, 0) * -18px));
   transform-origin: 50% 40%;
-  filter: brightness(calc(1 - var(--c, 0) * .35));
   border-radius: calc(var(--c, 0) * 18px);
-  will-change: transform, filter;
+  will-change: transform;
 }
+/* stmavnutie prekrytej scény – overlay namiesto filtra, aby to nebrzdilo */
+.sc::after { content: ""; position: absolute; inset: 0; z-index: 9; background: #000; opacity: calc(var(--c, 0) * .45); pointer-events: none; }
 .sc.dark { background: var(--ink); color: var(--cream); }
 .sc.light { background: var(--paper); color: var(--text); }
 .sc .eyebrow { margin-bottom: 18px; }
 .sc.dark .eyebrow { color: #e0545c; }
-.sc .no { font-family: var(--sans); font-size: 10.5px; letter-spacing: .28em; text-transform: uppercase; display: flex; gap: 14px; margin: 0 0 18px; }
+.sc .no { font-family: var(--sans); font-size: 9.5px; letter-spacing: .3em; text-transform: uppercase; display: grid; gap: 6px; margin: 0 0 26px; line-height: 1.6; }
 .sc.dark .no { color: rgba(243,239,230,.6); }
 .sc.light .no { color: var(--muted); }
 .sc .no b { font-weight: 500; color: inherit; }
 .sc.dark .no b { color: #e0545c; }
 .sc.light .no b { color: var(--accent); }
-.sc h1, .sc h2 { font-family: var(--serif); font-weight: 400; line-height: .98; margin: 0 0 22px; font-size: clamp(40px, 5.2vw, 88px); }
-.sc .lead { font-size: 17px; line-height: 1.65; max-width: 40ch; margin: 0 0 30px; }
+.sc h1, .sc h2 { font-family: var(--serif); font-weight: 400; line-height: 1.04; letter-spacing: -.005em; margin: 0 0 22px; font-size: clamp(34px, 4.3vw, 64px); }
+.sc .lead { font-size: 15.5px; line-height: 1.7; max-width: 34ch; margin: 0 0 36px; }
 .sc.dark .lead { color: rgba(243,239,230,.8); }
 .sc.light .lead { color: #3b352e; }
 .sc .copy { position: relative; z-index: 3; }
@@ -57,9 +58,11 @@ body[data-scene="2"] .sc-nav, body[data-scene="4"] .sc-nav, body[data-scene="6"]
 
 /* ─── 01 Remeslo (tmavá): fotka pri stroji, text vľavo, hotspoty ─── */
 .s1 .bg { position: absolute; inset: -6% 0 -6% 0; }
-.s1 .bg img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 40%; transform: scale(calc(1.06 + var(--p, 0) * .08)); transform-origin: 60% 50%; }
-.s1 .bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(30,26,23,.92) 0%, rgba(30,26,23,.72) 34%, rgba(30,26,23,.1) 62%, rgba(30,26,23,0) 100%), linear-gradient(to top, rgba(30,26,23,.5), transparent 40%); }
-.s1 .copy { position: absolute; left: var(--pad); bottom: clamp(60px, 12vh, 140px); max-width: 520px; }
+.s1 .bg img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 42%; transform: scale(calc(1.04 + var(--p, 0) * .06)); transform-origin: 60% 50%; }
+.s1 .bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(30,26,23,.78) 0%, rgba(30,26,23,.5) 30%, rgba(30,26,23,.08) 55%, rgba(30,26,23,0) 100%), linear-gradient(to bottom, rgba(30,26,23,.45), transparent 22%); }
+.s1 .copy { position: absolute; left: clamp(60px, 9vw, 130px); top: 19vh; bottom: 9vh; max-width: 420px; display: flex; flex-direction: column; }
+.s1 .copy .cta-round { margin-top: auto; }
+.s1 .copy h1 { margin-bottom: 24px; }
 .s1 .hs { position: absolute; z-index: 4; left: var(--hx); top: var(--hy); width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; background: #fff; color: var(--accent); display: grid; place-items: center; box-shadow: 0 2px 10px rgba(0,0,0,.35); opacity: 0; transform: scale(.4); transition: opacity .5s, transform .6s var(--ease-out), background .3s, color .3s; }
 .s1 .hs::before, .s1 .hs::after { content: ""; position: absolute; width: 12px; height: 1.5px; background: currentColor; }
 .s1 .hs::after { transform: rotate(90deg); transition: transform .3s; }
@@ -71,13 +74,13 @@ body[data-scene="2"] .sc-nav, body[data-scene="4"] .sc-nav, body[data-scene="6"]
 .s1 .hs.is-on span, .s1 .hs:hover span { opacity: 1; transform: translateY(-50%); }
 .s1.is-on .hs { opacity: 1; transform: none; }
 .s1.is-on .hs:nth-of-type(2) { transition-delay: .5s; } .s1.is-on .hs:nth-of-type(3) { transition-delay: .6s; } .s1.is-on .hs:nth-of-type(4) { transition-delay: .7s; }
-.s1 .scroll-hint { position: absolute; right: var(--pad); bottom: 34px; z-index: 3; font-family: var(--sans); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: rgba(243,239,230,.6); display: flex; align-items: center; gap: 12px; }
+.s1 .scroll-hint { display: none; position: absolute; right: var(--pad); bottom: 34px; z-index: 3; font-family: var(--sans); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: rgba(243,239,230,.6); display: flex; align-items: center; gap: 12px; }
 .s1 .scroll-hint i { width: 46px; height: 1px; background: rgba(243,239,230,.25); position: relative; overflow: hidden; }
 .s1 .scroll-hint i::after { content: ""; position: absolute; inset: 0; background: #e0545c; animation: abRun 2.6s var(--ease) infinite; }
 @keyframes abRun { 0% { transform: translateX(-100%); } 55%, 100% { transform: translateX(100%); } }
 
 /* ─── 02 Materiál (svetlá): vejár fotiek + index ─── */
-.s2 { display: grid; grid-template-columns: 120px minmax(0, 1.1fr) minmax(0, .9fr); gap: 4vw; align-items: center; padding: 0 var(--pad); }
+.s2 { display: grid; grid-template-columns: 90px minmax(0, 1.25fr) minmax(0, .85fr); gap: 4vw; align-items: center; padding: 0 clamp(60px, 9vw, 130px) 0 var(--pad); }
 .s2 .idx { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; font-family: var(--sans); font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
 .s2 .idx li:first-child { color: var(--text); margin-bottom: 8px; }
 .s2 .idx li.is-on { color: var(--accent); }
@@ -102,11 +105,11 @@ body[data-scene="2"] .sc-nav, body[data-scene="4"] .sc-nav, body[data-scene="6"]
 .s3 .vz-lbl { position: absolute; bottom: 26px; z-index: 2; font-family: var(--sans); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--cream); pointer-events: none; }
 .s3 .vz-lbl.l { left: var(--pad); } .s3 .vz-lbl.r { right: var(--pad); }
 .s3 .shade { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(90deg, rgba(30,26,23,.85) 0%, rgba(30,26,23,.55) 30%, rgba(30,26,23,0) 58%); }
-.s3 .copy { position: absolute; left: var(--pad); top: 50%; transform: translateY(-50%); max-width: 460px; z-index: 4; pointer-events: none; }
+.s3 .copy { position: absolute; left: clamp(60px, 9vw, 130px); top: 50%; transform: translateY(-50%); max-width: 400px; z-index: 4; pointer-events: none; }
 .s3 .copy > * { pointer-events: auto; }
 
 /* ─── 04 Proces (svetlá): vrstvy + kroky ─── */
-.s4 { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.2fr) 220px; gap: 3vw; align-items: center; padding: 0 var(--pad); }
+.s4 { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.25fr) 200px; gap: 3vw; align-items: center; padding: 0 var(--pad) 0 clamp(60px, 9vw, 130px); }
 .s4 .layers { position: relative; aspect-ratio: 4 / 3; }
 .s4 .layers img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transform: translate3d(0, calc(var(--py, 0px)), 0) scale(calc(.92 + var(--p, 0) * .12)); }
 .s4 .layers::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: -4%; height: 12%; background: radial-gradient(50% 50% at 50% 50%, rgba(24,22,20,.25), transparent 70%); filter: blur(10px); z-index: -1; }
@@ -123,10 +126,10 @@ body[data-scene="2"] .sc-nav, body[data-scene="4"] .sc-nav, body[data-scene="6"]
 .s5 .bg { position: absolute; inset: 0; }
 .s5 .bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; opacity: .32; transform: translate3d(calc(var(--p, 0) * -6%), 0, 0) scale(1.12); }
 .s5 .bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,26,23,.9), rgba(30,26,23,.3) 60%, rgba(30,26,23,.6)); }
-.s5 .head { position: absolute; left: var(--pad); top: clamp(96px, 14vh, 150px); z-index: 3; }
-.s5 .head h2 { font-size: clamp(34px, 3.6vw, 56px); margin-bottom: 0; }
-.tl-track { position: absolute; left: 0; bottom: clamp(40px, 9vh, 90px); display: flex; gap: clamp(22px, 3vw, 44px); padding: 0 var(--pad); will-change: transform; align-items: flex-end; }
-.tl-track::before { content: ""; position: absolute; left: var(--pad); right: 0; top: 34px; height: 1px; background: rgba(243,239,230,.18); }
+.s5 .head { position: absolute; left: clamp(60px, 9vw, 130px); top: 17vh; z-index: 3; }
+.s5 .head h2 { font-size: clamp(30px, 3.2vw, 48px); margin-bottom: 0; }
+.tl-track { position: absolute; left: 0; bottom: clamp(40px, 9vh, 90px); display: flex; gap: clamp(22px, 3vw, 44px); padding: 0 clamp(60px, 9vw, 130px); will-change: transform; align-items: flex-end; }
+.tl-track::before { content: ""; position: absolute; left: clamp(60px, 9vw, 130px); right: 0; top: 34px; height: 1px; background: rgba(243,239,230,.18); }
 .tl-card { position: relative; flex: 0 0 auto; width: clamp(260px, 24vw, 360px); padding-top: 54px; transition: opacity .5s; opacity: .5; }
 .tl-card.is-cur { opacity: 1; }
 .tl-card::before { content: ""; position: absolute; left: 0; top: 30px; width: 9px; height: 9px; border-radius: 50%; background: var(--ink); border: 1.4px solid #e0545c; }
@@ -141,7 +144,7 @@ body[data-scene="2"] .sc-nav, body[data-scene="4"] .sc-nav, body[data-scene="6"]
 .tl-card .tag { display: block; font-family: var(--sans); font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: rgba(243,239,230,.5); margin: 0 0 6px; }
 
 /* ─── 06 Detaily (svetlá): lupa + kde už kroje ožili ─── */
-.s6 { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 4vw; align-items: center; padding: 0 var(--pad); }
+.s6 { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 4vw; align-items: center; padding: 0 var(--pad) 0 clamp(60px, 9vw, 130px); }
 .dt-fig { position: relative; margin: 0; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 4px; background: #e9e2d4; box-shadow: 0 30px 70px rgba(24,22,20,.16); cursor: none; --mx: 40%; --my: 50%; }
 .dt-fig > img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .dt-lens { position: absolute; left: var(--mx); top: var(--my); width: clamp(160px, 16vw, 240px); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; overflow: hidden; box-shadow: 0 20px 50px rgba(24,22,20,.35), inset 0 0 0 1px rgba(255,255,255,.7); background: var(--img) var(--mx) var(--my) / 260% no-repeat; pointer-events: none; transition: width .3s; }
@@ -185,3 +188,18 @@ body[data-scene="2"] .sc-nav, body[data-scene="4"] .sc-nav, body[data-scene="6"]
   [data-depth] { transform: none !important; }
   .s1 .scroll-hint i::after { animation: none; }
 }
+
+/* ─── hlavička nad scénami: bez lišty, kompaktné logo, farba podľa scény ─── */
+body.page-about .site-header { height: 76px; background: linear-gradient(to bottom, rgba(0,0,0,.28), transparent); box-shadow: none; }
+body.page-about .site-header.is-scrolled { height: 76px; padding-bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,.28), transparent); -webkit-mask-image: none; mask-image: none; backdrop-filter: none; }
+body.page-about .site-header.is-scrolled::after { display: none; }
+body.page-about .site-header:not(.is-scrolled) .logo { margin-top: 0; }
+body.page-about .logo { grid-template-columns: auto auto; align-items: center; gap: 8px; }
+body.page-about .logo-orn { width: 32px; height: 31px; margin: 0; color: inherit; }
+body.page-about .logo-word { height: 27px; width: 95px; margin: 0; }
+body.page-about .logo-tag { display: none; }
+body.page-about .main-nav a + a::before { background: currentColor; opacity: .3; }
+body.page-about .tools-sep { background: currentColor; opacity: .3; }
+body.page-about[data-scene="1"] .site-header, body.page-about[data-scene="3"] .site-header, body.page-about[data-scene="5"] .site-header { color: var(--cream); }
+body.page-about[data-scene="2"] .site-header, body.page-about[data-scene="4"] .site-header, body.page-about[data-scene="6"] .site-header { color: var(--text); background: none; }
+body.page-about .site-header { transition: none; }
