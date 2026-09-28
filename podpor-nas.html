@@ -3,16 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>O Krojárke — Lenka Černoková</title>
-<meta name="description" content="Ateliér, príbeh, ocenenia a spolupráce Krojárky. Kroje šité a trukované na zákazku, na hody, pre folklórne súbory aj podľa rodinných fotografií.">
+<title>Podporte múzeum — Krojárka</title>
+<meta name="description" content="Podporte múzeum krojov v Čachticiach. Prevodom s QR kódom bez poplatkov, kartou alebo pravidelne, prípadne dvomi percentami z daní.">
 <link rel="icon" href="logo/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="logo/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/basovsky-atelier.webp">
 <link rel="stylesheet" href="styles.css?v=20">
-<link rel="stylesheet" href="o-krojarke.css?v=1">
+<link rel="stylesheet" href="podstranky.css?v=2">
 </head>
 <body>
 
@@ -27,7 +26,6 @@
   </defs>
 </svg>
 
-<!-- ───────── HEADER ───────── -->
 <header class="site-header" id="top">
   <a class="logo" href="index.html" aria-label="Krojárka — domov">
     <svg class="logo-orn" viewBox="0 0 124.88 120.88"><use href="#orn"/></svg>
@@ -39,10 +37,10 @@
     <a href="index.html#pribehy">Príbehy</a>
     <a href="index.html#remeslo">Remeslo</a>
     <a href="index.html#regiony">Regióny</a>
-    <a href="o-krojarke.html" aria-current="page">O projekte</a>
+    <a href="o-krojarke.html">O projekte</a>
     <a href="priestor.html">Priestor</a>
     <a href="kontakt.html">Kontakt</a>
-    <a class="nav-support" href="podpor-nas.html">Podporte nás</a>
+    <a class="nav-support" href="podpor-nas.html" aria-current="page">Podporte nás</a>
   </nav>
   <div class="header-tools">
     <button class="icon-btn" aria-label="Hľadať"><svg viewBox="0 0 24 24" width="20" height="20"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="1.4"/></svg></button>
@@ -63,149 +61,129 @@
     <a href="kontakt.html"><small>07</small>Kontakt</a>
     <a href="podpor-nas.html"><small>08</small>Podporte nás</a>
   </nav>
-  <p class="overlay-foot">SK / EN &nbsp;·&nbsp; Ateliér Piešťansko</p>
+  <p class="overlay-foot">SK / EN &nbsp;·&nbsp; Múzeum krojov Čachtice</p>
 </div>
 
 <main>
 
-<!-- ───────── HERO ─────────
-     Tri vrstvy s rôznou rýchlosťou: fotka ateliéru vzadu ide najpomalšie,
-     text stredne, portrét vpredu najrýchlejšie. Tým vznikne hĺbka. -->
-<section class="ab-hero">
-  <div class="ab-hero-media">
-    <img class="ab-hero-shot" data-par=".12" src="img/krojarka.webp" alt="Lenka Černoková pri práci v ateliéri" fetchpriority="high">
-    <span class="ab-hero-tag">Ateliér · Piešťansko</span>
+<!-- TODO pred spustením: doplniť skutočný IBAN, presný názov príjemcu,
+     variabilný symbol, IČO a odkaz na darovaciu stránku. QR kódy sa
+     vygenerujú znova cez tools/pay_by_square.py už bez prepínača --ukazka. -->
+<section class="pg-hero">
+  <div class="pg-hero-copy">
+    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Podporte múzeum</p>
+    <h1 class="display-l">Z hlineného<br>domu múzeum.</h1>
+    <p class="lead">Zo stoštyridsaťročnej sedliackej usadlosti robíme interaktívne múzeum krojov. Každý dar ide do konkrétnej veci, nie do fondu.</p>
   </div>
-
-  <div class="ab-hero-copy">
-    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Krojárka · Lenka Černoková</p>
-    <h1 class="display-l">Ruka,<br>ktorá vedie<br>retiazku.</h1>
-    <p class="lead">Kroje šije a trukuje na zákazku. Na hody, pre folklórne súbory aj podľa rodinných fotografií, ktoré niekto našiel v škatuli po starej mame.</p>
-    <ul class="ab-jump">
-      <li><a href="#atelier">Ateliér</a></li>
-      <li><a href="#pribeh">Môj príbeh</a></li>
-      <li><a href="#ocenenia">Ocenenia</a></li>
-      <li><a href="#spolupraca">Spolupráce</a></li>
-    </ul>
-  </div>
-
-  <a class="ab-scroll" href="#atelier"><span></span>Ďalej</a>
-</section>
-
-<!-- ───────── CITÁT ───────── -->
-<section class="ab-claim">
-  <img class="ab-ph ph-l" data-par=".22" src="img/detail-vysivka.webp" srcset="img/detail-vysivka.webp 1x, img/detail-vysivka@2x.webp 2x" alt="" aria-hidden="true" loading="lazy">
-  <p class="ab-quote reveal">Kroj nie je kostým.<br>Je to <em>rodokmeň</em>, ktorý sa dá obliecť.</p>
-  <img class="ab-ph ph-r" data-par=".3" src="img/kriezlo-detail.webp" alt="" aria-hidden="true" loading="lazy">
-</section>
-
-<!-- ───────── ATELIÉR: lepkavá fotka, texty idú okolo ───────── -->
-<section class="ab-sticky" id="atelier">
-  <div class="abs-media">
-    <div class="abs-stack">
-      <img class="is-on" src="img/krojarka-stroj.webp" alt="Historický trukovací stroj Lintz &amp; Eckhardt" data-cap="Stroj Lintz &amp; Eckhardt, Berlín">
-      <img src="img/kriezlo-niti.webp" alt="Nite pripravené na prácu" data-cap="Nite podľa predlohy, odtieň po odtieni" loading="lazy">
-      <img src="img/kriezlo-rozpracovane.webp" alt="Rozpracované krieželo" data-cap="Rozpracované krieželo" loading="lazy">
-      <img src="img/krojarka-skola.webp" alt="Ukážka trukovania v škole" data-cap="Ukážka pre deti, aby videli, ako retiazka vzniká" loading="lazy">
-    </div>
-    <p class="abs-cap" id="abs-cap">Stroj Lintz &amp; Eckhardt, Berlín</p>
-  </div>
-
-  <div class="abs-steps">
-    <article class="abs-step">
-      <p class="eyebrow">01 · Ateliér</p>
-      <h2 class="display-s">Jedna miestnosť,<br>jeden stroj.</h2>
-      <p>Ateliér je malý a tichý. Stroj je starší ako republika a stále beží, lebo sa oň niekto stará. Každá retiazka ide rukou, nie programom.</p>
-    </article>
-    <article class="abs-step">
-      <p class="eyebrow">02 · Materiál</p>
-      <h2 class="display-s">Najskôr<br>sa hľadá niť.</h2>
-      <p>Odtieň sa nevyberá z katalógu, ale podľa predlohy. Pri starých fotografiách to znamená hádať z čiernobielej a overovať si to v múzeu aj u pamätníkov.</p>
-    </article>
-    <article class="abs-step">
-      <p class="eyebrow">03 · Práca</p>
-      <h2 class="display-s">Vzor sa vedie<br>bez predkreslenia.</h2>
-      <p>Trukovanie je retiazkový steh vedený rukou. Kde iní tlačia tlačidlo, tu sa otáča látkou. Jeden oblúk je jedna súvislá retiazka, ktorá sa nedá opraviť.</p>
-    </article>
-    <article class="abs-step">
-      <p class="eyebrow">04 · Odovzdávanie</p>
-      <h2 class="display-s">So strojom<br>chodí aj do škôl.</h2>
-      <p>Remeslo žije, kým ho má kto odovzdávať. Deti vidia, ako vzor vzniká, a môžu si skúsiť viesť látku. Väčšinou zistia, že to nie je také ľahké.</p>
-    </article>
+  <div class="pg-hero-media">
+    <img data-par=".1" src="img/krojarka-skola.webp" alt="Ukážka trukovania pre deti">
+    <span class="pg-hero-tag">Čachtice · OZ Tým správnym smerom</span>
   </div>
 </section>
 
-<!-- ───────── PRÍBEH: časová os ───────── -->
-<section class="ab-time" id="pribeh">
+<!-- ─── tri cesty ─── -->
+<section class="pg-sec">
   <div class="sec-head reveal">
-    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Môj príbeh</p>
-    <h2 class="display-m">Od prvej zástery<br>po autorský kroj.</h2>
+    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Ako pomôcť</p>
+    <h2 class="display-m">Tri cesty,<br>vyberte si svoju.</h2>
   </div>
 
-  <ol class="ab-line">
-    <li class="ab-ev reveal">
-      <span class="ab-year" data-par=".1">2009</span>
-      <div class="ab-ev-txt">
-        <h3>Prvá zástera</h3>
-        <p>Ušitá pre vlastnú dcéru na hody. Vzor odkreslený z fotografie starej mamy. Vtedy to ešte nebolo remeslo, len tvrdohlavosť.</p>
+  <div class="give">
+    <!-- 1. prevod s QR -->
+    <article class="give-main reveal">
+      <p class="give-badge">Bez poplatkov</p>
+      <h3>Prevodom s QR kódom</h3>
+      <p>Otvorte bankovú aplikáciu, naskenujte kód a máte predvyplnený účet, sumu aj variabilný symbol. Peniaze idú priamo na účet združenia, nikto si z nich nič nestrhne.</p>
+
+      <div class="qr-row" role="group" aria-label="Výber sumy">
+        <button class="qr-pick is-on" type="button" data-qr="img/qr/qr-10.png" data-sum="10 €">10 €</button>
+        <button class="qr-pick" type="button" data-qr="img/qr/qr-20.png" data-sum="20 €">20 €</button>
+        <button class="qr-pick" type="button" data-qr="img/qr/qr-50.png" data-sum="50 €">50 €</button>
+        <button class="qr-pick" type="button" data-qr="img/qr/qr-100.png" data-sum="100 €">100 €</button>
+        <button class="qr-pick" type="button" data-qr="img/qr/qr-volna-suma.png" data-sum="vlastná suma">Vlastná suma</button>
       </div>
-      <figure class="ab-ev-img" data-par=".18"><img src="img/basovsky-zastera.webp" alt="" loading="lazy"></figure>
-    </li>
-    <li class="ab-ev reveal">
-      <span class="ab-year" data-par=".1">2014</span>
-      <div class="ab-ev-txt">
-        <h3>Stroj z pozostalosti</h3>
-        <p>Lintz &amp; Eckhardt prišiel rozobratý v debne. Po oprave sa ukázalo, že vie to, čo dnešné stroje nevedia, viesť retiazku voľnou rukou.</p>
+
+      <div class="qr-box">
+        <img id="qrImg" src="img/qr/qr-10.png" alt="Platobný QR kód na 10 eur" width="320" height="320">
+        <div class="qr-side">
+          <p class="qr-sum" id="qrSum">10 €</p>
+          <dl class="qr-det">
+            <div><dt>Príjemca</dt><dd>OZ Tým správnym smerom</dd></div>
+            <div><dt>IBAN</dt><dd><code id="iban">SK00 0000 0000 0000 0000 0000</code></dd></div>
+            <div><dt>Variabilný symbol</dt><dd>2026</dd></div>
+            <div><dt>Poznámka</dt><dd>Dar na múzeum krojov</dd></div>
+          </dl>
+          <button class="mini-copy" type="button" data-copy="iban">Skopírovať IBAN</button>
+          <p class="qr-note">Kódy sú zatiaľ označené ako ukážka. Doplníme skutočný účet a potom fungujú naostro.</p>
+        </div>
       </div>
-      <figure class="ab-ev-img" data-par=".24"><img src="img/krojarka-stroj.webp" alt="" loading="lazy"></figure>
-    </li>
-    <li class="ab-ev reveal">
-      <span class="ab-year" data-par=".1">2019</span>
-      <div class="ab-ev-txt">
-        <h3>Kroje pre súbory</h3>
-        <p>Prvé väčšie zákazky pre folklórne súbory. Nie jeden kroj, ale celá sada, v ktorej musí každý kus sedieť k ostatným.</p>
-      </div>
-      <figure class="ab-ev-img" data-par=".18"><img src="img/kroj-regiony.webp" alt="" loading="lazy"></figure>
-    </li>
-    <li class="ab-ev reveal">
-      <span class="ab-year" data-par=".1">2026</span>
-      <div class="ab-ev-txt">
-        <h3>Autorský Bašovský kroj</h3>
-        <p>Vlastný vzor postavený na starých predlohách. Zlatá trukovka na čiernom saténe, ktorá v kraji predtým takto nikdy nevyzerala.</p>
-      </div>
-      <figure class="ab-ev-img" data-par=".24"><img src="img/kroj-basovsky-v2.webp" alt="" loading="lazy"></figure>
-    </li>
-  </ol>
+    </article>
+
+    <!-- 2. kartou alebo pravidelne -->
+    <article class="give-alt reveal">
+      <h3>Kartou alebo pravidelne</h3>
+      <p>Ak chcete platiť kartou alebo posielať menšiu sumu každý mesiac, vybavíte to cez darovaciu stránku. Pravidelný dar nám najviac pomáha pri plánovaní prác.</p>
+      <a class="link-arrow" href="#" rel="noopener">Prejsť na darovaciu stránku <svg><use href="#arrow"/></svg></a>
+      <p class="hint">Stránku prevádzkuje darcovská platforma, ktorá vystaví aj potvrdenie o dare.</p>
+    </article>
+
+    <!-- 3. dve percentá -->
+    <article class="give-alt reveal">
+      <h3>Dve percentá z daní</h3>
+      <p>Raz do roka viete presmerovať časť už zaplatenej dane. Nestojí vás to nič navyše a pre združenie je to najväčší jednotlivý príjem v roku.</p>
+      <dl class="qr-det">
+        <div><dt>Názov</dt><dd>Tým správnym smerom, o. z.</dd></div>
+        <div><dt>IČO</dt><dd class="na">doplniť</dd></div>
+        <div><dt>Termín</dt><dd>do 30. apríla</dd></div>
+      </dl>
+      <p class="hint">Zamestnanci podávajú vyhlásenie, firmy a živnostníci to uvedú v daňovom priznaní.</p>
+    </article>
+  </div>
 </section>
 
-<!-- ───────── OCENENIA ─────────
-     TODO: čísla a názvy sú zástupné, treba doplniť reálne. -->
-<section class="ab-awards" id="ocenenia">
+<!-- ─── na čo to ide ─── -->
+<section class="pg-sec tight">
   <div class="sec-head reveal">
-    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Ocenenia a uznania</p>
-    <h2 class="display-m">Čo sa k tomu<br>popri práci prilepilo.</h2>
+    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Na čo dar ide</p>
+    <h2 class="display-m">Konkrétne veci,<br>nie fond.</h2>
   </div>
-  <ul class="ab-award-list">
-    <li class="reveal"><span class="ab-aw-y">2025</span><span class="ab-aw-t">Cena za zachovanie remesla</span><span class="ab-aw-m">zástupný záznam</span></li>
-    <li class="reveal"><span class="ab-aw-y">2024</span><span class="ab-aw-t">Výstava krojov · regionálne múzeum</span><span class="ab-aw-m">zástupný záznam</span></li>
-    <li class="reveal"><span class="ab-aw-y">2023</span><span class="ab-aw-t">Workshop trukovania pre školy</span><span class="ab-aw-m">zástupný záznam</span></li>
-    <li class="reveal"><span class="ab-aw-y">2021</span><span class="ab-aw-t">Rekonštrukcia kroja podľa rodinnej fotografie</span><span class="ab-aw-m">zástupný záznam</span></li>
+  <ul class="needs reveal">
+    <li><span class="needs-p">15 €</span><h3>Jeden strom do sadu</h3><p>Stará odroda jablone alebo hrušky, aké sa tu pestovali pred sto rokmi.</p></li>
+    <li><span class="needs-p">40 €</span><h3>Vrece hliny a slamy</h3><p>Materiál na omietku, ktorá musí byť pôvodná, inak steny nedýchajú.</p></li>
+    <li><span class="needs-p">120 €</span><h3>Deň lektora pri stroji</h3><p>Ukážka trukovania pre jednu školskú triedu vrátane materiálu.</p></li>
+    <li><span class="needs-p">300 €</span><h3>Jedno okno do hlineného domu</h3><p>Drevené okno na mieru podľa pôvodného, aj s osadením.</p></li>
+    <li><span class="needs-p">900 €</span><h3>Oprava časti strechy stodoly</h3><p>Stodola drží pôvodné hospodárske mechanizmy, ktoré nesmú zmoknúť.</p></li>
+    <li><span class="needs-p">na dohodu</span><h3>Materiál a náradie</h3><p>Ak máte drevo, tehly alebo staré náradie, ozvite sa. Dar nemusí byť v peniazoch.</p></li>
   </ul>
+  <p class="hint" style="margin-top:16px">Sumy sú orientačné a ukazujú, čo sa za dar reálne kúpi. Presné ceny sa menia podľa dodávateľa.</p>
 </section>
 
-<!-- ───────── SPOLUPRÁCE ───────── -->
-<section class="ab-partners" id="spolupraca">
-  <div class="sec-head reveal">
-    <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Spolupráce</p>
-    <h2 class="display-m">S kým to má<br>zmysel robiť.</h2>
+<!-- ─── čo už stojí ─── -->
+<section class="pg-sec tight">
+  <div class="pg-split">
+    <div class="reveal">
+      <div class="sec-head">
+        <p class="eyebrow"><svg class="orn-s"><use href="#orn"/></svg>Čo je za nami</p>
+        <h2 class="display-m">Kde sme<br>teraz.</h2>
+      </div>
+      <p>Usadlosť stojí, trukovací stroj beží a ukážky pre školy už prebiehajú. Kroje, ktoré v múzeu uvidíte, nie sú kulisy, ale kusy ušité tu.</p>
+      <p>Pred nami je stodola s pôvodnými hospodárskymi mechanizmami, sad so starými odrodami, náučný chodník a zázemie, kde sa dá posedieť.</p>
+      <a class="link-arrow" href="o-krojarke.html">Celý príbeh <svg><use href="#arrow"/></svg></a>
+    </div>
+    <div class="shots reveal" style="grid-template-columns:1fr 1fr">
+      <figure><img data-par=".05" src="img/krojarka-stroj.webp" alt="Trukovací stroj v prevádzke" loading="lazy"></figure>
+      <figure><img src="img/cepcenie.webp" alt="Ukážka čepčenia" loading="lazy"></figure>
+    </div>
   </div>
-  <div class="ab-part-grid">
-    <article class="ab-part reveal"><svg class="ab-part-orn"><use href="#orn"/></svg><h3>Folklórne súbory</h3><p>Kompletné sady krojov, opravy a doplnky pred sezónou.</p></article>
-    <article class="ab-part reveal"><svg class="ab-part-orn"><use href="#orn"/></svg><h3>Múzeá a zbierky</h3><p>Rekonštrukcie podľa zbierkových predmetov a archívnych fotografií.</p></article>
-    <article class="ab-part reveal"><svg class="ab-part-orn"><use href="#orn"/></svg><h3>Školy</h3><p>Ukážky trukovania so strojom priamo v triede.</p></article>
-    <article class="ab-part reveal"><svg class="ab-part-orn"><use href="#orn"/></svg><h3>Rodiny</h3><p>Kroj na mieru podľa toho, čo sa v rodine zachovalo.</p></article>
+</section>
+
+<section class="pg-sec tight">
+  <div class="band reveal">
+    <p class="eyebrow">Ďakujeme</p>
+    <h2>Každé euro<br>tu vidno.</h2>
+    <p>Ak chcete vedieť, kam dar išiel, napíšte. Pošleme fotky z prác a účet za materiál.</p>
+    <a class="btn-red" href="kontakt.html#dopyt">Napísať nám <svg><use href="#arrow"/></svg></a>
   </div>
-  <a class="cta-round" href="index.html#kontakt"><span class="dot"><svg><use href="#arrow"/></svg></span>Napísať Krojárke<span class="cta-line"></span></a>
 </section>
 
 </main>
@@ -214,17 +192,17 @@
   <div class="ft-top">
     <div>
       <p class="eyebrow">Kontakt</p>
-      <h2 class="display-l">Navštívte<br>ateliér.</h2>
+      <h2 class="display-l">Navštívte<br>múzeum.</h2>
     </div>
     <div class="ft-cols">
-      <div><h3>Ateliér</h3><p>Piešťansko<br>na dohodu</p></div>
+      <div><h3>Múzeum</h3><p>Čachtice<br>po dohode</p></div>
       <div><h3>Napíšte</h3><p><a href="mailto:ahoj@krojarka.sk">ahoj@krojarka.sk</a><br><a href="tel:+421900000000">+421 900 000 000</a></p></div>
       <div><h3>Sledujte</h3><p><a href="https://www.facebook.com/lenka.cernokova" rel="noopener">Facebook</a><br><a href="#">Instagram</a></p></div>
     </div>
-    <a class="btn-red" href="mailto:ahoj@krojarka.sk">Kontaktovať <svg><use href="#arrow"/></svg></a>
+    <a class="btn-red" href="podpor-nas.html">Podporte nás <svg><use href="#arrow"/></svg></a>
   </div>
   <svg class="ft-word" viewBox="0 0 235.50 67.25" aria-hidden="true"><use href="#wordmark"/></svg>
-  <div class="ft-bottom"><span>© 2026 Krojárka</span><span>Workshopy · Výstavy · Spolupráce · Médiá</span><a href="#top">Hore ↑</a></div>
+  <div class="ft-bottom"><span>© 2026 Krojárka · OZ Tým správnym smerom</span><span><a href="priestor.html">Prenájom priestoru</a> · <a href="podpor-nas.html">Podporte nás</a> · <a href="kontakt.html">Kontakt</a></span><a href="#top">Hore ↑</a></div>
 </footer>
 
 <div class="progress-thread" aria-hidden="true"><i id="pt-fill"></i></div>

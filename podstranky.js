@@ -61,6 +61,32 @@
     });
   };
 
+  /* ───────── výber sumy pri QR kóde ─────────
+     Kódy sú vopred vygenerované obrázky, prepínač len mení, ktorý je vidieť. */
+  const qrImg = $('#qrImg'), qrSum = $('#qrSum');
+  $$('.qr-pick').forEach(b => b.addEventListener('click', () => {
+    $$('.qr-pick').forEach(x => x.classList.toggle('is-on', x === b));
+    if (qrImg) {
+      qrImg.src = b.dataset.qr;
+      qrImg.alt = 'Platobný QR kód — ' + b.dataset.sum;
+    }
+    if (qrSum) qrSum.textContent = b.dataset.sum;
+  }));
+
+  /* kopírovanie čísla účtu */
+  $$('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+    const zdroj = $('#' + b.dataset.copy);
+    if (!zdroj) return;
+    const povodny = b.textContent;
+    try {
+      await navigator.clipboard.writeText(zdroj.textContent.trim());
+      b.textContent = 'Skopírované';
+    } catch {
+      b.textContent = 'Skopírujte ručne';
+    }
+    setTimeout(() => (b.textContent = povodny), 2000);
+  }));
+
   /* ───────── formulár dopytu ─────────
      Stránka beží bez servera, preto sa správa poskladá a otvorí sa
      poštový klient. Nič sa neodosiela na pozadí a nič sa nikam neukladá. */
