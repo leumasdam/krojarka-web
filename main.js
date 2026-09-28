@@ -170,23 +170,30 @@
   ];
 
   /* ───────── mapa (reálne súradnice z OpenStreetMap, obce z tvorby Krojárky) ───────── */
+  // obce z jej príspevkov; k: 'kroj' = šila kroj / kus, 'live' = trukovanie naživo, výstava
   const TOWNS = [
-    { n: 'Podolie', lat: 48.6751, lon: 17.7739, img: 'img/rukavce-podolie.webp', t: 'Detské podolské rukávce', a: 'end', dy: -4 },
-    { n: 'Pobedim', lat: 48.6561, lon: 17.8072, img: 'img/zasterky-pobedim.webp', t: 'Zásterky na hody · workshop trukovania v škole', a: 'start', dy: -2 },
-    { n: 'Očkov', lat: 48.6528, lon: 17.7647, img: 'img/kroj-ockovsky-detsky.webp', t: 'Detský kroj podľa rodinnej fotky', a: 'end', dy: 8 },
-    { n: 'Bašovce', lat: 48.6330, lon: 17.7974, img: 'img/kroj-basovsky-v2.webp', t: 'Autorský trukovaný Bašovský kroj', a: 'start', dy: 12, main: true },
-    { n: 'Bučany', lat: 48.4190, lon: 17.6992, img: 'img/prucel-bucany.webp', t: 'Mužský prucel · Trnavský kroj', a: 'start' },
+    { n: 'Čachtice', lat: 48.7138, lon: 17.7871, k: 'kroj', img: 'img/kriezlo-hotove.webp', photo: true, t: 'Rukávce s novým kriezlom', a: 'end', dy: 0 },
+    { n: 'Podolie', lat: 48.6751, lon: 17.7739, k: 'kroj', img: 'img/rukavce-podolie.webp', t: 'Detské podolské rukávce · stará brána', a: 'end', dy: -2 },
+    { n: 'Pobedim', lat: 48.6561, lon: 17.8072, k: 'kroj', img: 'img/zasterky-pobedim.webp', t: 'Hody v kroji 2025 a 2026 · trukovanie v škole', a: 'start', dy: -6 },
+    { n: 'Očkov', lat: 48.6528, lon: 17.7647, k: 'kroj', img: 'img/kroj-ockovsky-detsky.webp', t: 'Detský kroj podľa rodinnej fotky', a: 'end', dy: 4 },
+    { n: 'Bašovce', lat: 48.6330, lon: 17.7974, k: 'kroj', img: 'img/kroj-basovsky-v2.webp', t: 'Hody v kroji 2025 · nebíčkový kroj po babičke', a: 'start', dy: 2, main: true },
+    { n: 'Ostrov', lat: 48.6287, lon: 17.7688, k: 'kroj', img: 'img/kroj-fialovy.webp', t: 'Hody v kroji 2025 · koniec krojovej sezóny', a: 'end', dy: 10 },
+    { n: 'Rakovice', lat: 48.5634, lon: 17.7308, k: 'live', t: 'Trukovanie naživo', a: 'end', dy: 4 },
+    { n: 'Bučany', lat: 48.4190, lon: 17.6992, k: 'kroj', img: 'img/prucel-bucany.webp', t: 'Mužský a ženský prucel · Trnavský kroj', a: 'end' },
+    { n: 'Červeník', lat: 48.4601, lon: 17.7554, k: 'live', t: 'Trukovanie naživo · 8. 8. 2026', a: 'start' },
+    { n: 'Nitrianska Blatnica', lat: 48.5537, lon: 17.9669, k: 'live', t: 'Šarfické folklórne slávnosti · trukovanie', a: 'end', dy: -12 },
+    { n: 'Beckov', lat: 48.7892, lon: 17.8967, k: 'live', t: 'Výstava krojov z jej zbierky · jar 2025', a: 'start' },
+    { n: 'Trnava', lat: 48.3767, lon: 17.5858, k: 'live', t: 'Západoslovenské múzeum · trukovanie v advente', a: 'start' },
   ];
   const CTX = [
     { n: 'Nové Mesto n. V.', lat: 48.757, lon: 17.831 },
     { n: 'Piešťany', lat: 48.591, lon: 17.827 },
     { n: 'Hlohovec', lat: 48.426, lon: 17.803 },
-    { n: 'Trnava', lat: 48.377, lon: 17.588 },
   ];
   const VAH = [[48.84, 17.93], [48.757, 17.845], [48.68, 17.84], [48.594, 17.845], [48.52, 17.82], [48.426, 17.81], [48.33, 17.75]];
   const proj = (lat, lon) => {
-    const kmx = (lon - 17.55) * 73.7, kmy = (48.80 - lat) * 111.2;
-    return [60 + kmx * 17, 30 + kmy * 14.5];
+    const kmx = (lon - 17.55) * 73.7, kmy = (48.82 - lat) * 111.2;
+    return [70 + kmx * 14.6, 30 + kmy * 14.4];
   };
   const smooth = pts => {
     let d = `M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
@@ -215,7 +222,7 @@
   TOWNS.forEach((t, i) => {
     const [x, y] = proj(t.lat, t.lon);
     const g = el('g', { style: `--d:${i * 0.12}s` }, heroPts);
-    el('circle', { cx: x, cy: y, r: t.main ? 5 : 3.5 }, g);
+    el('circle', { cx: x, cy: y, r: t.main ? 5 : 3.5, class: t.k === 'live' ? 'live' : '' }, g);
     const tx = el('text', { x: x + (t.a === 'end' ? -12 : 12), y: y + 4 + (t.dy || 0), 'text-anchor': t.a }, g);
     tx.textContent = t.n;
   });
@@ -490,7 +497,8 @@
   const showTown = (i) => {
     const t = TOWNS[i];
     $$('.rpt:not(.ctx)', regPts).forEach((g, j) => g.classList.toggle('is-on', j === i));
-    regCard.innerHTML = `<img src="${t.img}" alt="" class="${t.photo ? 'is-photo' : ''}"><div><p class="cnt">Z ateliéru</p><h3>${t.n}</h3><p>${t.t}</p><a class="link-arrow" href="#kroje">Pozrieť kroj <svg><use href="#arrow"/></svg></a></div>`;
+    const media = t.img ? `<img src="${t.img}" alt="" class="${t.photo ? 'is-photo' : ''}">` : `<span class="reg-live" aria-hidden="true"><svg><use href="#orn"/></svg></span>`;
+    regCard.innerHTML = `${media}<div><p class="cnt">${t.k === 'live' ? 'Trukovanie naživo' : 'Kroj z ateliéru'}</p><h3>${t.n}</h3><p>${t.t}</p><a class="link-arrow" href="${t.k === 'live' ? '#podujatia' : '#kroje'}">${t.k === 'live' ? 'Podujatia' : 'Pozrieť kroje'} <svg><use href="#arrow"/></svg></a></div>`;
   };
   CTX.forEach(t => {
     const [x, y] = proj(t.lat, t.lon);
@@ -500,7 +508,7 @@
   });
   TOWNS.forEach((t, i) => {
     const [x, y] = proj(t.lat, t.lon);
-    const g = el('g', { class: 'rpt', tabindex: 0, role: 'button', 'aria-label': t.n }, regPts);
+    const g = el('g', { class: 'rpt' + (t.k === 'live' ? ' live' : ''), tabindex: 0, role: 'button', 'aria-label': t.n }, regPts);
     el('circle', { class: 'halo', cx: x, cy: y, r: 22 }, g);
     el('circle', { class: 'dot', cx: x, cy: y, r: t.main ? 7 : 5.5 }, g);
     el('text', { x: x + (t.a === 'end' ? -14 : 14), y: y + 4 + (t.dy || 0), 'text-anchor': t.a }, g).textContent = t.n;
@@ -508,7 +516,7 @@
     g.addEventListener('click', () => showTown(i));
     g.addEventListener('keydown', e => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), showTown(i)));
   });
-  showTown(3);
+  showTown(4);
 
   /* ───────── príbehy: kedysi / dnes ───────── */
   const cmp = $('#compare');
