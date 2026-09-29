@@ -111,7 +111,11 @@ body[data-scene="2"] .sc-nav, body[data-scene="4"] .sc-nav, body[data-scene="6"]
 /* ─── 04 Proces (svetlá): vrstvy + kroky ─── */
 .s4 { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.25fr) 200px; gap: 3vw; align-items: center; padding: 0 var(--pad) 0 clamp(60px, 9vw, 130px); }
 .s4 .layers { position: relative; aspect-ratio: 4 / 3; }
-.s4 .layers img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transform: translate3d(0, calc(var(--py, 0px)), 0) scale(calc(.92 + var(--p, 0) * .12)); }
+.s4 .layers { aspect-ratio: 1; max-height: 78svh; justify-self: center; width: min(100%, 78svh); }
+/* pláty začínajú zložené na predlohe a dvíhajú sa jeden po druhom; koncový stav = pôvodná fotka,
+   takže sa nikdy neodkryje miesto, ktoré bolo prekryté */
+.s4 .layers .ly { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; will-change: transform;
+  transform: translate3d(0, calc(var(--o) * (1 - clamp(0, (var(--p, 0) - var(--a)) / .24, 1))), 0); }
 .s4 .layers::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: -4%; height: 12%; background: radial-gradient(50% 50% at 50% 50%, rgba(24,22,20,.25), transparent 70%); filter: blur(10px); z-index: -1; }
 .pr-steps { list-style: none; margin: 0; padding: 0 0 0 22px; border-left: 1px solid var(--line); display: grid; gap: 22px; position: relative; }
 .pr-steps::before { content: ""; position: absolute; left: -1px; top: 0; width: 1px; height: calc((var(--step, 0) + 1) / 5 * 100%); background: var(--accent); transition: height .6s var(--ease); }
@@ -174,7 +178,7 @@ body[data-scene="2"] .sc-nav, body[data-scene="4"] .sc-nav, body[data-scene="6"]
   .s2 .fan { aspect-ratio: 4 / 3.2; }
   .s3 .copy { top: auto; bottom: 70px; transform: none; max-width: none; right: var(--pad); }
   .s3 .shade { background: linear-gradient(to top, rgba(30,26,23,.9) 0%, rgba(30,26,23,.4) 45%, rgba(30,26,23,0) 75%); }
-  .s4 .layers { aspect-ratio: 16 / 10; }
+  .s4 .layers { width: min(100%, 46svh); }
   .s5 .head { top: 90px; }
   .tl-card { width: 76vw; }
   .sc-nav { display: none; }
@@ -189,6 +193,7 @@ body[data-scene="2"] .sc-nav, body[data-scene="4"] .sc-nav, body[data-scene="6"]
   .sc { transform: none !important; filter: none !important; }
   .sc .copy > * { opacity: 1 !important; transform: none !important; }
   [data-depth] { transform: none !important; }
+  .s4 .layers .ly { transform: none !important; }
   .s1 .scroll-hint i::after { animation: none; }
 }
 
