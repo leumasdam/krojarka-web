@@ -3,3 +3,7 @@ real/
 shots/
 .playwright-mcp/
 fb/
+video/frames/
+video/*.mp4
+video/bg_*.png
+video/mask_*.png
