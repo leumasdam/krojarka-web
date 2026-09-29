@@ -309,16 +309,23 @@ body.torn .site-header.is-scrolled::after { background: none; }
 .macro-kroj {
   position: absolute; left: 50%; top: 50%; height: min(80vh, calc(70vw / var(--ar, .73))); width: auto;
   transform-origin: 50% 50%; transform: translate(-50%, -50%) scale(var(--mz, 1));
-  will-change: transform;
+  filter: blur(var(--mb, 0px)); will-change: transform, filter;
 }
 .macro-kroj.photo { border-radius: 999px 999px 6px 6px; }
 .macro-detail {
   position: absolute; left: 50%; top: 50%; width: min(78vh, 88vw); aspect-ratio: 1; border-radius: 50%; overflow: hidden;
   transform: translate(-50%, -50%) scale(var(--vz, .6)) rotate(var(--vr, -6deg));
-  opacity: var(--vo, 0); will-change: transform, opacity; box-shadow: 0 40px 90px rgba(24,22,20,.25); background: #1e1a17;
+  opacity: var(--vo, 0); filter: blur(var(--vb, 0px)); will-change: transform, opacity, filter; box-shadow: 0 40px 90px rgba(24,22,20,.25); background: #1e1a17;
 }
 .macro-detail.is-cutout { width: min(92vh, 980px, 92vw); aspect-ratio: auto; border-radius: 0; overflow: visible; box-shadow: none; background: none; }
 .macro-detail.is-cutout img { height: auto; object-fit: contain; transform: none; }
+/* makro cez celú obrazovku: pokračuje v priblížení, nie je to samostatný objekt */
+.macro-detail.is-full { left: 0; top: 0; width: 100%; height: 100%; aspect-ratio: auto; border-radius: 0; box-shadow: none; background: var(--bg); transform: scale(var(--vz, 1.08)); }
+.macro-detail.is-full img { transform: none; }
+.macro-steps, .macro-cap { transition: background .5s, padding .5s, box-shadow .5s; border-radius: 4px; }
+.macro-sticky.on-photo .macro-steps { background: rgba(243,239,230,.9); padding: 16px 20px; box-shadow: 0 10px 30px rgba(24,22,20,.12); }
+.macro-sticky.on-photo .macro-cap { background: rgba(243,239,230,.92); padding: 20px 24px; box-shadow: 0 10px 30px rgba(24,22,20,.12); }
+.macro.is-fullmode { height: 380vh; }
 .macro-detail img, .macro-detail video { width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); }
 .macro-steps { position: absolute; left: var(--pad); top: 50%; transform: translateY(-50%); list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; z-index: 2; }
 .macro-steps li { font-family: var(--sans); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 14px; transition: color .4s; }
@@ -653,6 +660,7 @@ body.torn .site-header.is-scrolled::after { background: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .macro-kroj, .macro-detail { filter: none !important; }
   *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; }
