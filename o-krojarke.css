@@ -114,8 +114,17 @@ body[data-scene="2"] .sc-nav, body[data-scene="4"] .sc-nav, body[data-scene="6"]
 .s4 .layers { aspect-ratio: 1; max-height: 78svh; justify-self: center; width: min(100%, 78svh); }
 /* pláty začínajú zložené na predlohe a dvíhajú sa jeden po druhom; koncový stav = pôvodná fotka,
    takže sa nikdy neodkryje miesto, ktoré bolo prekryté */
-.s4 .layers .ly { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; will-change: transform;
-  transform: translate3d(0, calc(var(--o) * (1 - clamp(0, (var(--p, 0) - var(--a)) / .24, 1))), 0); }
+.s4 .layers {
+  /* tri kroky: A zdvihne všetko nad predlohou, B čipku a výšivku, C už len výšivku.
+     Medzera medzi susednými plátmi tak nikdy neprekročí tú z pôvodnej fotky. */
+  --eA: clamp(0, (var(--p, 0) - .06) / .26, 1);
+  --eB: clamp(0, (var(--p, 0) - .34) / .26, 1);
+  --eC: clamp(0, (var(--p, 0) - .62) / .26, 1);
+}
+.s4 .layers .ly { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; will-change: transform; }
+.s4 .layers .l2 { transform: translate3d(0, calc(12% * (1 - var(--eA))), 0); }
+.s4 .layers .l3 { transform: translate3d(0, calc(12% * (1 - var(--eA)) + 12% * (1 - var(--eB))), 0); }
+.s4 .layers .l4 { transform: translate3d(0, calc(12% * (1 - var(--eA)) + 12% * (1 - var(--eB)) + 11% * (1 - var(--eC))), 0); }
 .s4 .layers::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: -4%; height: 12%; background: radial-gradient(50% 50% at 50% 50%, rgba(24,22,20,.25), transparent 70%); filter: blur(10px); z-index: -1; }
 .pr-steps { list-style: none; margin: 0; padding: 0 0 0 22px; border-left: 1px solid var(--line); display: grid; gap: 22px; position: relative; }
 .pr-steps::before { content: ""; position: absolute; left: -1px; top: 0; width: 1px; height: calc((var(--step, 0) + 1) / 5 * 100%); background: var(--accent); transition: height .6s var(--ease); }
