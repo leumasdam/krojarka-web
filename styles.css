@@ -836,3 +836,9 @@ body.torn .site-header.is-scrolled::after { background: none; }
   .macro-facts.is-story { left: calc(var(--pad) - 26px); }
   .macro-facts.is-story li { padding: 24px 26px 26px; border-radius: 4px; background: rgba(243,239,230,.93); box-shadow: 0 14px 40px rgba(24,22,20,calc(.14 * var(--lc, 0))); }
 }
+/* kroje: na úzkych obrazovkách jedna karta na riadok, pod sebou */
+@media (max-width: 890px) {
+  .cards { grid-template-columns: 1fr; overflow: visible; margin: 0; padding: 0; gap: 14px; }
+  .cards .card { aspect-ratio: auto; height: clamp(230px, 50vw, 340px); }
+  .card img { height: 86%; right: -2%; }
+}
