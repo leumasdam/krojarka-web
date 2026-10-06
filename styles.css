@@ -808,3 +808,14 @@ body.torn .site-header.is-scrolled::after { background: none; }
 .macro.is-live .macro-detail video { transform: scale(var(--vz, 1)); transform-origin: 52% 48%; }
 .macro.is-live { height: 220vh; }
 .macro.is-live .macro-thread { display: none; }
+
+/* fakty pri videu namiesto krokov */
+.macro-facts { position: absolute; left: var(--pad); top: 50%; transform: translateY(-50%); list-style: none; margin: 0; padding: 0; width: min(34vw, 360px); z-index: 2; display: none; }
+.macro.is-live .macro-facts { display: block; }
+.macro.is-live .macro-steps { display: none; }
+.macro-facts li { position: absolute; left: 0; top: 0; transform: translateY(-50%); font-family: var(--serif); font-size: clamp(22px, 2.1vw, 32px); line-height: 1.2; color: var(--text); opacity: 0; transition: opacity .6s var(--ease), transform .9s var(--ease-out); }
+.macro-facts li.is-on { opacity: 1; }
+.macro-facts li:not(.is-on) { transform: translateY(calc(-50% + 14px)); }
+.macro-facts li::before { content: ""; display: block; width: 44px; height: 1px; background: var(--accent); margin-bottom: 16px; }
+.macro-facts small { display: block; font-family: var(--sans); font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); margin-top: 12px; }
+@media (max-width: 960px) { .macro-facts { display: none !important; } }

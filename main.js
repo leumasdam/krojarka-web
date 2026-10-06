@@ -168,7 +168,7 @@
       hs: [
         { x: 40, y: 50, t: 'Stroj', d: 'Historický trukovací stroj Lintz & Eckhardt, Berlín. Látku vedie ruka, stroj len ťahá retiazku.', z: 380 },
       ],
-      macro: { o: '50% 50%', z: 1, video: 'img/krojarka-stroj.mp4', poster: 'img/krojarka-stroj-first.jpg', live: true, label: 'Pri trukovacom stroji', steps: ['Ateliér', 'Stroj', 'Ihla', 'Retiazka', 'Ruka'] },
+      macro: { o: '50% 50%', z: 1, video: 'img/krojarka-stroj.mp4', poster: 'img/krojarka-stroj-first.jpg', live: true, label: 'Pri trukovacom stroji', facts: ['Lintz & Eckhardt, Berlín.<br>Stroj starší ako republika.', 'Stroj ťahá niť.<br>Smer a tvar vedie ruka.', 'Jedna ihla, jedna niť,<br>tisíce slučiek.', 'Každý oblúk je definitívny.<br>Nedá sa vrátiť.'] },
     },
   ];
 
@@ -366,7 +366,7 @@
 
   /* ───────── makro: vždy aktuálny kroj z hero ───────── */
   const macro = $('#macro');
-  const mk = $('.macro-kroj'), mDetail = $('#macro-detail'), mLabel = $('#macro-label');
+  const mk = $('.macro-kroj'), mDetail = $('#macro-detail'), mLabel = $('#macro-label'), mSticky = $('.macro-sticky');
   function setMacro(s) {
     const m = s.macro;
     mk.src = s.img; mk.alt = '';
@@ -381,6 +381,9 @@
     $$('.macro-steps li').forEach((li, i) => (li.textContent = labels[i]));
     macro.classList.toggle('is-gallery', !!m.gallery);
     macro.classList.toggle('is-live', !!m.live);
+    let facts = $('.macro-facts');
+    if (!facts) { facts = document.createElement('ol'); facts.className = 'macro-facts'; mSticky.appendChild(facts); }
+    facts.innerHTML = (m.facts || []).map(f => `<li>${f}</li>`).join('');
     mDetail.innerHTML = m.gallery
       ? m.gallery.map((g, i) => `<img src="${g.src}" srcset="${g.src} 1x, ${big(g.src, '@2x')} 2x" alt="${g.label}" data-label="${g.label}" loading="lazy" class="${i ? '' : 'is-on'}">`).join('')
       : m.video
@@ -536,7 +539,7 @@
   $$('.reveal, .stitch, .reg-map').forEach(x => io.observe(x));
 
   /* ───────── scroll: macro zoom, parallax, progress ───────── */
-  const mv = mDetail, mSticky = $('.macro-sticky');
+  const mv = mDetail;
   const steps = $$('.macro-steps li'), mThread = $('.macro-thread path');
   mThread.setAttribute('pathLength', 1);
   const qb = $('.qb-img img'), atd = $('.at-detail'), pt = $('#pt-fill');
@@ -555,7 +558,7 @@
     const p = clamp(-r.top / (r.height - vh));
     if (macro.classList.contains('is-live')) {
       /* video ostáva v oblúku; počas scrollu sa oblúk zväčší o 18 % a obsah o 8 %, rovnomerne cez všetkých päť krokov */
-      const N = steps.length, si = Math.min(N - 1, Math.floor(p * N));
+      const N = (m => m ? m.children.length : 1)($('.macro-facts')) || 1, si = Math.min(N - 1, Math.floor(p * N));
       mk.style.setProperty('--mz', 1); mk.style.opacity = 0;
       mv.style.setProperty('--vo', 1);
       mv.style.setProperty('--grow', (p * 0.28).toFixed(4));
@@ -565,7 +568,7 @@
       if (vid && vid.paused) vid.play().catch(() => {});
       mSticky.style.setProperty('--co', range(p, .4, .52));
       mThread.style.setProperty('--to', 1 - range(p, .5, .85));
-      steps.forEach((s, i) => s.classList.toggle('is-on', i === si));
+      $$('.macro-facts li').forEach((f, i) => f.classList.toggle('is-on', i === si));
       if (qb) { const qr = qb.parentElement.getBoundingClientRect(); qb.style.setProperty('--py', ((qr.top + qr.height / 2 - vh / 2) * -.12) + 'px'); }
       return;
     }
