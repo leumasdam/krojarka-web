@@ -197,15 +197,20 @@
           { k: 'Brokát', t: 'Ruža na brokáte.', d: 'Tyrkysový brokát s veľkými ružami. Taký sa dnes zháňa ťažko, preto Lenka zachraňuje aj staré kusy.' },
           { k: 'Bučany', t: 'Hotový prucel.', d: 'Na bielej košeli: brokát, vykrajované plstené lemy, rozety s gombíkmi. Ako na starej fotke, len nový.' },
         ],
-        /* prilietanie, všetko v % (scroll detailu 0–100, poloha a veľkosť v % plochy):
-           at = kedy priletí, until = kedy odletí (null = ostane), x/y = kde pristane (0 0 = stred),
-           fx/fy = odkiaľ letí, w = šírka, r = náklon v stupňoch */
+        /* prilietanie (všetko v %): fx/fy = odkiaľ letí, out = kedy odletí (null = ostane),
+           k = kľúčové polohy podľa scrollu detailu 0–100: at = kedy, x/y = kde (0 0 stred), w = šírka,
+           r = náklon, z = hĺbka (0 vpredu, 1 vzadu: menší, rozmazanejší, pomalší) */
         fly: [
-          { src: 'img/prucel/rozety-kopa.webp', label: 'Plstené rozety', at: 2, until: null, x: -30.5, y: -23.9, fx: -75, fy: 20, w: 30, r: -12 },
-          { src: 'img/prucel/rozety-gombiky.webp', label: 'Rozety s maľovanými gombíkmi', at: 22, until: 78, x: 28.7, y: -21.8, fx: 80, fy: -40, w: 28, r: 6 },
-          { src: 'img/prucel/prisite.webp?v=2', label: 'Rozety prišité na brokát', at: 42, until: 78, x: 8.5, y: 24.3, fx: -60, fy: -70, w: 36, r: -17 },
-          { src: 'img/prucel/ruza.webp', label: 'Ruža na tyrkysovom brokáte', at: 60, until: 80, x: -52.2, y: 22.8, fx: 80, fy: 60, w: 34, r: 12 },
-          { src: 'img/prucel/prucel-cely.webp', label: 'Mužský prucel z Bučian', at: 80, until: null, x: 39.7, y: -8.8, fx: 0, fy: 30, w: 46, r: 0 },
+          { src: 'img/prucel/rozety-kopa.webp', label: 'Plstené rozety', fx: -75, fy: 20, out: null,
+            k: [{ at: 2, x: -24, y: -14, w: 34, r: -12, z: 0 }, { at: 22, x: -36, y: -28, w: 22, r: -16, z: .6 }, { at: 80, x: -42, y: -32, w: 16, r: -20, z: .85 }] },
+          { src: 'img/prucel/rozety-gombiky.webp', label: 'Rozety s maľovanými gombíkmi', fx: 80, fy: -40, out: 80,
+            k: [{ at: 22, x: 10, y: -8, w: 30, r: 6, z: 0 }, { at: 42, x: 32, y: -28, w: 18, r: 10, z: .6 }] },
+          { src: 'img/prucel/prisite.webp?v=2', label: 'Rozety prišité na brokát', fx: -60, fy: -70, out: 80,
+            k: [{ at: 42, x: 4, y: 10, w: 38, r: -8, z: 0 }, { at: 60, x: 26, y: 20, w: 26, r: -14, z: .55 }] },
+          { src: 'img/prucel/ruza.webp', label: 'Ruža na tyrkysovom brokáte', fx: 80, fy: 60, out: 80,
+            k: [{ at: 60, x: -16, y: 14, w: 36, r: 10, z: 0 }] },
+          { src: 'img/prucel/prucel-cely.webp', label: 'Mužský prucel z Bučian', fx: 0, fy: 30, out: null,
+            k: [{ at: 80, x: 22, y: -2, w: 48, r: 0, z: 0 }] },
         ] },
     },
     {
@@ -434,6 +439,7 @@
   const macro = $('#macro');
   const mk = $('.macro-kroj'), mDetail = $('#macro-detail'), mLabel = $('#macro-label'), mSticky = $('.macro-sticky');
   let mSegs = [], mSeq = false, mChapter = -1, mFly = null;
+  let mFlyBase = [], mMouse = { x: 0, y: 0 }, mFlyRun = false;
   function setMacro(s) {
     const m = s.macro;
     mk.src = s.img; mk.alt = '';
@@ -449,6 +455,7 @@
     /* zábery videa ku kapitolám: [od, do] v sekundách; sekcia s kapitolami po obrázkoch/záberoch je dlhšia */
     mSegs = (m.story || []).map(c => c.v || null);
     mFly = m.fly || null;
+    if (mFly && macroNear && !mFlyRun) { mFlyRun = true; requestAnimationFrame(flyLoop); }
     const seq = !!m.gallery || !!m.fly || mSegs.some(Boolean);
     macro.classList.toggle('is-fly', !!m.fly);
     macro.classList.toggle('is-gallery', seq);
@@ -496,6 +503,7 @@
   new IntersectionObserver(es => {
     macroNear = es[0].isIntersecting;
     upgradeMacro();
+    if (macroNear && mFly && !mFlyRun) { mFlyRun = true; requestAnimationFrame(flyLoop); }
   }, { rootMargin: '60% 0px' }).observe(macro);
 
   /* ───────── hotspot drawer ───────── */
@@ -637,72 +645,133 @@
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   const range = (p, a, b) => clamp((p - a) / (b - a));
 
-  /* ?tune — editor prilietania: klikni na kus, ťahaj ho myšou, kolieskom otáčaj, slidery doladia zvyšok */
+  /* ?tune — editor prilietania: vyber kus a jeho polohu, ťahaj myšou, kolieskom otáčaj, slidery doladia zvyšok */
   let tune = null;
   if (/[?&]tune/.test(location.search)) {
     document.body.classList.add('is-tune');
     const el = document.createElement('aside'); el.id = 'tune';
-    const F = { at: [0, 100, 'kedy priletí (% scrollu)'], until: [0, 100, 'kedy odletí (prázdne = ostane)'], x: [-70, 70, 'kde pristane ←→'], y: [-70, 70, 'kde pristane ↑↓'],
-      fx: [-160, 160, 'odkiaľ letí ←→'], fy: [-160, 160, 'odkiaľ letí ↑↓'], w: [8, 90, 'šírka (% plochy)'], r: [-60, 60, 'náklon (°)'] };
-    const fmt = v => v === null ? 'null' : Math.round(v * 10) / 10;
-    const dump = () => { if (tune && tune.out) tune.out.value = 'fly: [\n' + mFly.map(f => `  { src: '${f.src}', label: '${f.label}', ` + Object.keys(F).map(k => `${k}: ${fmt(f[k])}`).join(', ') + ' },').join('\n') + '\n]'; };
+    const KF = { at: [0, 100, 'kedy (% scrollu)'], x: [-70, 70, 'kde ←→'], y: [-70, 70, 'kde ↑↓'], w: [8, 90, 'šírka'], r: [-60, 60, 'náklon (°)'], z: [0, 1, 'hĺbka (0 vpredu, 1 vzadu)'] };
+    const PF = { fx: [-160, 160, 'odkiaľ letí ←→'], fy: [-160, 160, 'odkiaľ letí ↑↓'], out: [0, 100, 'kedy odletí'] };
+    const fmt = v => v === null ? 'null' : Math.round(v * 100) / 100;
     const name = f => f.src.split('/').pop().replace(/\.webp.*$/, '');
+    const dump = () => { if (!tune || !tune.out) return;
+      tune.out.value = 'fly: [\n' + mFly.map(f => `  { src: '${f.src}', label: '${f.label}', fx: ${f.fx}, fy: ${f.fy}, out: ${fmt(f.out)},\n    k: [` +
+        f.k.map(k => `{ at: ${k.at}, x: ${fmt(k.x)}, y: ${fmt(k.y)}, w: ${fmt(k.w)}, r: ${fmt(k.r)}, z: ${fmt(k.z)} }`).join(', ') + '] },').join('\n') + '\n]'; };
     const flyImgs = () => $$('.fly-img', mDetail);
-    const showAt = f => { const r = macro.getBoundingClientRect(); window.scrollTo(0, scrollY + r.top + (r.height - innerHeight) * (.3 + Math.min(99, f.at + 9) * .007)); };
-    const select = i => {
-      tune.sel = i; flyImgs().forEach((g, k) => g.classList.toggle('is-sel', k === i));
-      $$('.t-item', el).forEach((b, k) => b.classList.toggle('is-on', k === i));
+    const curD = () => parseFloat(tune.d.textContent) || 0;
+    const showAt = at => { const r = macro.getBoundingClientRect(); window.scrollTo(0, scrollY + r.top + (r.height - innerHeight) * (.3 + Math.min(99, at + 9) * .007)); };
+    const select = (i, kf) => {
       const f = mFly[i]; if (!f) return;
+      if (kf == null) { kf = 0; f.k.forEach((k, j) => { if (curD() >= k.at) kf = j; }); }   // poloha platná pri aktuálnom scrolle
+      tune.sel = i; tune.kf = kf;
+      flyImgs().forEach((g, j) => g.classList.toggle('is-sel', j === i));
+      $$('.t-item', el).forEach((b, j) => b.classList.toggle('is-on', j === i));
       $('.t-name', el).textContent = (i + 1) + '. ' + name(f);
-      $$('.t-sl', el).forEach(inp => { const k = inp.dataset.k; inp.value = f[k] === null ? inp.max : f[k]; inp.nextElementSibling.textContent = f[k] === null ? '∞' : fmt(f[k]); });
-      const u = $('.t-stay', el); u.checked = f.until === null;
+      $('.t-kfs', el).innerHTML = f.k.map((k, j) => `<button class="t-kf ${j === kf ? 'is-on' : ''}" data-j="${j}">poloha ${j + 1} <i>@${k.at}</i></button>`).join('') +
+        `<button class="t-kf t-add" title="pridať polohu (kam kus ustúpi neskôr)">+</button>${f.k.length > 1 ? '<button class="t-kf t-del" title="odobrať túto polohu">−</button>' : ''}`;
+      $$('.t-kf[data-j]', el).forEach(b => b.addEventListener('click', () => { select(i, +b.dataset.j); showAt(f.k[+b.dataset.j].at); }));
+      const add = $('.t-add', el); add.addEventListener('click', () => { const k = f.k[kf]; f.k.splice(kf + 1, 0, Object.assign({}, k, { at: Math.min(99, k.at + 20), z: Math.min(1, k.z + .5), w: k.w * .65 })); f.k.sort((p, q) => p.at - q.at); select(i, kf + 1); dump(); onScroll(); });
+      const del = $('.t-del', el); if (del) del.addEventListener('click', () => { f.k.splice(kf, 1); select(i, Math.max(0, kf - 1)); dump(); onScroll(); });
+      const k = f.k[kf];
+      $$('.t-sl', el).forEach(inp => { const key = inp.dataset.k, v = key in KF ? k[key] : f[key]; inp.value = v === null ? inp.max : v; inp.nextElementSibling.textContent = v === null ? '∞' : fmt(v); });
+      $('.t-stay', el).checked = f.out === null;
     };
+    const slider = (key, [lo, hi, t]) => `<label><span>${key} <i>${t}</i></span><input class="t-sl" type="range" min="${lo}" max="${hi}" step="${key === 'z' ? .05 : key === 'w' || key === 'r' ? .5 : 1}" data-k="${key}"><output></output></label>`;
     const build = () => {
       if (!mFly) { el.innerHTML = '<p>Tento kroj nemá prilietanie. Vyber na úvode prucel (08).</p>'; tune = { d: { textContent: '' } }; return; }
-      el.innerHTML = '<p class="t-h">Pozícia v detaile: <b class="t-d">0 %</b> · klikni na kus a ťahaj ho myšou, kolieskom ho otáčaš</p>' +
+      el.innerHTML = '<p class="t-h">Pozícia v detaile: <b class="t-d">0 %</b> · klikni na kus a ťahaj ho, kolieskom otáčaš. Každý kus má polohy: prvá = príchod, ďalšie = kam ustúpi, keď príde ďalší kus.</p>' +
         '<div class="t-row"><div class="t-list">' + mFly.map((f, i) => `<button class="t-item" data-i="${i}">${i + 1}. ${name(f)}<span>ukáž</span></button>`).join('') + '</div>' +
-        '<div class="t-sliders"><b class="t-name"></b>' + Object.entries(F).map(([k, [lo, hi, t]]) =>
-          `<label><span>${k} <i>${t}</i></span><input class="t-sl" type="range" min="${lo}" max="${hi}" step="${k === 'w' || k === 'r' ? .5 : 1}" data-k="${k}"><output></output></label>`).join('') +
-        '<label class="t-stayl"><input type="checkbox" class="t-stay"> ostane do konca (until = null)</label></div></div>' +
+        '<div class="t-sliders"><b class="t-name"></b><div class="t-kfs"></div>' + Object.entries(KF).map(([k, v]) => slider(k, v)).join('') +
+        '<hr>' + Object.entries(PF).map(([k, v]) => slider(k, v)).join('') +
+        '<label class="t-stayl"><input type="checkbox" class="t-stay"> ostane do konca (out = null)</label></div></div>' +
         '<textarea class="t-out" readonly></textarea><p class="t-n">Skopíruj obsah políčka a pošli ho.</p>';
-      tune = { d: $('.t-d', el), out: $('.t-out', el), sel: 0 };
-      $$('.t-item', el).forEach(btn => {
-        btn.addEventListener('click', e => { const i = +btn.dataset.i; select(i); if (e.target.tagName === 'SPAN') showAt(mFly[i]); });
-      });
+      tune = { d: $('.t-d', el), out: $('.t-out', el), sel: 0, kf: 0 };
+      $$('.t-item', el).forEach(btn => btn.addEventListener('click', e => { const i = +btn.dataset.i; select(i, 0); if (e.target.tagName === 'SPAN') showAt(mFly[i].k[0].at); }));
       $$('.t-sl', el).forEach(inp => inp.addEventListener('input', () => {
-        const f = mFly[tune.sel], k = inp.dataset.k; f[k] = +inp.value; inp.nextElementSibling.textContent = fmt(f[k]);
-        if (k === 'until') $('.t-stay', el).checked = false;
+        const f = mFly[tune.sel], key = inp.dataset.k, v = +inp.value;
+        if (key in KF) { f.k[tune.kf][key] = v; if (key === 'at') { f.k.sort((p, q) => p.at - q.at); tune.kf = f.k.findIndex(k => k[key] === v); } }
+        else { f[key] = v; if (key === 'out') $('.t-stay', el).checked = false; }
+        inp.nextElementSibling.textContent = fmt(v); if (key === 'at') select(tune.sel, tune.kf);
         dump(); onScroll();
       }));
-      $('.t-stay', el).addEventListener('change', e => { const f = mFly[tune.sel]; f.until = e.target.checked ? null : 90; select(tune.sel); dump(); onScroll(); });
-      dump(); select(0);
+      $('.t-stay', el).addEventListener('change', e => { const f = mFly[tune.sel]; f.out = e.target.checked ? null : 90; select(tune.sel, tune.kf); dump(); onScroll(); });
+      dump(); select(0, 0);
     };
-    /* priamo na ploche: výber klikom, ťahanie, otáčanie kolieskom */
     let drag = null;
     mDetail.addEventListener('pointerdown', e => {
       const g = e.target.closest('.fly-img'); if (!g || !mFly) return;
-      const i = flyImgs().indexOf(g); select(i);
-      const f = mFly[i]; drag = { i, x0: e.clientX, y0: e.clientY, fx: f.x, fy: f.y };
+      const i = flyImgs().indexOf(g); select(i, null);
+      const k = mFly[i].k[tune.kf]; drag = { i, kf: tune.kf, x0: e.clientX, y0: e.clientY, kx: k.x, ky: k.y };
       g.setPointerCapture(e.pointerId); e.preventDefault();
     });
     mDetail.addEventListener('pointermove', e => {
       if (!drag) return;
-      const f = mFly[drag.i];
-      f.x = Math.round((drag.fx + (e.clientX - drag.x0) / mDetail.clientWidth * 100) * 10) / 10;
-      f.y = Math.round((drag.fy + (e.clientY - drag.y0) / mDetail.clientHeight * 100) * 10) / 10;
-      select(drag.i); dump(); onScroll();
+      const k = mFly[drag.i].k[drag.kf];
+      k.x = Math.round((drag.kx + (e.clientX - drag.x0) / mDetail.clientWidth * 100) * 10) / 10;
+      k.y = Math.round((drag.ky + (e.clientY - drag.y0) / mDetail.clientHeight * 100) * 10) / 10;
+      select(drag.i, drag.kf); dump(); onScroll();
     });
     addEventListener('pointerup', () => { drag = null; });
     mDetail.addEventListener('wheel', e => {
       const g = e.target.closest('.fly-img'); if (!g || !mFly) return;
       e.preventDefault();
-      const i = flyImgs().indexOf(g); select(i);
-      const f = mFly[i]; f.r = Math.round((f.r + (e.deltaY > 0 ? 2 : -2)) * 10) / 10;
-      select(i); dump(); onScroll();
+      const i = flyImgs().indexOf(g); select(i, null);
+      const k = mFly[i].k[tune.kf]; k.r = Math.round((k.r + (e.deltaY > 0 ? 2 : -2)) * 10) / 10;
+      select(i, tune.kf); dump(); onScroll();
     }, { passive: false });
     document.body.appendChild(el); build();
     document.addEventListener('macrochange', build);
   }
+
+  /* ───────── prilietanie ─────────
+     Kľúčové polohy sa interpolujú podľa scrollu; príchod má mierne prestrelenie (ako keď kus dosadne),
+     odchod ide pomimo kamery. Hĺbka z robí kus menším, rozmazanejším a pomalším v paralaxe.
+     Dýchanie a paralaxa myšou bežia v rAF slučke, len kým je makro na obrazovke. */
+  const sstep = t => t * t * (3 - 2 * t);
+  const back = t => { const c = .9; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+  const lerp = (a, b, t) => a + (b - a) * t;
+  function flyState(f, d) {
+    const K = f.k, a = range(d, K[0].at, K[0].at + 8);
+    if (a <= 0) return { on: false, op: 0 };
+    const cur = Object.assign({}, K[0]);
+    for (let j = 1; j < K.length; j++) {
+      const t = sstep(range(d, K[j].at, K[j].at + 8)); if (t <= 0) break;
+      for (const key of ['x', 'y', 'w', 'r', 'z']) cur[key] = lerp(cur[key], K[j][key], t);
+    }
+    const ab = back(a), as = sstep(a);
+    const out = f.out == null ? 0 : sstep(range(d, f.out, f.out + 7));
+    const depth = 1 - cur.z * .45;
+    return {
+      on: out < 1, w: cur.w, z: cur.z,
+      x: lerp(f.fx, cur.x, ab) - (f.fx * .5 + cur.x * .3) * out,
+      y: lerp(f.fy, cur.y, ab) - (f.fy * .5 + cur.y * .3) * out,
+      s: (.3 + .7 * ab) * depth + .5 * out,
+      r: cur.r * (2.2 - 1.2 * ab) * (1 - .6 * out),
+      blur: 8 * (1 - as) + 5 * cur.z + 10 * out,
+      op: clamp(a * 1.6) * (1 - cur.z * .3) * clamp(1 - out * 1.4),
+      sh: .22 * as * (1 - out) * (1 - cur.z * .6),
+    };
+  }
+  function applyFly(t = performance.now() / 1000) {
+    const gal = $$('.fly-img', mv), cw = mv.clientWidth, chh = mv.clientHeight;
+    gal.forEach((g, i) => {
+      const st = mFlyBase[i]; if (!st) return;
+      if (!st.on && !st.op) { g.style.opacity = 0; return; }
+      const k = 1 - st.z * .7, calm = reduce ? 0 : 1;
+      const fx = Math.sin(t * .6 + i * 1.7) * .7 * k * calm, fy = Math.cos(t * .45 + i * 2.1) * .9 * k * calm, fr = Math.sin(t * .35 + i) * 1.2 * k * calm;
+      const px = mMouse.x * (5 - st.z * 4) * calm, py = mMouse.y * (3.5 - st.z * 2.8) * calm;
+      g.style.maxWidth = st.w + '%';
+      g.style.transform = `translate(calc(-50% + ${((st.x + fx + px) / 100 * cw).toFixed(1)}px), calc(-50% + ${((st.y + fy + py) / 100 * chh).toFixed(1)}px)) scale(${st.s.toFixed(3)}) rotate(${(st.r + fr).toFixed(2)}deg)`;
+      g.style.opacity = st.op.toFixed(3);
+      g.style.filter = `blur(${st.blur.toFixed(1)}px) drop-shadow(0 ${(24 * (1 - st.z * .5)).toFixed(0)}px ${(36 * (1 - st.z * .5)).toFixed(0)}px rgba(24,22,20,${st.sh.toFixed(2)}))`;
+      g.style.zIndex = Math.round(10 - st.z * 9);
+    });
+  }
+  function flyLoop() {
+    if (!mFly || !macroNear) { mFlyRun = false; return; }
+    applyFly(); requestAnimationFrame(flyLoop);
+  }
+  addEventListener('pointermove', e => { mMouse.x = e.clientX / innerWidth - .5; mMouse.y = e.clientY / innerHeight - .5; }, { passive: true });
 
   let ticking = false;
   const onScroll = () => {
@@ -751,22 +820,12 @@
       ? (p < (mFly ? .3 : .5) ? 0 : Math.min(N - 1, 1 + Math.floor(range(p, .5, .95) * (N - 1))))
       : Math.min(N - 1, Math.floor(range(p, 0, .9) * N));
     if (mFly) {
-      /* každý kus letí podľa vlastného plánu; kapitola textu = posledný kus, ktorý priletel */
-      const d = range(p, .3, 1) * 100, cw = mv.clientWidth, chh = mv.clientHeight, eo = t => 1 - Math.pow(1 - t, 3);
+      const d = range(p, .3, 1) * 100;
       mv.style.setProperty('--vz', 1); mv.style.setProperty('--vr', '0deg');
       let last = -1;
-      gal.forEach((g, i) => {
-        const f = mFly[i]; if (!f) return;
-        const a = eo(range(d, f.at, f.at + 7)), b = f.until == null ? 0 : eo(range(d, f.until, f.until + 6));
-        if (a > 0 && b < 1) last = i;
-        const x = f.fx + (f.x - f.fx) * a - (f.fx * .5 + f.x * .3) * b, y = f.fy + (f.y - f.fy) * a - (f.fy * .5 + f.y * .3) * b;
-        const s = .3 + .7 * a + .5 * b, r = f.r * (2.4 - 1.4 * a) * (1 - .6 * b), blur = 6 * (1 - a) + 10 * b;
-        g.style.maxWidth = f.w + '%';
-        g.style.transform = `translate(calc(-50% + ${(x / 100 * cw).toFixed(1)}px), calc(-50% + ${(y / 100 * chh).toFixed(1)}px)) scale(${s.toFixed(3)}) rotate(${r.toFixed(2)}deg)`;
-        g.style.opacity = (clamp(a * 1.6) * clamp(1 - b * 1.4)).toFixed(3);
-        g.style.filter = `blur(${blur.toFixed(1)}px) drop-shadow(0 30px 40px rgba(24,22,20,${(.22 * a * (1 - b)).toFixed(2)}))`;
-        g.classList.toggle('is-on', i === last);
-      });
+      mFlyBase = mFly.map((f, i) => { const st = flyState(f, d); if (st.on) last = i; return st; });
+      gal.forEach((g, i) => g.classList.toggle('is-on', i === last));
+      applyFly();
       si = Math.min(N - 1, last + 1);
       if (last >= 0) mLabel.textContent = mFly[last].label;
       if (tune) tune.d.textContent = d.toFixed(0) + ' %';
