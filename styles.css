@@ -842,3 +842,8 @@ body.torn .site-header.is-scrolled::after { background: none; }
   .cards .card { aspect-ratio: auto; height: clamp(230px, 50vw, 340px); }
   .card img { height: 86%; right: -2%; }
 }
+/* regióny: na veľmi širokých obrazovkách mapa nemá byť prilepená k okraju */
+@media (min-width: 1500px) {
+  .regions { padding-right: calc(var(--pad) + (100vw - 1500px) * .3); }
+  .reg-map { width: 100%; }
+}
