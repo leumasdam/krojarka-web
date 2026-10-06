@@ -1,5 +1,8 @@
 /* Krojárka — prezentačný web (vanilla) */
 (() => {
+  /* po obnovení stránky vždy začať hore, nie uprostred makra */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (!location.hash) { document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo(0, 0); addEventListener('load', () => { window.scrollTo(0, 0); setTimeout(() => { window.scrollTo(0, 0); document.documentElement.style.scrollBehavior = ''; }, 50); }); }
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
