@@ -180,13 +180,13 @@
       key: 'prucel', title: 'Regióny', sub: 'Mužský prucel z Bučian.',
       txt: 'Trnavský kroj. Prucel ušitý podľa starej fotografie — brokát, vykrajované plstené lemy a rozety s gombíkmi.',
       cta: 'Objaviť regióny', href: '#regiony', real: true,
-      img: 'img/prucel-bucany.webp', ar: 1145 / 1400, amb: '#16795A',
+      img: 'img/prucel-bucany-v2.webp', ar: 1086 / 1351, amb: '#16795A',
       sc: .8, inset: 'img/foto-bucany-predloha.webp', insetCap: 'Predloha · Bučany',
       hs: [
-        { x: 50, y: 8, t: 'Mašľa', d: 'Biela saténová mašľa s vyšívanými stuhami a zlatými strapcami.', z: 440 },
-        { x: 26, y: 40, t: 'Rozety', d: 'Plstené rozety v červenej a zelenej s maľovanými gombíkmi — každá vystrihnutá ručne.', z: 460 },
-        { x: 84, y: 60, t: 'Brokát', d: 'Tyrkysový brokát s veľkými ružami, lemovaný retiazkovou výšivkou.', z: 400 },
-        { x: 18, y: 95, t: 'Lem', d: 'Vykrajovaný plstený lem v zelenej, červenej a oranžovej.', z: 420 },
+        { x: 50, y: 12, t: 'Mašľa', d: 'Biela saténová mašľa s vyšívanými stuhami a zlatými strapcami.', z: 440 },
+        { x: 20, y: 46, t: 'Rozety', d: 'Plstené rozety v červenej a zelenej s maľovanými gombíkmi — každá vystrihnutá ručne.', z: 460 },
+        { x: 84, y: 62, t: 'Brokát', d: 'Tyrkysový brokát s veľkými ružami, lemovaný retiazkovou výšivkou.', z: 400 },
+        { x: 30, y: 94, t: 'Lem', d: 'Vykrajovaný plstený lem v zelenej, červenej a oranžovej.', z: 420 },
       ],
       macro: { o: '27% 42%', z: 2.5, fadeEarly: true, contain: true, rot: 0, label: 'Rozety a gombíky',
         story: [
@@ -200,7 +200,7 @@
            k = kľúčové polohy podľa scrollu detailu 0–100: at = kedy, x/y = kde (0 0 stred), w = šírka,
            r = náklon, z = hĺbka (0 vpredu, 1 vzadu: menší, rozmazanejší, pomalší) */
         fly: [
-          { src: 'img/prucel/prucel-cely.webp', label: 'Mužský prucel z Bučian', fx: 0, fy: 40, out: null,
+          { src: 'img/prucel/prucel-cely.webp?v=2', label: 'Mužský prucel z Bučian', fx: 0, fy: 40, out: null,
             k: [{ at: 2, x: -3, y: 0, w: 60, r: 0, z: 0 }] },
           { src: 'img/prucel/brokat-foto.webp?v=2', label: 'Rozety prišité na brokát', fx: 70, fy: 60, out: null,
             k: [{ at: 18, x: 36, y: 4, w: 34, r: 1, z: 0 }] },
@@ -254,7 +254,7 @@
     { n: 'Bašovce', lat: 48.6330, lon: 17.7974, k: 'kroj', img: 'img/kroj-basovsky-v2.webp', t: 'Hody v kroji 2025 · nebíčkový kroj po babičke', a: 'start', dy: 2, main: true },
     { n: 'Ostrov', lat: 48.6287, lon: 17.7688, k: 'kroj', img: 'img/kroj-fialovy.webp', t: 'Hody v kroji 2025 · koniec krojovej sezóny', a: 'end', dy: 10 },
     { n: 'Rakovice', lat: 48.5634, lon: 17.7308, k: 'live', t: 'Trukovanie naživo', a: 'end', dy: 4 },
-    { n: 'Bučany', lat: 48.4190, lon: 17.6992, k: 'kroj', img: 'img/prucel-bucany.webp', t: 'Mužský a ženský prucel · Trnavský kroj', a: 'end' },
+    { n: 'Bučany', lat: 48.4190, lon: 17.6992, k: 'kroj', img: 'img/prucel-bucany-v2.webp', t: 'Mužský a ženský prucel · Trnavský kroj', a: 'end' },
     { n: 'Červeník', lat: 48.4601, lon: 17.7554, k: 'live', t: 'Trukovanie naživo · 8. 8. 2026', a: 'start' },
     { n: 'Nitrianska Blatnica', lat: 48.5537, lon: 17.9669, k: 'live', t: 'Šarfické folklórne slávnosti · trukovanie', a: 'end', dy: -12 },
     { n: 'Beckov', lat: 48.7892, lon: 17.8967, k: 'live', t: 'Výstava krojov z jej zbierky · jar 2025', a: 'start' },
@@ -583,7 +583,7 @@
     { reg: 'Sviatočný', t: 'Červený kroj so zlatou trukovkou', m: 'ženský', img: 'img/kroj-cerveny.webp', f: 'zensky' },
     { reg: 'Pobedim', t: 'Zásterky na hody', m: '2026 · ženské', img: 'img/zasterky-pobedim.webp', f: 'zensky', wide: true },
     { reg: 'Očkov', t: 'Detský kroj podľa fotky', m: 'na zákazku · detský', img: 'img/kroj-ockovsky-detsky.webp', f: 'detsky zakazka', wide: true },
-    { reg: 'Bučany', t: 'Mužský prucel', m: 'Trnavský kroj · mužský', img: 'img/prucel-bucany.webp', f: 'muzsky zakazka', wide: true },
+    { reg: 'Bučany', t: 'Mužský prucel', m: 'Trnavský kroj · mužský', img: 'img/prucel-bucany-v2.webp', f: 'muzsky zakazka', wide: true },
     { reg: 'Podolie', t: 'Detské rukávce', m: 'trukovanie · detské', img: 'img/rukavce-podolie.webp', f: 'detsky', wide: true },
   ];
   const cards = $('#cards');
