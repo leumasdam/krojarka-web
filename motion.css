@@ -158,3 +158,10 @@
   .kt-hero { height: auto; }
   .kt-sticky { height: 80svh; }
 }
+
+/* kontakt bez hera: nadpis + údaje hneď hore */
+.kt-top { padding-top: clamp(130px, 18vh, 190px); }
+.kt-head { max-width: 760px; margin-bottom: clamp(36px, 5vw, 64px); }
+.kt-head h1 { font-size: clamp(44px, 6vw, 96px); margin: 12px 0 18px; }
+.kt-head .lead { max-width: 46ch; font-size: 17px; line-height: 1.65; color: #3b352e; margin: 0; }
+.kt-top .contact-cols { padding-top: 28px; border-top: 1px solid var(--line); }

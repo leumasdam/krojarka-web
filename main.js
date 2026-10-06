@@ -456,6 +456,9 @@
 
   go(0, true);
 
+  /* logo na homepage: plynulo hore, bez reloadu */
+  $('.logo').addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); history.replaceState(null, '', location.pathname); }); // logo-top
+
   /* ───────── header, menu ───────── */
   const header = $('.site-header'), menuBtn = $('.menu-btn'), overlay = $('#overlay-nav');
   const toggleMenu = open => {
