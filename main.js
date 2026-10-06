@@ -825,7 +825,12 @@
       const d = range(p, .3, 1) * 100;
       mv.style.setProperty('--vz', 1); mv.style.setProperty('--vr', '0deg');
       let last = -1;
-      mFlyBase = mFly.map((f, i) => { const st = flyState(f, d); if (st.on) last = i; return st; });
+      /* na mobile vždy len jeden kus: každý má rovnaký diel scrollu, v strede, a odletí, keď príde ďalší */
+      const narrow = innerWidth <= 960, n = mFly.length;
+      mFlyBase = mFly.map((f, i) => {
+        const g = narrow ? Object.assign({}, f, { out: i < n - 1 ? (i + 1) * (92 / n) : null, k: [{ at: i * (92 / n) + 2, x: 0, y: 0, w: 92, r: f.k[0].r * .5, z: 0 }] }) : f;
+        const st = flyState(g, d); if (st.on) last = i; return st;
+      });
       gal.forEach((g, i) => g.classList.toggle('is-on', i === last));
       applyFly();
       si = Math.min(N - 1, last + 1);

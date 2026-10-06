@@ -893,3 +893,11 @@ body.is-tune .macro-cap, body.is-tune .macro-thread { display: none; }
   .macro.is-fly .macro-facts .mf-d { font-size: 17px; margin-top: 18px; max-width: 30ch; }
   .macro.is-fly .macro-facts .mf-img { display: none; }
 }
+
+/* prilietanie na mobile: jeden kus naraz, text kapitoly dole ako kartička, bez ornamentu */
+@media (max-width: 960px) {
+  .macro.is-fly { height: 520vh; }
+  .macro-detail.is-fly { height: min(70vh, 92vw); width: 92vw; top: 44%; }
+  .macro-detail.is-fly .fly-img { max-height: 92%; }
+  .macro.is-fly .macro-orn, .macro.is-fly .macro-thread, .macro.is-fly .macro-cap { display: none; }
+}
