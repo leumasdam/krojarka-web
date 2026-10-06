@@ -577,22 +577,29 @@ body.torn .site-header.is-scrolled::after { background: none; }
   .overlay-nav { clip-path: circle(0 at calc(100% - var(--pad) - 25px) 42px); }
   .overlay-nav.is-open { clip-path: circle(150% at calc(100% - var(--pad) - 25px) 42px); }
 
-  .hero { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto auto; padding-top: 96px; height: auto; min-height: 100svh; max-height: none; }
+  .hero { grid-template-columns: 1fr; grid-template-rows: auto auto auto auto; padding-top: 92px; height: auto; min-height: 100svh; max-height: none; row-gap: 0; }
   .hero-left { grid-row: 1; max-width: none; margin: 0; }
-  .hero-left .display { font-size: clamp(40px, 11vw, 64px); margin-bottom: 14px; }
+  .hero-left .display { font-size: clamp(34px, 9vw, 48px); margin-bottom: 8px; }
   .hero-left .display br:nth-of-type(2) { display: none; }
-  .lede { font-size: 15.5px; margin-bottom: 0; }
+  .lede { display: none; }
   .hero-left .cta-round { display: none; }
-  .stage { position: relative; grid-row: 2; inset: auto; height: 58svh; min-height: 380px; margin: 0 calc(var(--pad) * -1); }
-  .fig, .fig.person { height: 100%; bottom: 0; }
+  .stage { position: relative; grid-row: 2; inset: auto; height: 34svh; min-height: 220px; margin: 0; }
+  .fig, .fig.person { height: 100%; max-width: 62vw; bottom: 0; }
   .fig[data-pos="-1"] { --x: -62vw; } .fig[data-pos="1"] { --x: 62vw; }
-  .hero-right { grid-row: 3; grid-column: 1; justify-self: stretch; width: 100%; margin: 12px 0 0; }
+  .hero-right { grid-row: 3; grid-column: 1; justify-self: stretch; width: 100%; margin: 4px 0 0; }
   .rule { display: none; }
   .counter { display: none; }
-  .hr-body { min-height: 210px; }
-  .hr-item .txt { font-size: 15.5px; }
+  /* text kroja má skutočnú výšku (nie absolútne), aby tlačidlo nepretekalo pod šípky */
+  .hr-body { min-height: 0; display: grid; }
+  .hr-item { position: relative; inset: auto; grid-area: 1 / 1; }
+  .hr-item:not(.is-in) { pointer-events: none; }
+  .hero-bottom { margin-top: 18px; }
+  .hr-item .txt { font-size: 14.5px; margin-bottom: 14px; }
+  .hr-item h2 { font-size: 30px; margin-bottom: 6px; }
+  .hr-item .sub { margin-bottom: 8px; font-size: 9.5px; }
+  .hr-item .short { display: none; }
   .hero-arrow span { width: 44px; height: 44px; }
-  .hero-bottom { grid-row: 4; grid-template-columns: 1fr auto; padding-bottom: 20px; }
+  .hero-bottom { grid-row: 4; grid-template-columns: 1fr auto; padding-bottom: 16px; }
   .hb-nums { display: none; }
   .hero-bottom { grid-template-columns: auto 1fr; }
   .hb-mid { grid-column: 1; grid-row: 1; }
