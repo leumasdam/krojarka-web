@@ -165,3 +165,11 @@
 .kt-head h1 { font-size: clamp(44px, 6vw, 96px); margin: 12px 0 18px; }
 .kt-head .lead { max-width: 46ch; font-size: 17px; line-height: 1.65; color: #3b352e; margin: 0; }
 .kt-top .contact-cols { padding-top: 28px; border-top: 1px solid var(--line); }
+
+/* múzeum: perokresba ako vrstva atramentu, odkrýva sa mäkkou hranou */
+.mz-ink img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.mz-ink {
+  -webkit-mask-image: linear-gradient(100deg, #000 calc(var(--rev, 30%) - 14%), transparent var(--rev, 30%));
+          mask-image: linear-gradient(100deg, #000 calc(var(--rev, 30%) - 14%), transparent var(--rev, 30%));
+}
+@media (prefers-reduced-motion: reduce) { .mz-ink { -webkit-mask-image: none; mask-image: none; } }

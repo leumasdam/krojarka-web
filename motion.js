@@ -122,8 +122,10 @@
     if (mz && mzDraw) {
       const r = mzWrap.getBoundingClientRect();
       const p = range(-r.top / Math.max(1, r.height - H), 0, 1);
-      const draw = range(p, 0, .3), veil = 1 - range(p, .55, .92), fade = 1 - range(p, .75, 1);
-      mzDraw.style.setProperty('--t', (1 - ease(draw)).toFixed(4));
+      /* perokresba sa vyjaví zľava doprava (tretina je hotová hneď), potom pod ňou fotka */
+      const draw = .32 + .68 * range(p, 0, .42), veil = 1 - range(p, .5, .85), fade = 1 - range(p, .72, .98);
+      mzDraw.style.setProperty('--t', (1 - draw).toFixed(4));
+      mzDraw.style.setProperty('--rev', (draw * 135 - 10).toFixed(2) + '%');
       if (sk.length) {   // skica: ťahy sa dokresľujú zľava doprava medzi 22 % a 70 %
         const q = range(p, .22, .7) * sk.length;
         for (let i = 0; i < sk.length; i++) sk[i].style.strokeDashoffset = clamp(1 - (q - i) / 6).toFixed(3);
