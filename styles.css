@@ -791,3 +791,8 @@ body.torn .site-header.is-scrolled::after { background: none; }
 }
 .hd-grid img, .st-pair img { transform: scale(1.03); transition: transform 1.6s var(--ease-out); }
 .hd-grid figure:hover img, .st-pair figure:hover img { transform: scale(1.09); }
+/* regióny: na širokých obrazovkách mapu zastropiť a prisunúť k textu */
+.regions { max-width: 1320px; margin-inline: auto; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: clamp(32px, 5vw, 80px); }
+.reg-map { justify-self: start; width: 100%; max-width: 520px; }
+.reg-map svg { max-height: 68vh; }
+.rpt text { font-size: 11.5px; }
