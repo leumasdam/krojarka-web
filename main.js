@@ -54,7 +54,7 @@
         { x: 62, y: 71, t: 'Trukovka', d: 'Zlatá trukovka na čiernom saténe — autorský vzor inšpirovaný starými predlohami.', z: 380 },
         { x: 28, y: 88, t: 'Čipka', d: 'Biela čipka na leme spodnej sukne.', z: 420 },
       ],
-      macro: { o: '55% 71%', z: 5, detail: 'img/trukovka-zlata.webp', pos: '50% 50%', label: 'Zlatá trukovka na čiernom saténe' },
+      macro: { o: '50% 9%', z: 5, detail: 'img/hody/stofky-makro.webp', pos: '50% 50%', label: 'Vzácne bašovské štófky' },
     },
     {
       key: 'cerveny', title: 'Zlatá retiazka', sub: 'Červený sviatočný kroj.',

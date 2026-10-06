@@ -770,3 +770,32 @@ body.torn .site-header.is-scrolled::after { background: none; }
 .sec-head .eyebrow { justify-self: start; }
 .rpt:not(.live):not(.ctx) .dot { fill: var(--accent); }
 .rpt:not(.live):not(.ctx).is-on .dot, .rpt:not(.live):not(.ctx):hover .dot { fill: var(--text); stroke: var(--text); }
+
+/* ─── HODY V KROJI ─── */
+.hody { padding: 130px var(--pad) 90px; background: var(--surface); }
+.hd-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: auto auto; gap: 14px; }
+.hd-grid figure { margin: 0; position: relative; overflow: hidden; border-radius: 4px; background: #e9e2d4; }
+.hd-grid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hd-a { grid-row: 1 / 3; aspect-ratio: 3 / 4; }
+.hd-b { aspect-ratio: 4 / 3; } .hd-b img { object-position: 50% 35%; }
+.hd-c { aspect-ratio: 4 / 3; } .hd-c img { object-position: 50% 40%; }
+.hd-d { grid-column: 2 / 4; aspect-ratio: 2.4; } .hd-d img { object-position: 50% 55%; }
+.hd-grid figcaption { position: absolute; left: 14px; bottom: 12px; font-family: var(--sans); font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: #fbf8f1; text-shadow: 0 1px 10px rgba(24,22,20,.65); }
+.hd-note { margin: 18px 0 0; font-size: 13px; color: var(--muted); }
+/* príbeh 2 */
+.st-two { margin-top: 110px; padding-top: 80px; border-top: 1px solid rgba(243,239,230,.15); }
+.st-two .display-m { color: #f3efe6; margin-bottom: 22px; }
+.st-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.st-pair figure { margin: 0; overflow: hidden; border-radius: 4px; aspect-ratio: 3 / 4; background: #2a2420; }
+.st-pair figure:last-child { margin-top: 48px; }
+.st-pair img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 960px) {
+  .hody { padding: 90px var(--pad) 60px; }
+  .hd-grid { grid-template-columns: 1fr 1fr; }
+  .hd-a { grid-row: auto; grid-column: 1 / 3; aspect-ratio: 4 / 3; }
+  .hd-d { grid-column: 1 / 3; }
+  .st-two { margin-top: 70px; padding-top: 50px; }
+  .st-pair figure:last-child { margin-top: 24px; }
+}
+.hd-grid img, .st-pair img { transform: scale(1.03); transition: transform 1.6s var(--ease-out); }
+.hd-grid figure:hover img, .st-pair figure:hover img { transform: scale(1.09); }
