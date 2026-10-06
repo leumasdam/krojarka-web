@@ -554,15 +554,12 @@
     const r = macro.getBoundingClientRect();
     const p = clamp(-r.top / (r.height - vh));
     if (macro.classList.contains('is-live')) {
-      /* päť krokov, každý rovnaký kus scrollu (20 %). Video sa rozšíri počas kroku 1,
-         potom sa s každým krokom priblíži o 3 %, spolu 1,12×. Popis vyskočí v kroku 3. */
+      /* video ostáva v oblúku; počas scrollu sa oblúk zväčší o 18 % a obsah o 8 %, rovnomerne cez všetkých päť krokov */
       const N = steps.length, si = Math.min(N - 1, Math.floor(p * N));
-      const grow = ease(range(p, .02, .2));
-      const zoomIn = range(p, .2, .98);
       mk.style.setProperty('--mz', 1); mk.style.opacity = 0;
       mv.style.setProperty('--vo', 1);
-      mv.style.setProperty('--grow', grow.toFixed(4));
-      mv.style.setProperty('--vz', (1 + zoomIn * 0.12).toFixed(4));
+      mv.style.setProperty('--grow', (p * 0.18).toFixed(4));
+      mv.style.setProperty('--vz', (1 + p * 0.08).toFixed(4));
       mv.style.setProperty('--vr', '0deg');
       const vid = $('video', mv);
       if (vid && vid.paused) vid.play().catch(() => {});
