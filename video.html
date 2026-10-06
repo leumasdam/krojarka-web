@@ -28,6 +28,13 @@
   .play:hover .ring { transform: scale(1.08); }
   .play .lbl { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; }
   .player.is-on .play { display: none; }
+  /* telefón na výšku: video od okraja po okraj */
+  @media (max-width: 760px) and (orientation: portrait) {
+    main { padding: 0; }
+    .player, .player video { max-width: none; width: 100vw; border-radius: 0; }
+    .play, .player video { border-radius: 0; }
+    header { padding: 14px 16px; } footer { padding: 14px 16px 20px; }
+  }
 </style>
 </head>
 <body>
