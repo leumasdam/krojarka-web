@@ -168,7 +168,7 @@
       hs: [
         { x: 40, y: 50, t: 'Stroj', d: 'Historický trukovací stroj Lintz & Eckhardt, Berlín. Látku vedie ruka, stroj len ťahá retiazku.', z: 380 },
       ],
-      macro: { o: '50% 50%', z: 1, video: 'img/krojarka-stroj.mp4', poster: 'img/krojarka-stroj-first.jpg', live: true, label: 'Pri trukovacom stroji', facts: ['Lintz & Eckhardt, Berlín.<br>Stroj starší ako republika.', 'Stroj ťahá niť.<br>Smer a tvar vedie ruka.', 'Jedna ihla, jedna niť,<br>tisíce slučiek.', 'Každý oblúk je definitívny.<br>Nedá sa vrátiť.'] },
+      macro: { o: '50% 50%', z: 1, video: 'img/krojarka-stroj.mp4', poster: 'img/krojarka-stroj-first.jpg', live: true, label: 'Pri trukovacom stroji', facts: ['Lintz & Eckhardt, Berlín.<br>Stroj starší ako republika.', 'Stroj ťahá niť.<br>Smer a tvar vedie ruka.', 'Jedna ihla, jedna niť,<br>tisíce slučiek.'] },
     },
   ];
 
