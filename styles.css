@@ -908,3 +908,8 @@ body.is-tune .macro-cap, body.is-tune .macro-thread { display: none; }
   .macro-detail.is-fly .fly-img { max-height: 92%; }
   .macro.is-fly .macro-orn, .macro.is-fly .macro-thread, .macro.is-fly .macro-cap { display: none; }
 }
+
+/* mapa regiónov v hero: na mobile len za krojom, nie za textami */
+@media (max-width: 960px) {
+  .hero-map { display: none; }
+}
