@@ -807,4 +807,4 @@ body.torn .site-header.is-scrolled::after { background: none; }
   transform: translate(-50%, -50%); box-shadow: 0 30px 60px rgba(24,22,20,calc(.18 * (1 - var(--grow, 0)))); background: #1e1a17;
 }
 .macro.is-live .macro-detail video { transform: scale(var(--vz, 1)); transform-origin: 52% 48%; }
-.macro.is-live { height: 420vh; }
+.macro.is-live { height: 260vh; }
