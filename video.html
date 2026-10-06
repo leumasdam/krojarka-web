@@ -19,21 +19,41 @@
   video { width: 100%; max-width: min(100%, calc((100svh - 150px) * 16 / 9)); aspect-ratio: 16 / 9; background: #000; border-radius: 6px; box-shadow: 0 30px 80px rgba(0,0,0,.6); outline: none; }
   footer { padding: 16px clamp(16px, 4vw, 40px) 22px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; opacity: .75; }
   footer a { color: var(--cream); }
+  .player { position: relative; width: 100%; max-width: min(100%, calc((100svh - 150px) * 16 / 9)); }
+  .player video { max-width: none; }
+  .player:fullscreen { max-width: none; background: #000; display: grid; place-items: center; }
+  .player:fullscreen video { width: 100vw; height: 100vh; border-radius: 0; box-shadow: none; object-fit: contain; }
+  .play { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 14px; background: rgba(24,22,20,.35); border: 0; border-radius: 6px; color: var(--cream); cursor: pointer; font: inherit; }
+  .play .ring { width: 92px; height: 92px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; box-shadow: 0 20px 50px rgba(0,0,0,.5); transition: transform .3s; }
+  .play:hover .ring { transform: scale(1.08); }
+  .play .lbl { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; }
+  .player.is-on .play { display: none; }
 </style>
 </head>
 <body>
   <header>
-    <a href="index.html"><img src="logo/krojarka-horizontal.svg" alt="Krojárka" style="filter:invert(1) brightness(1.6)"><span>Video prehliadka webu</span></a>
+    <a><img src="logo/krojarka-horizontal.svg" alt="Krojárka" style="filter:invert(1) brightness(1.6)"><span>Video prehliadka webu</span></a>
     <span>2:55</span>
   </header>
   <main>
-    <video src="media/krojarka-web.mp4" poster="media/krojarka-web-poster.jpg" controls playsinline preload="metadata"></video>
+    <div class="player">
+      <video src="media/krojarka-web.mp4" poster="media/krojarka-web-poster.jpg" controls playsinline preload="metadata"></video>
+      <button class="play" aria-label="Prehrať na celú obrazovku"><span class="ring"><svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><span class="lbl">Prehrať na celú obrazovku</span></button>
+    </div>
   </main>
   <footer>
-    <span>Na celú obrazovku: ikona ⛶ v prehrávači alebo dvojklik na video.</span>
+    <span>Video sa spustí na celú obrazovku. Ukončíš ju klávesom Esc.</span>
     <a href="media/krojarka-web.mp4" download>Stiahnuť video (MP4)</a>
-    <a href="index.html">Otvoriť web →</a>
   </footer>
-  <script>document.querySelector('video').addEventListener('dblclick', e => { const v = e.currentTarget; (document.fullscreenElement ? document.exitFullscreen() : (v.requestFullscreen || v.webkitEnterFullscreen).call(v)); });</script>
+  <script>
+    /* Celú obrazovku dovolí prehliadač len po kliknutí: prvé spustenie ju zapne hneď. */
+    const v = document.querySelector('video'), btn = document.querySelector('.play'), wrap = document.querySelector('.player');
+    const full = () => { try { if (v.webkitEnterFullscreen && !v.requestFullscreen) v.webkitEnterFullscreen(); else (wrap.requestFullscreen || v.requestFullscreen).call(wrap.requestFullscreen ? wrap : v); } catch (e) {} };
+    const start = () => { wrap.classList.add('is-on'); full(); v.play(); };
+    btn.addEventListener('click', start);
+    v.addEventListener('play', () => { wrap.classList.add('is-on'); if (!document.fullscreenElement && !wrap.dataset.went) { wrap.dataset.went = 1; full(); } }, { once: true });
+    v.addEventListener('dblclick', () => document.fullscreenElement ? document.exitFullscreen() : full());
+    v.addEventListener('ended', () => { if (document.fullscreenElement) document.exitFullscreen(); });
+  </script>
 </body>
 </html>
