@@ -28,7 +28,16 @@
   /* lupa v scéne 06 */
   const lens = $('.dt-fig');
   if (lens) {
-    const move = (x, y) => { lens.style.setProperty('--mx', (x * 100).toFixed(2) + '%'); lens.style.setProperty('--my', (y * 100).toFixed(2) + '%'); };
+    /* lupa zväčšuje presne miesto pod sebou: počíta s object-fit: cover aj s pomerom strán fotky */
+    const glass = $('.dt-lens', lens), pic = $('img', lens), ZOOM = 2.6;
+    var move = (x, y) => {
+      lens.style.setProperty('--mx', (x * 100).toFixed(2) + '%'); lens.style.setProperty('--my', (y * 100).toFixed(2) + '%');
+      const fw = lens.clientWidth, fh = lens.clientHeight, iw = pic.naturalWidth || fw, ih = pic.naturalHeight || fh;
+      const k = Math.max(fw / iw, fh / ih), dw = iw * k, dh = ih * k, L = glass.offsetWidth;
+      const px = x * fw + (dw - fw) / 2, py = y * fh + (dh - fh) / 2;
+      glass.style.backgroundSize = `${(dw * ZOOM).toFixed(1)}px ${(dh * ZOOM).toFixed(1)}px`;
+      glass.style.backgroundPosition = `${(L / 2 - px * ZOOM).toFixed(1)}px ${(L / 2 - py * ZOOM).toFixed(1)}px`;
+    };
     lens.addEventListener('pointermove', e => { const r = lens.getBoundingClientRect(); move(clamp((e.clientX - r.left) / r.width), clamp((e.clientY - r.top) / r.height)); lens.classList.add('is-hover'); });
     lens.addEventListener('pointerleave', () => lens.classList.remove('is-hover'));
   }
@@ -90,8 +99,7 @@
     }
     if (lens && !lens.classList.contains('is-hover')) {
       const sc = lens.closest('.sc'), p = parseFloat(sc.style.getPropertyValue('--p')) || 0;
-      lens.style.setProperty('--mx', (30 + p * 40).toFixed(2) + '%');
-      lens.style.setProperty('--my', (40 + Math.sin(p * 6) * 12).toFixed(2) + '%');
+      move(.3 + p * .4, .4 + Math.sin(p * 6) * .12);
     }
   };
   let ticking = false;
