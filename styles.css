@@ -853,7 +853,7 @@ body.torn .site-header.is-scrolled::after { background: none; }
 .macro-detail video.is-cut { opacity: 0; }
 
 /* makro „prilietanie": kusy letia z pozadia podľa vlastného plánu (polohu počíta main.js) */
-.macro.is-fly { height: 560vh; }
+.macro.is-fly { height: 420vh; }
 .macro-detail.is-fly { height: min(92vh, 980px, 92vw); }
 .macro-detail.is-fly .fly-img { position: absolute; inset: auto; left: 50%; top: 50%; width: auto; height: auto; max-height: 96%; object-fit: contain; opacity: 0; will-change: transform, opacity, filter; }
 
