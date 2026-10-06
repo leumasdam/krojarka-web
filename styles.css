@@ -584,7 +584,8 @@ body.torn .site-header.is-scrolled::after { background: none; }
   .lede { display: none; }
   .hero-left .cta-round { display: none; }
   .stage { position: relative; grid-row: 2; inset: auto; height: 34svh; min-height: 220px; margin: 0; }
-  .fig, .fig.person { height: 100%; max-width: 62vw; bottom: 0; }
+  .fig, .fig.person, .fig.photo { height: 100%; max-width: 62vw; bottom: 0; }
+  .fig.photo img { border-radius: 999px 999px 6px 6px; }
   .fig[data-pos="-1"] { --x: -62vw; } .fig[data-pos="1"] { --x: 62vw; }
   .hero-right { grid-row: 3; grid-column: 1; justify-self: stretch; width: 100%; margin: 4px 0 0; }
   .rule { display: none; }
