@@ -553,7 +553,7 @@
       mk.style.setProperty('--mz', 1); mk.style.opacity = 1 - live;
       mv.style.setProperty('--vo', live);
       mv.style.setProperty('--grow', grow.toFixed(4));
-      mv.style.setProperty('--vz', (1 + zoomIn * 1.6).toFixed(4));
+      mv.style.setProperty('--vz', (1 + zoomIn * 0.55).toFixed(4));
       mv.style.setProperty('--vr', '0deg');
       const vid = $('video', mv);
       if (vid) { if (live > .05 && vid.paused) vid.play().catch(() => {}); else if (live <= .05 && !vid.paused) vid.pause(); }
