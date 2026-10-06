@@ -202,10 +202,10 @@
            fx/fy = odkiaľ letí, w = šírka, r = náklon v stupňoch */
         fly: [
           { src: 'img/prucel/rozety-kopa.webp', label: 'Plstené rozety', at: 2, until: null, x: -30.5, y: -23.9, fx: -75, fy: 20, w: 30, r: -12 },
-          { src: 'img/prucel/rozety-gombiky.webp', label: 'Rozety s maľovanými gombíkmi', at: 22, until: 78, x: 5.9, y: -22.3, fx: 80, fy: -40, w: 28, r: 6 },
-          { src: 'img/prucel/prisite.webp?v=2', label: 'Rozety prišité na brokát', at: 42, until: 78, x: 11, y: 26.2, fx: -60, fy: -70, w: 36, r: -17 },
-          { src: 'img/prucel/ruza.webp', label: 'Ruža na tyrkysovom brokáte', at: 60, until: 80, x: -41.5, y: 18.5, fx: 80, fy: 60, w: 34, r: 12 },
-          { src: 'img/prucel/prucel-cely.webp', label: 'Mužský prucel z Bučian', at: 80, until: null, x: 29.4, y: 9.7, fx: 0, fy: 30, w: 46, r: 0 },
+          { src: 'img/prucel/rozety-gombiky.webp', label: 'Rozety s maľovanými gombíkmi', at: 22, until: 78, x: 26.4, y: -22.4, fx: 80, fy: -40, w: 28, r: 6 },
+          { src: 'img/prucel/prisite.webp?v=2', label: 'Rozety prišité na brokát', at: 42, until: 78, x: 8.5, y: 24.3, fx: -60, fy: -70, w: 36, r: -17 },
+          { src: 'img/prucel/ruza.webp', label: 'Ruža na tyrkysovom brokáte', at: 60, until: 80, x: -52.2, y: 22.8, fx: 80, fy: 60, w: 34, r: 12 },
+          { src: 'img/prucel/prucel-cely.webp', label: 'Mužský prucel z Bučian', at: 80, until: null, x: 25.7, y: -5, fx: 0, fy: 30, w: 46, r: 0 },
         ] },
     },
     {
