@@ -883,3 +883,13 @@ body.is-tune .macro-cap, body.is-tune .macro-thread { display: none; }
 .macro-orn { position: absolute; width: min(22vw, 320px); opacity: 0; pointer-events: none; z-index: 0; transition: opacity 1.2s var(--ease); }
 .macro-orn.l { left: -2%; bottom: -4%; } .macro-orn.r { right: -1%; top: 6%; width: min(18vw, 260px); }
 .macro.is-fly .macro-orn { opacity: calc(.55 * var(--orn, 0)); }
+
+/* prilietanie: text kapitoly ako veľký nadpis bez kartičky (ako v mockupe) */
+@media (min-width: 961px) {
+  .macro.is-fly .macro-facts.is-story { left: var(--pad); width: min(26vw, 360px); top: 40%; }
+  .macro.is-fly .macro-thread { display: none; }
+  .macro.is-fly .macro-facts.is-story li { padding: 0; background: none; box-shadow: none; }
+  .macro.is-fly .macro-facts b { font-size: clamp(40px, 4.4vw, 68px); line-height: .98; }
+  .macro.is-fly .macro-facts .mf-d { font-size: 17px; margin-top: 18px; max-width: 30ch; }
+  .macro.is-fly .macro-facts .mf-img { display: none; }
+}
