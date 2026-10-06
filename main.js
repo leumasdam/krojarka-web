@@ -191,26 +191,29 @@
       macro: { o: '27% 42%', z: 2.5, fadeEarly: true, contain: true, rot: 0, label: 'Rozety a gombíky',
         story: [
           { k: 'Bučany · Trnavský kroj', img: 'img/foto-bucany-predloha.webp', cap: 'Predloha · stará fotografia', t: 'Jediná stará fotka.', d: 'Mužský prucel z Bučian. Strih, rozety aj lemy sa čítali z čiernobielej fotografie.' },
-          { k: 'Rozety', t: 'Strihané ručne.', d: 'Plstené rozety v červenej a zelenej. Každá vystrihnutá z plsti ručne, žiadna nie je presne ako druhá.' },
-          { k: 'Gombíky', t: 'Maľovaný stred.', d: 'Do stredu každej rozety príde gombík s maľovanou hviezdicou a zlatou retiazkou okolo.' },
-          { k: 'Brokát', t: 'Prišité na brokát.', d: 'Rozety sa kladú pozdĺž lemu na tyrkysový brokát, pomedzi ne ide retiazková výšivka.' },
-          { k: 'Brokát', t: 'Ruža na brokáte.', d: 'Tyrkysový brokát s veľkými ružami. Taký sa dnes zháňa ťažko, preto Lenka zachraňuje aj staré kusy.' },
           { k: 'Bučany', t: 'Hotový prucel.', d: 'Na bielej košeli: brokát, vykrajované plstené lemy, rozety s gombíkmi. Ako na starej fotke, len nový.' },
+          { k: 'Brokát', t: 'Prišité na brokát.', d: 'Rozety sa kladú pozdĺž stredu na tyrkysový brokát, pomedzi ne ide retiazková výšivka.' },
+          { k: 'Rozety', t: 'Strihané ručne.', d: 'Plstené rozety v červenej a zelenej. Každá vystrihnutá z plsti ručne, žiadna nie je presne ako druhá.' },
+          { k: 'Lem', t: 'Vykrajovaný lem.', d: 'Červená plsť vystrihnutá do oblúčikov s dierkami, nad ňou krémová retiazka a krížikový steh.' },
+          { k: 'Stred', t: 'Krížiky a slučky.', d: 'Stredový pás z červenej plsti, po bokoch slučky z krémovej retiazky a zelený krížikový steh.' },
+          { k: 'Gombíky', t: 'Maľovaný stred.', d: 'Do stredu každej rozety príde gombík s maľovanou hviezdicou a zlatou retiazkou okolo.' },
         ],
         /* prilietanie (všetko v %): fx/fy = odkiaľ letí, out = kedy odletí (null = ostane),
            k = kľúčové polohy podľa scrollu detailu 0–100: at = kedy, x/y = kde (0 0 stred), w = šírka,
            r = náklon, z = hĺbka (0 vpredu, 1 vzadu: menší, rozmazanejší, pomalší) */
         fly: [
-          { src: 'img/prucel/rozety-kopa.webp', label: 'Plstené rozety', fx: -75, fy: 20, out: null,
-            k: [{ at: 2, x: -24, y: -14, w: 34, r: -12, z: 0 }, { at: 22, x: -36, y: -28, w: 22, r: -16, z: .6 }, { at: 80, x: -42, y: -32, w: 16, r: -20, z: .85 }] },
-          { src: 'img/prucel/rozety-gombiky.webp', label: 'Rozety s maľovanými gombíkmi', fx: 80, fy: -40, out: 80,
-            k: [{ at: 22, x: 10, y: -8, w: 30, r: 6, z: 0 }, { at: 42, x: 32, y: -28, w: 18, r: 10, z: .6 }] },
-          { src: 'img/prucel/prisite.webp?v=2', label: 'Rozety prišité na brokát', fx: -60, fy: -70, out: 80,
-            k: [{ at: 42, x: 4, y: 10, w: 38, r: -8, z: 0 }, { at: 60, x: 26, y: 20, w: 26, r: -14, z: .55 }] },
-          { src: 'img/prucel/ruza.webp', label: 'Ruža na tyrkysovom brokáte', fx: 80, fy: 60, out: 80,
-            k: [{ at: 60, x: -16, y: 14, w: 36, r: 10, z: 0 }] },
-          { src: 'img/prucel/prucel-cely.webp', label: 'Mužský prucel z Bučian', fx: 0, fy: 30, out: null,
-            k: [{ at: 80, x: 22, y: -2, w: 48, r: 0, z: 0 }] },
+          { src: 'img/prucel/prucel-cely.webp', label: 'Mužský prucel z Bučian', fx: 0, fy: 40, out: null,
+            k: [{ at: 2, x: 0, y: 2, w: 60, r: 0, z: 0 }] },
+          { src: 'img/prucel/brokat-foto.webp', label: 'Rozety prišité na brokát', fx: 70, fy: 60, out: null,
+            k: [{ at: 18, x: 30, y: 8, w: 38, r: -2, z: 0 }] },
+          { src: 'img/prucel/rozety-zhluk.webp', label: 'Plstené rozety', fx: -70, fy: 50, out: null,
+            k: [{ at: 34, x: -52, y: 26, w: 28, r: -8, z: 0 }] },
+          { src: 'img/prucel/lem.webp', label: 'Vykrajovaný lem', fx: 80, fy: -60, out: null,
+            k: [{ at: 50, x: 56, y: -27, w: 30, r: 0, z: 0 }] },
+          { src: 'img/prucel/stred.webp', label: 'Krížiky a slučky', fx: 85, fy: 30, out: null,
+            k: [{ at: 64, x: 62, y: 6, w: 21, r: 0, z: 0 }] },
+          { src: 'img/prucel/rozety-gombiky.webp', label: 'Rozety s maľovanými gombíkmi', fx: -60, fy: -70, out: null,
+            k: [{ at: 78, x: -44, y: -28, w: 20, r: 14, z: 0 }] },
         ] },
     },
     {
@@ -458,6 +461,7 @@
     if (mFly && macroNear && !mFlyRun) { mFlyRun = true; requestAnimationFrame(flyLoop); }
     const seq = !!m.gallery || !!m.fly || mSegs.some(Boolean);
     macro.classList.toggle('is-fly', !!m.fly);
+    if (!$('.macro-orn')) mSticky.insertAdjacentHTML('afterbegin', '<img class="macro-orn l" src="img/prucel/orn-l.webp" alt="" aria-hidden="true"><img class="macro-orn r" src="img/prucel/orn-r.webp" alt="" aria-hidden="true">');
     macro.classList.toggle('is-gallery', seq);
     mSeq = seq; mChapter = -1;
     macro.classList.toggle('is-live', !!m.live);
@@ -828,6 +832,7 @@
       applyFly();
       si = Math.min(N - 1, last + 1);
       if (last >= 0) mLabel.textContent = mFly[last].label;
+      mSticky.style.setProperty('--orn', range(d, 0, 12).toFixed(3));
       if (tune) tune.d.textContent = d.toFixed(0) + ' %';
     }
     ch.forEach((c, i) => c.classList.toggle('is-on', i === si));

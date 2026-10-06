@@ -855,7 +855,7 @@ body.torn .site-header.is-scrolled::after { background: none; }
 /* makro „prilietanie": kusy letia z pozadia podľa vlastného plánu (polohu počíta main.js) */
 .macro.is-fly { height: 560vh; }
 .macro-detail.is-fly { height: min(92vh, 980px, 92vw); }
-.macro-detail.is-fly .fly-img { position: absolute; inset: auto; left: 50%; top: 50%; width: auto; height: auto; max-height: 68%; object-fit: contain; opacity: 0; will-change: transform, opacity, filter; }
+.macro-detail.is-fly .fly-img { position: absolute; inset: auto; left: 50%; top: 50%; width: auto; height: auto; max-height: 96%; object-fit: contain; opacity: 0; will-change: transform, opacity, filter; }
 
 /* ?tune: editor prilietania */
 body.is-tune .macro-detail.is-fly .fly-img { pointer-events: auto; cursor: grab; }
@@ -878,3 +878,8 @@ body.is-tune .macro-cap, body.is-tune .macro-thread { display: none; }
 #tune .t-kf.is-on { border-color: #ffd166; color: #ffd166; } #tune .t-kf i { color: #999; font-style: normal; }
 #tune hr { border: 0; border-top: 1px solid #444; margin: 8px 0; }
 #tune { width: 470px; }
+
+/* makro: botanický ornament v rohoch, len pri prilietaní */
+.macro-orn { position: absolute; width: min(22vw, 320px); opacity: 0; pointer-events: none; z-index: 0; transition: opacity 1.2s var(--ease); }
+.macro-orn.l { left: -2%; bottom: -4%; } .macro-orn.r { right: -1%; top: 6%; width: min(18vw, 260px); }
+.macro.is-fly .macro-orn { opacity: calc(.55 * var(--orn, 0)); }
