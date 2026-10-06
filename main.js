@@ -39,7 +39,7 @@
         { x: 66, y: 50, t: 'Stuha', d: 'Dlhá stuha s kvetinovým ornamentom po celej dĺžke.', z: 480 },
         { x: 34, y: 76, t: 'Sukňa', d: 'Čierna sukňa s pásmi výšivky a čipkovým lemom.', z: 380 },
       ],
-      macro: { o: '16% 26%', z: 5.4, detail: 'img/gen/rukav-makro.webp', pos: '50% 50%', full: true, label: 'Čierna výšivka na rukáve',
+      macro: { o: '16% 26%', z: 5, detail: 'img/detail-vysivka.webp', pos: '50% 50%', contain: true, rot: 10, label: 'Od kroja k stehu',
         steps: ['Celý kroj', 'Živôtik', 'Rukáv', 'Výšivka', 'Jeden steh'] },
     },
     {
@@ -363,7 +363,6 @@
 
   /* ───────── makro: vždy aktuálny kroj z hero ───────── */
   const macro = $('#macro');
-  var macroReady = false;
   const mk = $('.macro-kroj'), mDetail = $('#macro-detail'), mLabel = $('#macro-label');
   function setMacro(s) {
     const m = s.macro;
@@ -374,8 +373,6 @@
     mk.classList.toggle('photo', !!s.photo);
     mk.dataset.z = m.z;
     mDetail.classList.toggle('is-cutout', !!m.contain);
-    mDetail.classList.toggle('is-full', !!m.full);
-    macro.classList.toggle('is-fullmode', !!m.full);
     mDetail.dataset.rot = m.rot || 6;
     const labels = m.steps || ['Celý kroj', 'Detail', 'Ornament', 'Steh', 'Ruka'];
     $$('.macro-steps li').forEach((li, i) => (li.textContent = labels[i]));
@@ -384,12 +381,9 @@
       ? m.gallery.map((g, i) => `<img src="${g.src}" srcset="${g.src} 1x, ${big(g.src, '@2x')} 2x" alt="${g.label}" data-label="${g.label}" loading="lazy" class="${i ? '' : 'is-on'}">`).join('')
       : m.video
       ? `<video src="${m.video}" poster="${m.poster}" muted loop playsinline preload="none" aria-label="${m.label}"></video>`
-      : m.full
-      ? `<img src="${m.detail}" alt="${m.label}" style="object-position:${m.pos}">`
       : `<img src="${m.detail}" srcset="${m.detail} 1x, ${big(m.detail, '@2x')} 2x" alt="${m.label}" style="object-position:${m.pos}" loading="lazy">`;
     mLabel.textContent = m.label + (s.real ? ' · z ateliéru' : '');
     upgradeMacro();
-    if (macroReady) applyMacro(mp);   // pri prvom volaní ešte makro premenné neexistujú
   }
 
   /* veľkú verziu kroja načítaj, až keď sa makro blíži do zorného poľa */
@@ -543,59 +537,6 @@
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   const range = (p, a, b) => clamp((p - a) / (b - a));
 
-  /* ───────── makro: postup so zotrvačnosťou ─────────
-     Koliesko myši skáče po krokoch. Postup sa preto k cieľu dobieha plynulo,
-     zoom je exponenciálny (rovnaká rýchlosť priblíženia po celý čas)
-     a do detailu sa neprelína, ale preostruje: kroj sa rozostrí, makro zaostrí. */
-  const sstep = t => t * t * t * (t * (6 * t - 15) + 10);
-  const glide = t => .55 * t + .45 * t * t * (3 - 2 * t);      // takmer rovnomerne, len mäkký rozbeh a dobeh
-  let mp = 0, mTarget = 0, mRun = false, mLast = 0;
-  macroReady = true;
-  function applyMacro(p) {
-    const Z = +mk.dataset.z || 5, full = mDetail.classList.contains('is-full');
-    mk.style.setProperty('--mz', Math.pow(Z, glide(range(p, .02, full ? .64 : .6))).toFixed(4));
-    if (full) {
-      mk.style.setProperty('--mb', (11 * sstep(range(p, .46, .62))).toFixed(2) + 'px');
-      mk.style.opacity = (1 - sstep(range(p, .52, .64))).toFixed(3);
-      mv.style.setProperty('--vo', sstep(range(p, .5, .62)).toFixed(3));
-      mv.style.setProperty('--vb', (11 * (1 - sstep(range(p, .54, .7)))).toFixed(2) + 'px');
-      mv.style.setProperty('--vz', (1.06 * Math.pow(1.55, glide(range(p, .5, 1)))).toFixed(4));
-      mv.style.setProperty('--vr', '0deg');
-      mSticky.classList.toggle('on-photo', p > .57);
-    } else {
-      mk.style.setProperty('--mb', (10 * range(p, .45, .62)).toFixed(2) + 'px');
-      mk.style.opacity = (1 - range(p, .45, .62)).toFixed(3);
-      const v = range(p, .42, .8);
-      mv.style.setProperty('--vo', clamp(v * 1.6).toFixed(3));
-      mv.style.setProperty('--vb', (10 * (1 - range(p, .44, .62))).toFixed(2) + 'px');
-      mv.style.setProperty('--vz', (.7 + sstep(v) * .55).toFixed(4));
-      const rot = +mv.dataset.rot || 6;
-      mv.style.setProperty('--vr', (-rot + v * rot * 1.2).toFixed(2) + 'deg');
-      mSticky.classList.remove('on-photo');
-      const vid = $('video', mv);
-      if (vid) { if (v > .2 && vid.paused) vid.play().catch(() => {}); else if (v <= .2 && !vid.paused) vid.pause(); }
-    }
-    const gal = $$('img[data-label]', mv);
-    let galOn = -1;
-    if (gal.length) {
-      galOn = Math.min(gal.length - 1, Math.floor(range(p, .5, .96) * gal.length));
-      gal.forEach((g, i) => g.classList.toggle('is-on', i === galOn));
-      mLabel.textContent = gal[galOn].dataset.label;
-    }
-    mSticky.style.setProperty('--co', range(p, .7, .86));
-    mThread.style.setProperty('--to', 1 - range(p, .78, 1));
-    let si = Math.min(4, Math.floor(p * 5.2));
-    if (galOn >= 0 && p >= .5) si = Math.min(4, galOn + 1);
-    steps.forEach((s, i) => s.classList.toggle('is-on', i === si));
-  }
-  function tickMacro(now) {
-    // čas berieme len z rAF: pri nahrávaní videa beží spomalene a zotrvačnosť sa spomalí s ním
-    const dt = mLast ? Math.min(.05, Math.max(0, (now - mLast) / 1000)) : 1 / 60; mLast = now;
-    mp += (mTarget - mp) * (1 - Math.exp(-dt * 6.5));
-    if (Math.abs(mTarget - mp) < .0004) { mp = mTarget; mRun = false; } else requestAnimationFrame(tickMacro);
-    applyMacro(mp);
-  }
-
   let ticking = false;
   const onScroll = () => {
     ticking = false;
@@ -604,8 +545,29 @@
     pt.style.setProperty('--p', clamp(y / (document.documentElement.scrollHeight - vh)));
 
     const r = macro.getBoundingClientRect();
-    mTarget = clamp(-r.top / (r.height - vh));
-    if (reduce) { mp = mTarget; applyMacro(mp); } else if (!mRun) { mRun = true; mLast = 0; requestAnimationFrame(tickMacro); }
+    const p = clamp(-r.top / (r.height - vh));
+    const z = ease(range(p, 0, .6));
+    mk.style.setProperty('--mz', 1 + z * ((+mk.dataset.z || 5) - 1));
+    mk.style.opacity = 1 - range(p, .45, .62);
+    const v = range(p, .42, .8);
+    mv.style.setProperty('--vo', clamp(v * 1.6));
+    mv.style.setProperty('--vz', .7 + ease(v) * .55);
+    const rot = +mv.dataset.rot || 6;
+    mv.style.setProperty('--vr', (-rot + v * rot * 1.2) + 'deg');
+    const vid = $('video', mv);
+    if (vid) { if (v > .2 && vid.paused) vid.play().catch(() => {}); else if (v <= .2 && !vid.paused) vid.pause(); }
+    const gal = $$('img[data-label]', mv);
+    if (gal.length) {
+      const gi = Math.min(gal.length - 1, Math.floor(range(p, .5, .96) * gal.length));
+      gal.forEach((g, i) => g.classList.toggle('is-on', i === gi));
+      mLabel.textContent = gal[gi].dataset.label;
+    }
+    mSticky.style.setProperty('--co', range(p, .7, .86));
+    mThread.style.setProperty('--to', 1 - range(p, .78, 1));
+    let si = Math.min(4, Math.floor(p * 5.2));
+    const galOn = $$('img[data-label]', mv).findIndex(g => g.classList.contains('is-on'));
+    if (galOn >= 0 && p >= .5) si = Math.min(4, galOn + 1);
+    steps.forEach((s, i) => s.classList.toggle('is-on', i === si));
 
     if (qb) {
       const qr = qb.parentElement.getBoundingClientRect();
