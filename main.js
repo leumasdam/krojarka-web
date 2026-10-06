@@ -558,8 +558,8 @@
       const N = steps.length, si = Math.min(N - 1, Math.floor(p * N));
       mk.style.setProperty('--mz', 1); mk.style.opacity = 0;
       mv.style.setProperty('--vo', 1);
-      mv.style.setProperty('--grow', (p * 0.18).toFixed(4));
-      mv.style.setProperty('--vz', (1 + p * 0.08).toFixed(4));
+      mv.style.setProperty('--grow', (p * 0.28).toFixed(4));
+      mv.style.setProperty('--vz', (1 + p * 0.18).toFixed(4));
       mv.style.setProperty('--vr', '0deg');
       const vid = $('video', mv);
       if (vid && vid.paused) vid.play().catch(() => {});
