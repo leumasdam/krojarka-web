@@ -165,7 +165,7 @@
       hs: [
         { x: 40, y: 50, t: 'Stroj', d: 'Historický trukovací stroj Lintz & Eckhardt, Berlín. Látku vedie ruka, stroj len ťahá retiazku.', z: 380 },
       ],
-      macro: { o: '42% 52%', z: 3.5, detail: 'img/krojarka-stroj.webp', pos: '45% 58%', label: 'Pri trukovacom stroji' },
+      macro: { o: '46% 58%', z: 2.6, video: 'img/krojarka-stroj.mp4', poster: 'img/krojarka-stroj.webp', label: 'Pri trukovacom stroji', steps: ['Ateliér', 'Stroj', 'Ihla', 'Retiazka', 'Ruka'] },
     },
   ];
 
