@@ -188,11 +188,22 @@
         { x: 84, y: 60, t: 'Brokát', d: 'Tyrkysový brokát s veľkými ružami, lemovaný retiazkovou výšivkou.', z: 400 },
         { x: 18, y: 95, t: 'Lem', d: 'Vykrajovaný plstený lem v zelenej, červenej a oranžovej.', z: 420 },
       ],
-      macro: { o: '27% 42%', z: 5, detail: 'img/prucel-foto.webp', pos: '22% 50%', label: 'Rozety a gombíky',
+      macro: { o: '27% 42%', z: 5, contain: true, rot: 0, label: 'Rozety a gombíky',
         story: [
           { k: 'Bučany · Trnavský kroj', img: 'img/foto-bucany-predloha.webp', cap: 'Predloha · stará fotografia', t: 'Jediná stará fotka.', d: 'Mužský prucel z Bučian. Strih, rozety aj lemy sa čítali z čiernobielej fotografie.' },
-          { t: 'Rozety strihané ručne.', d: 'Plstené rozety v červenej a zelenej, v strede maľované gombíky. Žiadna nie je presne ako druhá.' },
-          { t: 'Keď brokát dosluhuje.', d: 'Lenka zachraňuje aj staré prucle. Keď zo stromkového brokátu ostanú len nitky, treba sa rozhodnúť: nechať, opraviť, alebo ušiť nanovo.' },
+          { k: 'Rozety', t: 'Strihané ručne.', d: 'Plstené rozety v červenej a zelenej. Každá vystrihnutá z plsti ručne, žiadna nie je presne ako druhá.' },
+          { k: 'Gombíky', t: 'Maľovaný stred.', d: 'Do stredu každej rozety príde gombík s maľovanou hviezdicou a zlatou retiazkou okolo.' },
+          { k: 'Brokát', t: 'Prišité na brokát.', d: 'Rozety sa kladú pozdĺž lemu na tyrkysový brokát, pomedzi ne ide retiazková výšivka.' },
+          { k: 'Brokát', t: 'Ruža na brokáte.', d: 'Tyrkysový brokát s veľkými ružami. Taký sa dnes zháňa ťažko, preto Lenka zachraňuje aj staré kusy.' },
+          { k: 'Bučany', t: 'Hotový prucel.', d: 'Na bielej košeli: brokát, vykrajované plstené lemy, rozety s gombíkmi. Ako na starej fotke, len nový.' },
+        ],
+        /* výrezy prilietajú z pozadia: fx/fy = odkiaľ, fr = náklon, fw = šírka */
+        fly: [
+          { src: 'img/prucel/rozety-kopa.webp', label: 'Plstené rozety', fx: '-28vw', fy: '14vh', fr: '-14deg', fw: '64%' },
+          { src: 'img/prucel/rozety-gombiky.webp', label: 'Rozety s maľovanými gombíkmi', fx: '30vw', fy: '-12vh', fr: '11deg', fw: '56%' },
+          { src: 'img/prucel/prisite.webp', label: 'Rozety prišité na brokát', fx: '-22vw', fy: '-18vh', fr: '-9deg', fw: '62%' },
+          { src: 'img/prucel/ruza.webp', label: 'Ruža na tyrkysovom brokáte', fx: '26vw', fy: '16vh', fr: '13deg', fw: '60%' },
+          { src: 'img/prucel/prucel-cely.webp', label: 'Mužský prucel z Bučian', fx: '0vw', fy: '10vh', fr: '0deg', fw: '50%' },
         ] },
     },
     {
@@ -430,10 +441,12 @@
     mk.classList.toggle('photo', !!s.photo);
     mk.dataset.z = m.z;
     mDetail.classList.toggle('is-cutout', !!m.contain);
-    mDetail.dataset.rot = m.rot || 6;
+    mDetail.dataset.rot = m.rot ?? 6;
+    mDetail.classList.toggle('is-fly', !!m.fly);
     /* zábery videa ku kapitolám: [od, do] v sekundách; sekcia s kapitolami po obrázkoch/záberoch je dlhšia */
     mSegs = (m.story || []).map(c => c.v || null);
-    const seq = !!m.gallery || mSegs.some(Boolean);
+    const seq = !!m.gallery || !!m.fly || mSegs.some(Boolean);
+    macro.classList.toggle('is-fly', !!m.fly);
     macro.classList.toggle('is-gallery', seq);
     mSeq = seq; mChapter = -1;
     macro.classList.toggle('is-live', !!m.live);
@@ -445,7 +458,9 @@
       ? m.story.map(c => `<li>${c.img ? `<figure class="mf-img"><img src="${c.img}" alt="${c.cap}" loading="lazy"><figcaption>${c.cap}</figcaption></figure>` : ''}` +
           `${c.k ? `<span class="mf-k">${c.k}</span>` : ''}<b>${c.t}</b><span class="mf-d">${c.d}</span></li>`).join('')
       : (m.facts || []).map(f => `<li>${f}</li>`).join('');
-    mDetail.innerHTML = m.gallery
+    mDetail.innerHTML = m.fly
+      ? m.fly.map(f => `<img src="${f.src}" alt="${f.label}" data-label="${f.label}" loading="lazy" class="fly-img" style="--fx:${f.fx};--fy:${f.fy};--fr:${f.fr};--fw:${f.fw}">`).join('')
+      : m.gallery
       ? m.gallery.map((g, i) => `<img src="${g.src}" srcset="${g.src} 1x, ${big(g.src, '@2x')} 2x" alt="${g.label}" data-label="${g.label}" loading="lazy" onerror="this.removeAttribute('srcset')" class="${i ? '' : 'is-on'}">`).join('')
       : m.video
       ? `<video src="${m.video}" poster="${m.poster}" muted loop playsinline preload="${m.live ? 'auto' : 'none'}" aria-label="${m.label}"></video>`
@@ -648,7 +663,7 @@
     const v = range(p, .42, .8);
     mv.style.setProperty('--vo', clamp(v * 1.6));
     mv.style.setProperty('--vz', .7 + ease(v) * .55);
-    const rot = +mv.dataset.rot || 6;
+    const rot = +mv.dataset.rot;
     mv.style.setProperty('--vr', (-rot + v * rot * 1.2) + 'deg');
     const vid = $('video', mv);
     if (vid) { if (v > .2 && vid.paused) vid.play().catch(() => {}); else if (v <= .2 && !vid.paused) vid.pause(); }
@@ -664,9 +679,10 @@
       : Math.min(N - 1, Math.floor(range(p, 0, .9) * N));
     ch.forEach((c, i) => c.classList.toggle('is-on', i === si));
     if (gal.length) {
-      const gi = Math.max(0, Math.min(gal.length - 1, si - 1));
-      gal.forEach((g, i) => g.classList.toggle('is-on', i === gi));
-      mLabel.textContent = gal[gi].dataset.label;
+      /* pri prilietaní počas priblíženia ešte nič neletí, prvý kus priletí až s druhou kapitolou */
+      const gi = mv.classList.contains('is-fly') ? Math.min(gal.length - 1, si - 1) : Math.max(0, Math.min(gal.length - 1, si - 1));
+      gal.forEach((g, i) => { g.classList.toggle('is-on', i === gi); g.classList.toggle('is-past', i < gi); });
+      if (gi >= 0) mLabel.textContent = gal[gi].dataset.label;
     }
     if (si !== mChapter) {
       mChapter = si;
