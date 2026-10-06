@@ -61,11 +61,15 @@
         { x: 62, y: 71, t: 'Trukovka', d: 'Zlatá trukovka na čiernom saténe — autorský vzor inšpirovaný starými predlohami.', z: 380 },
         { x: 28, y: 88, t: 'Čipka', d: 'Biela čipka na leme spodnej sukne.', z: 420 },
       ],
-      macro: { o: '50% 9%', z: 5, detail: 'img/hody/stofky-makro.webp', pos: '50% 50%', label: 'Vzácne bašovské štófky',
+      macro: { o: '50% 9%', z: 5, label: 'Vzácne bašovské štófky',
         story: [
           { k: 'Bašovce', t: 'Kroj z domova.', d: 'Lenka nosí nebíčkový kroj po bašovskej babičke Márii Melicherovej. Z tohto kraja vychádza aj jej autorský kroj.' },
           { k: 'Autorský kroj', t: 'Podľa starých vzorov, nie ich kópia.', d: 'Čierna a zlatá trukovka. Dnes je vystavený v ateliéri šperkárky Kataríny Žiak v Banskej Bystrici.' },
           { k: 'Detail', t: 'Štófky na pleciach.', d: 'Vzácna bašovská biela čipka. Na hodoch v Bašovciach ju ešte uvidíte.' },
+        ],
+        gallery: [
+          { src: 'img/vyklad-bb.webp', label: 'Výklad · Katarína Žiak, Banská Bystrica' },
+          { src: 'img/hody/stofky-makro.webp', label: 'Vzácne bašovské štófky' },
         ] },
     },
     {
@@ -83,9 +87,10 @@
       ],
       macro: { o: '40% 72%', z: 4.2, video: 'img/kroj-cerveny.mp4', poster: 'img/kroj-cerveny-poster.jpg', label: 'Kroj zblízka',
         story: [
-          { t: 'Červená na hody.', d: 'Červený živôtik so striebornými sponami a vysoký zlatý golier. Kroj, ktorý vidno z konca dediny.' },
-          { t: 'Kvety na čiernej sukni.', d: 'Každý zlatý kvet je jedna súvislá retiazka. Stroj ťahá niť, smer kreslí ruka.' },
-          { t: 'Mašľa vzadu.', d: 'Pestrá tkaná stuha s kvetmi sa viaže do veľkej mašle. Najlepšie ju vidno pri tanci.' },
+          { t: 'Červená na hody.', d: 'Červený živôtik, vysoký zlatý golier a čierna sukňa so zlatou trukovkou. Kroj, ktorý vidno z konca dediny.' },
+          { k: 'Sukňa', t: 'Kvety na čiernej sukni.', d: 'Každý zlatý kvet je jedna súvislá retiazka. Stroj ťahá niť, smer kreslí ruka.', v: [2.8, 5.4] },
+          { k: 'Živôtik', t: 'Strieborné spony.', d: 'Červený živôtik so striebornými sponami a zlatou výšivkou po stranách. Nad ním nariasený golier.', v: [5.6, 8.1] },
+          { k: 'Zozadu', t: 'Mašľa vzadu.', d: 'Pestrá tkaná stuha s kvetmi sa viaže do veľkej mašle. Najlepšie ju vidno pri tanci.', v: [8.3, 10.7] },
         ] },
     },
     {
@@ -144,11 +149,15 @@
         { x: 7, y: 36, t: 'Čipka', d: 'Biela čipka po okrajoch, na hody vždy čerstvo vyškrobená.', z: 440 },
         { x: 50, y: 90, t: 'Spodnička', d: 'Biela spodná sukňa s madeirovým lemom.', z: 400 },
       ],
-      macro: { o: '30% 45%', z: 4.5, detail: 'img/zasterky-foto.webp', pos: '22% 42%', label: 'Výšivka na modrom saténe',
+      macro: { o: '30% 45%', z: 4.5, label: 'Výšivka na modrom saténe',
         story: [
           { k: 'Pobedim', t: 'Posledná noc pred hodami.', d: 'Zásterky pre Elišku. Čipky došité, v noci vyškrobené, ráno pripravené.' },
           { t: 'Každý pás iný.', d: 'Kvety, špirály a vlnovky v červenej, žltej a ružovej na modrom saténe.' },
           { k: 'Pobedim', t: 'Dedina, ktorá nosí kroj.', d: 'Na hodoch sa stretnú tri generácie. A deti v miestnej škole si trukovanie vyskúšali priamo pri stroji.' },
+        ],
+        gallery: [
+          { src: 'img/zasterky-foto.webp', label: 'Výšivka na modrom saténe' },
+          { src: 'img/krojarka-skola.webp', label: 'Trukovanie v škole · Pobedim' },
         ] },
     },
     {
@@ -200,8 +209,8 @@
       macro: { o: '21% 25%', z: 4.5, video: 'img/rukavce.mp4', poster: 'img/rukavce-poster.jpg', label: 'Detské podolské rukávce',
         story: [
           { k: 'Na želanie', img: 'img/foto-rodinna.webp', cap: 'Predloha · rodinná fotografia', t: 'Dievčatko medzi starými rodičmi.', d: 'Jediná rodinná fotka. Podľa nej vznikol detský očkovský kroj.' },
-          { t: 'Golier ako na fotke.', d: 'Ružový nariasený golier a rukávce s veľkými kolesami, tak ako ich mala dievčina na fotografii.' },
-          { t: 'Rukávce zblízka.', d: 'Kolesá v žltej, ružovej a zelenej. Retiazka za retiazkou.' },
+          { k: 'Golier', t: 'Golier ako na fotke.', d: 'Ružový nariasený golier, presne taký, aký mala dievčina na fotografii.', v: [2.6, 5.2] },
+          { k: 'Rukávce', t: 'Rukávce zblízka.', d: 'Kolesá v žltej, ružovej a zelenej. Retiazka za retiazkou.', v: [5.6, 7.6] },
         ] },
     },
     {
@@ -411,6 +420,7 @@
   /* ───────── makro: vždy aktuálny kroj z hero ───────── */
   const macro = $('#macro');
   const mk = $('.macro-kroj'), mDetail = $('#macro-detail'), mLabel = $('#macro-label'), mSticky = $('.macro-sticky');
+  let mSegs = [], mSeq = false, mChapter = -1;
   function setMacro(s) {
     const m = s.macro;
     mk.src = s.img; mk.alt = '';
@@ -421,7 +431,11 @@
     mk.dataset.z = m.z;
     mDetail.classList.toggle('is-cutout', !!m.contain);
     mDetail.dataset.rot = m.rot || 6;
-    macro.classList.toggle('is-gallery', !!m.gallery);
+    /* zábery videa ku kapitolám: [od, do] v sekundách; sekcia s kapitolami po obrázkoch/záberoch je dlhšia */
+    mSegs = (m.story || []).map(c => c.v || null);
+    const seq = !!m.gallery || mSegs.some(Boolean);
+    macro.classList.toggle('is-gallery', seq);
+    mSeq = seq; mChapter = -1;
     macro.classList.toggle('is-live', !!m.live);
     let facts = $('.macro-facts');
     if (!facts) { facts = document.createElement('ol'); facts.className = 'macro-facts'; mSticky.appendChild(facts); }
@@ -437,6 +451,15 @@
       ? `<video src="${m.video}" poster="${m.poster}" muted loop playsinline preload="${m.live ? 'auto' : 'none'}" aria-label="${m.label}"></video>`
       : `<img src="${m.detail}" srcset="${m.detail} 1x, ${big(m.detail, '@2x')} 2x" alt="${m.label}" style="object-position:${m.pos}" loading="lazy" onerror="this.removeAttribute('srcset')">`;
     mLabel.textContent = m.label + (s.real ? ' · z ateliéru' : '');
+    const vid = $('video', mDetail);
+    if (vid) {
+      /* záber kapitoly sa opakuje dokola, kým sa kapitola nezmení */
+      vid.addEventListener('timeupdate', () => {
+        const t = mSegs[mChapter];
+        if (t && (vid.currentTime >= t[1] || vid.currentTime < t[0] - .3)) vid.currentTime = t[0];
+      });
+      vid.addEventListener('seeked', () => vid.classList.remove('is-cut'));
+    }
     upgradeMacro();
   }
 
@@ -630,18 +653,26 @@
     const vid = $('video', mv);
     if (vid) { if (v > .2 && vid.paused) vid.play().catch(() => {}); else if (v <= .2 && !vid.paused) vid.pause(); }
     const gal = $$('img[data-label]', mv);
-    if (gal.length) {
-      const gi = Math.min(gal.length - 1, Math.floor(range(p, .5, .96) * gal.length));
-      gal.forEach((g, i) => g.classList.toggle('is-on', i === gi));
-      mLabel.textContent = gal[gi].dataset.label;
-    }
     mSticky.style.setProperty('--co', range(p, .7, .86));
     mThread.style.setProperty('--to', 1 - range(p, .78, 1));
     const ch = $$('.macro-facts li'), N = ch.length || 1;
     $('.macro-facts').style.setProperty('--lc', range(p, .12, .35).toFixed(3));
-    let si = Math.min(N - 1, Math.floor(range(p, 0, .9) * N));
-    if (gal.length) si = p < .5 ? 0 : Math.min(N - 1, 1 + gal.findIndex(g => g.classList.contains('is-on')));
+    /* prvá kapitola počas priblíženia; ostatné sa striedajú, keď je detail celý viditeľný,
+       a každá má vlastný obrázok galérie alebo záber videa */
+    let si = mSeq
+      ? (p < .5 ? 0 : Math.min(N - 1, 1 + Math.floor(range(p, .5, .95) * (N - 1))))
+      : Math.min(N - 1, Math.floor(range(p, 0, .9) * N));
     ch.forEach((c, i) => c.classList.toggle('is-on', i === si));
+    if (gal.length) {
+      const gi = Math.max(0, Math.min(gal.length - 1, si - 1));
+      gal.forEach((g, i) => g.classList.toggle('is-on', i === gi));
+      mLabel.textContent = gal[gi].dataset.label;
+    }
+    if (si !== mChapter) {
+      mChapter = si;
+      const t = vid && mSegs[si];
+      if (t) { vid.classList.add('is-cut'); vid.currentTime = t[0]; }
+    }
 
     if (qb) {
       const qr = qb.parentElement.getBoundingClientRect();

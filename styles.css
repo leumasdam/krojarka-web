@@ -847,3 +847,7 @@ body.torn .site-header.is-scrolled::after { background: none; }
   .regions { padding-right: calc(var(--pad) + (100vw - 1500px) * .3); }
   .reg-map { width: 100%; }
 }
+
+/* makro video: strih medzi zábermi kapitol */
+.macro-detail video { transition: opacity .35s var(--ease); }
+.macro-detail video.is-cut { opacity: 0; }
