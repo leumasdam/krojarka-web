@@ -26,7 +26,7 @@
   const cmp = $('.vz-compare');
   if (cmp) $('input', cmp).addEventListener('input', e => cmp.style.setProperty('--cx', e.target.value + '%'));
   /* lupa v scéne 06 */
-  const lens = $('.dt-fig');
+  const lens = $('.dt-lens') ? $('.dt-fig') : null;   // lupa je vypnutá, obrázok je bez interakcie
   if (lens) {
     /* lupa zväčšuje presne miesto pod sebou: počíta s object-fit: cover aj s pomerom strán fotky */
     const glass = $('.dt-lens', lens), pic = $('img', lens), ZOOM = 2.6;
