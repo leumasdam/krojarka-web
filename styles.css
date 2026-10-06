@@ -919,3 +919,12 @@ body.is-tune .macro-cap, body.is-tune .macro-thread { display: none; }
 @media (max-width: 960px) {
   .macro.is-live .macro-detail { --h0: min(52vh, calc(84vw / var(--ar, .75))); top: auto; bottom: 4vh; transform: translate(-50%, 0); }
 }
+
+/* proces na mobile: kolotoč, jeden krok na obrazovke, ďalší vytŕča sprava, swipe s prichytením */
+@media (max-width: 760px) {
+  .process-list { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad); scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .process-list::-webkit-scrollbar { display: none; }
+  .process-list li { flex: 0 0 78%; scroll-snap-align: start; scroll-margin-left: var(--pad); }
+  .process-list figure { aspect-ratio: 4 / 5; }
+  .process-list h3 { font-size: 24px; }
+}
