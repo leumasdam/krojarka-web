@@ -188,7 +188,7 @@
         { x: 84, y: 60, t: 'Brokát', d: 'Tyrkysový brokát s veľkými ružami, lemovaný retiazkovou výšivkou.', z: 400 },
         { x: 18, y: 95, t: 'Lem', d: 'Vykrajovaný plstený lem v zelenej, červenej a oranžovej.', z: 420 },
       ],
-      macro: { o: '27% 42%', z: 5, contain: true, rot: 0, label: 'Rozety a gombíky',
+      macro: { o: '27% 42%', z: 2.5, fadeEarly: true, contain: true, rot: 0, label: 'Rozety a gombíky',
         story: [
           { k: 'Bučany · Trnavský kroj', img: 'img/foto-bucany-predloha.webp', cap: 'Predloha · stará fotografia', t: 'Jediná stará fotka.', d: 'Mužský prucel z Bučian. Strih, rozety aj lemy sa čítali z čiernobielej fotografie.' },
           { k: 'Rozety', t: 'Strihané ručne.', d: 'Plstené rozety v červenej a zelenej. Každá vystrihnutá z plsti ručne, žiadna nie je presne ako druhá.' },
@@ -203,7 +203,7 @@
         fly: [
           { src: 'img/prucel/rozety-kopa.webp', label: 'Plstené rozety', at: 2, until: null, x: -30, y: -16, fx: -75, fy: 20, w: 30, r: -12 },
           { src: 'img/prucel/rozety-gombiky.webp', label: 'Rozety s maľovanými gombíkmi', at: 22, until: 78, x: 26, y: -16, fx: 80, fy: -40, w: 28, r: 10 },
-          { src: 'img/prucel/prisite.webp', label: 'Rozety prišité na brokát', at: 42, until: 78, x: 0, y: 12, fx: -60, fy: -70, w: 40, r: -7 },
+          { src: 'img/prucel/prisite.webp?v=2', label: 'Rozety prišité na brokát', at: 42, until: 78, x: 0, y: 24, fx: -60, fy: -70, w: 36, r: -5 },
           { src: 'img/prucel/ruza.webp', label: 'Ruža na tyrkysovom brokáte', at: 60, until: 80, x: 28, y: 20, fx: 80, fy: 60, w: 34, r: 12 },
           { src: 'img/prucel/prucel-cely.webp', label: 'Mužský prucel z Bučian', at: 80, until: null, x: 4, y: 2, fx: 0, fy: 30, w: 46, r: 0 },
         ] },
@@ -445,6 +445,7 @@
     mDetail.classList.toggle('is-cutout', !!m.contain);
     mDetail.dataset.rot = m.rot ?? 6;
     mDetail.classList.toggle('is-fly', !!m.fly);
+    mk.dataset.fade = m.fadeEarly ? 1 : 0;
     /* zábery videa ku kapitolám: [od, do] v sekundách; sekcia s kapitolami po obrázkoch/záberoch je dlhšia */
     mSegs = (m.story || []).map(c => c.v || null);
     mFly = m.fly || null;
@@ -636,26 +637,69 @@
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   const range = (p, a, b) => clamp((p - a) / (b - a));
 
-  /* ?tune — panel na ladenie prilietania: posuň čísla, scrolluj, skopíruj výsledok */
+  /* ?tune — editor prilietania: klikni na kus, ťahaj ho myšou, kolieskom otáčaj, slidery doladia zvyšok */
   let tune = null;
   if (/[?&]tune/.test(location.search)) {
+    document.body.classList.add('is-tune');
     const el = document.createElement('aside'); el.id = 'tune';
-    const F = ['at', 'until', 'x', 'y', 'fx', 'fy', 'w', 'r'];
-    const dump = () => tune.out.value = 'fly: [\n' + mFly.map(f => `  { src: '${f.src}', label: '${f.label}', ` + F.map(k => `${k}: ${f[k] === null ? 'null' : f[k]}`).join(', ') + ' },').join('\n') + '\n]';
-    const build = () => {
-      if (!mFly) { el.innerHTML = '<p>Tento kroj nemá prilietanie. Vyber na úvode prucel (08).</p>'; return; }
-      el.innerHTML = '<p class="t-h">Pozícia v detaile: <b class="t-d">0 %</b> · at/until = kedy (% scrollu), x/y = kde (% plochy, 0 0 stred), fx/fy = odkiaľ, w = šírka, r = náklon</p>' +
-        '<table><tr><th></th>' + F.map(k => `<th>${k}</th>`).join('') + '</tr>' +
-        mFly.map((f, i) => `<tr><td>${i + 1}. ${f.src.split('/').pop().replace('.webp', '')}</td>` +
-          F.map(k => `<td><input type="number" step="${k === 'at' || k === 'until' ? 1 : 1}" data-i="${i}" data-k="${k}" value="${f[k] === null ? '' : f[k]}" placeholder="–"></td>`).join('') + '</tr>').join('') +
-        '</table><textarea class="t-out" readonly></textarea><p class="t-n">Skopíruj obsah políčka a pošli ho.</p>';
-      tune = { d: $('.t-d', el), out: $('.t-out', el) };
-      $$('input', el).forEach(inp => inp.addEventListener('input', () => {
-        const f = mFly[+inp.dataset.i], k = inp.dataset.k;
-        f[k] = inp.value === '' ? null : +inp.value; dump(); onScroll();
-      }));
-      dump();
+    const F = { at: [0, 100, 'kedy priletí (% scrollu)'], until: [0, 100, 'kedy odletí (prázdne = ostane)'], x: [-70, 70, 'kde pristane ←→'], y: [-70, 70, 'kde pristane ↑↓'],
+      fx: [-160, 160, 'odkiaľ letí ←→'], fy: [-160, 160, 'odkiaľ letí ↑↓'], w: [8, 90, 'šírka (% plochy)'], r: [-60, 60, 'náklon (°)'] };
+    const fmt = v => v === null ? 'null' : Math.round(v * 10) / 10;
+    const dump = () => { if (tune && tune.out) tune.out.value = 'fly: [\n' + mFly.map(f => `  { src: '${f.src}', label: '${f.label}', ` + Object.keys(F).map(k => `${k}: ${fmt(f[k])}`).join(', ') + ' },').join('\n') + '\n]'; };
+    const name = f => f.src.split('/').pop().replace(/\.webp.*$/, '');
+    const flyImgs = () => $$('.fly-img', mDetail);
+    const showAt = f => { const r = macro.getBoundingClientRect(); window.scrollTo(0, scrollY + r.top + (r.height - innerHeight) * (.5 + Math.min(99, f.at + 9) / 200)); };
+    const select = i => {
+      tune.sel = i; flyImgs().forEach((g, k) => g.classList.toggle('is-sel', k === i));
+      $$('.t-item', el).forEach((b, k) => b.classList.toggle('is-on', k === i));
+      const f = mFly[i]; if (!f) return;
+      $('.t-name', el).textContent = (i + 1) + '. ' + name(f);
+      $$('.t-sl', el).forEach(inp => { const k = inp.dataset.k; inp.value = f[k] === null ? inp.max : f[k]; inp.nextElementSibling.textContent = f[k] === null ? '∞' : fmt(f[k]); });
+      const u = $('.t-stay', el); u.checked = f.until === null;
     };
+    const build = () => {
+      if (!mFly) { el.innerHTML = '<p>Tento kroj nemá prilietanie. Vyber na úvode prucel (08).</p>'; tune = { d: { textContent: '' } }; return; }
+      el.innerHTML = '<p class="t-h">Pozícia v detaile: <b class="t-d">0 %</b> · klikni na kus a ťahaj ho myšou, kolieskom ho otáčaš</p>' +
+        '<div class="t-row"><div class="t-list">' + mFly.map((f, i) => `<button class="t-item" data-i="${i}">${i + 1}. ${name(f)}<span>ukáž</span></button>`).join('') + '</div>' +
+        '<div class="t-sliders"><b class="t-name"></b>' + Object.entries(F).map(([k, [lo, hi, t]]) =>
+          `<label><span>${k} <i>${t}</i></span><input class="t-sl" type="range" min="${lo}" max="${hi}" step="${k === 'w' || k === 'r' ? .5 : 1}" data-k="${k}"><output></output></label>`).join('') +
+        '<label class="t-stayl"><input type="checkbox" class="t-stay"> ostane do konca (until = null)</label></div></div>' +
+        '<textarea class="t-out" readonly></textarea><p class="t-n">Skopíruj obsah políčka a pošli ho.</p>';
+      tune = { d: $('.t-d', el), out: $('.t-out', el), sel: 0 };
+      $$('.t-item', el).forEach(btn => {
+        btn.addEventListener('click', e => { const i = +btn.dataset.i; select(i); if (e.target.tagName === 'SPAN') showAt(mFly[i]); });
+      });
+      $$('.t-sl', el).forEach(inp => inp.addEventListener('input', () => {
+        const f = mFly[tune.sel], k = inp.dataset.k; f[k] = +inp.value; inp.nextElementSibling.textContent = fmt(f[k]);
+        if (k === 'until') $('.t-stay', el).checked = false;
+        dump(); onScroll();
+      }));
+      $('.t-stay', el).addEventListener('change', e => { const f = mFly[tune.sel]; f.until = e.target.checked ? null : 90; select(tune.sel); dump(); onScroll(); });
+      dump(); select(0);
+    };
+    /* priamo na ploche: výber klikom, ťahanie, otáčanie kolieskom */
+    let drag = null;
+    mDetail.addEventListener('pointerdown', e => {
+      const g = e.target.closest('.fly-img'); if (!g || !mFly) return;
+      const i = flyImgs().indexOf(g); select(i);
+      const f = mFly[i]; drag = { i, x0: e.clientX, y0: e.clientY, fx: f.x, fy: f.y };
+      g.setPointerCapture(e.pointerId); e.preventDefault();
+    });
+    mDetail.addEventListener('pointermove', e => {
+      if (!drag) return;
+      const f = mFly[drag.i];
+      f.x = Math.round((drag.fx + (e.clientX - drag.x0) / mDetail.clientWidth * 100) * 10) / 10;
+      f.y = Math.round((drag.fy + (e.clientY - drag.y0) / mDetail.clientHeight * 100) * 10) / 10;
+      select(drag.i); dump(); onScroll();
+    });
+    addEventListener('pointerup', () => { drag = null; });
+    mDetail.addEventListener('wheel', e => {
+      const g = e.target.closest('.fly-img'); if (!g || !mFly) return;
+      e.preventDefault();
+      const i = flyImgs().indexOf(g); select(i);
+      const f = mFly[i]; f.r = Math.round((f.r + (e.deltaY > 0 ? 2 : -2)) * 10) / 10;
+      select(i); dump(); onScroll();
+    }, { passive: false });
     document.body.appendChild(el); build();
     document.addEventListener('macrochange', build);
   }
@@ -687,7 +731,8 @@
     }
     const z = ease(range(p, 0, .6));
     mk.style.setProperty('--mz', 1 + z * ((+mk.dataset.z || 5) - 1));
-    mk.style.opacity = 1 - range(p, .45, .62);
+    /* kroj s prilietaním bledne už od tretiny priblíženia */
+    mk.style.opacity = 1 - (mk.dataset.fade === '1' ? range(p, .2, .5) : range(p, .45, .62));
     const v = range(p, .42, .8);
     mv.style.setProperty('--vo', clamp(v * 1.6));
     mv.style.setProperty('--vz', .7 + ease(v) * .55);
