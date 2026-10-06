@@ -648,7 +648,7 @@
     const dump = () => { if (tune && tune.out) tune.out.value = 'fly: [\n' + mFly.map(f => `  { src: '${f.src}', label: '${f.label}', ` + Object.keys(F).map(k => `${k}: ${fmt(f[k])}`).join(', ') + ' },').join('\n') + '\n]'; };
     const name = f => f.src.split('/').pop().replace(/\.webp.*$/, '');
     const flyImgs = () => $$('.fly-img', mDetail);
-    const showAt = f => { const r = macro.getBoundingClientRect(); window.scrollTo(0, scrollY + r.top + (r.height - innerHeight) * (.5 + Math.min(99, f.at + 9) / 200)); };
+    const showAt = f => { const r = macro.getBoundingClientRect(); window.scrollTo(0, scrollY + r.top + (r.height - innerHeight) * (.3 + Math.min(99, f.at + 9) * .007)); };
     const select = i => {
       tune.sel = i; flyImgs().forEach((g, k) => g.classList.toggle('is-sel', k === i));
       $$('.t-item', el).forEach((b, k) => b.classList.toggle('is-on', k === i));
@@ -732,8 +732,8 @@
     const z = ease(range(p, 0, .6));
     mk.style.setProperty('--mz', 1 + z * ((+mk.dataset.z || 5) - 1));
     /* kroj s prilietaním bledne už od tretiny priblíženia */
-    mk.style.opacity = 1 - (mk.dataset.fade === '1' ? range(p, .2, .5) : range(p, .45, .62));
-    const v = range(p, .42, .8);
+    mk.style.opacity = 1 - (mk.dataset.fade === '1' ? range(p, .2, .4) : range(p, .45, .62));
+    const v = mFly ? range(p, .26, .5) : range(p, .42, .8);
     mv.style.setProperty('--vo', clamp(v * 1.6));
     mv.style.setProperty('--vz', .7 + ease(v) * .55);
     const rot = +mv.dataset.rot;
@@ -748,11 +748,11 @@
     /* prvá kapitola počas priblíženia; ostatné sa striedajú, keď je detail celý viditeľný,
        a každá má vlastný obrázok galérie alebo záber videa */
     let si = mSeq
-      ? (p < .5 ? 0 : Math.min(N - 1, 1 + Math.floor(range(p, .5, .95) * (N - 1))))
+      ? (p < (mFly ? .3 : .5) ? 0 : Math.min(N - 1, 1 + Math.floor(range(p, .5, .95) * (N - 1))))
       : Math.min(N - 1, Math.floor(range(p, 0, .9) * N));
     if (mFly) {
       /* každý kus letí podľa vlastného plánu; kapitola textu = posledný kus, ktorý priletel */
-      const d = range(p, .5, 1) * 100, cw = mv.clientWidth, chh = mv.clientHeight, eo = t => 1 - Math.pow(1 - t, 3);
+      const d = range(p, .3, 1) * 100, cw = mv.clientWidth, chh = mv.clientHeight, eo = t => 1 - Math.pow(1 - t, 3);
       mv.style.setProperty('--vz', 1); mv.style.setProperty('--vr', '0deg');
       let last = -1;
       gal.forEach((g, i) => {
