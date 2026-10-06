@@ -943,3 +943,9 @@ body.is-tune .macro-cap, body.is-tune .macro-thread { display: none; }
 @media (max-width: 960px) {
   .macro-thread { left: auto; right: 22px; transform: none; }
 }
+
+/* hero na mobile: bez vzoru modrotlače za krojom a bez rozmazaných susedných krojov (na úzkej obrazovke len rušia) */
+@media (max-width: 960px) {
+  .hero-pattern { display: none; }
+  .fig[data-pos="-1"], .fig[data-pos="1"] { opacity: 0; }
+}
