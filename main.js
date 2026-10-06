@@ -197,13 +197,15 @@
           { k: 'Brokát', t: 'Ruža na brokáte.', d: 'Tyrkysový brokát s veľkými ružami. Taký sa dnes zháňa ťažko, preto Lenka zachraňuje aj staré kusy.' },
           { k: 'Bučany', t: 'Hotový prucel.', d: 'Na bielej košeli: brokát, vykrajované plstené lemy, rozety s gombíkmi. Ako na starej fotke, len nový.' },
         ],
-        /* výrezy prilietajú z pozadia: fx/fy = odkiaľ, fr = náklon, fw = šírka */
+        /* prilietanie, všetko v % (scroll detailu 0–100, poloha a veľkosť v % plochy):
+           at = kedy priletí, until = kedy odletí (null = ostane), x/y = kde pristane (0 0 = stred),
+           fx/fy = odkiaľ letí, w = šírka, r = náklon v stupňoch */
         fly: [
-          { src: 'img/prucel/rozety-kopa.webp', label: 'Plstené rozety', fx: '-28vw', fy: '14vh', fr: '-14deg', fw: '64%' },
-          { src: 'img/prucel/rozety-gombiky.webp', label: 'Rozety s maľovanými gombíkmi', fx: '30vw', fy: '-12vh', fr: '11deg', fw: '56%' },
-          { src: 'img/prucel/prisite.webp', label: 'Rozety prišité na brokát', fx: '-22vw', fy: '-18vh', fr: '-9deg', fw: '62%' },
-          { src: 'img/prucel/ruza.webp', label: 'Ruža na tyrkysovom brokáte', fx: '26vw', fy: '16vh', fr: '13deg', fw: '60%' },
-          { src: 'img/prucel/prucel-cely.webp', label: 'Mužský prucel z Bučian', fx: '0vw', fy: '10vh', fr: '0deg', fw: '50%' },
+          { src: 'img/prucel/rozety-kopa.webp', label: 'Plstené rozety', at: 2, until: null, x: -30, y: -16, fx: -75, fy: 20, w: 30, r: -12 },
+          { src: 'img/prucel/rozety-gombiky.webp', label: 'Rozety s maľovanými gombíkmi', at: 22, until: 78, x: 26, y: -16, fx: 80, fy: -40, w: 28, r: 10 },
+          { src: 'img/prucel/prisite.webp', label: 'Rozety prišité na brokát', at: 42, until: 78, x: 0, y: 12, fx: -60, fy: -70, w: 40, r: -7 },
+          { src: 'img/prucel/ruza.webp', label: 'Ruža na tyrkysovom brokáte', at: 60, until: 80, x: 28, y: 20, fx: 80, fy: 60, w: 34, r: 12 },
+          { src: 'img/prucel/prucel-cely.webp', label: 'Mužský prucel z Bučian', at: 80, until: null, x: 4, y: 2, fx: 0, fy: 30, w: 46, r: 0 },
         ] },
     },
     {
@@ -431,7 +433,7 @@
   /* ───────── makro: vždy aktuálny kroj z hero ───────── */
   const macro = $('#macro');
   const mk = $('.macro-kroj'), mDetail = $('#macro-detail'), mLabel = $('#macro-label'), mSticky = $('.macro-sticky');
-  let mSegs = [], mSeq = false, mChapter = -1;
+  let mSegs = [], mSeq = false, mChapter = -1, mFly = null;
   function setMacro(s) {
     const m = s.macro;
     mk.src = s.img; mk.alt = '';
@@ -445,6 +447,7 @@
     mDetail.classList.toggle('is-fly', !!m.fly);
     /* zábery videa ku kapitolám: [od, do] v sekundách; sekcia s kapitolami po obrázkoch/záberoch je dlhšia */
     mSegs = (m.story || []).map(c => c.v || null);
+    mFly = m.fly || null;
     const seq = !!m.gallery || !!m.fly || mSegs.some(Boolean);
     macro.classList.toggle('is-fly', !!m.fly);
     macro.classList.toggle('is-gallery', seq);
@@ -459,13 +462,14 @@
           `${c.k ? `<span class="mf-k">${c.k}</span>` : ''}<b>${c.t}</b><span class="mf-d">${c.d}</span></li>`).join('')
       : (m.facts || []).map(f => `<li>${f}</li>`).join('');
     mDetail.innerHTML = m.fly
-      ? m.fly.map(f => `<img src="${f.src}" alt="${f.label}" data-label="${f.label}" loading="lazy" class="fly-img" style="--fx:${f.fx};--fy:${f.fy};--fr:${f.fr};--fw:${f.fw}">`).join('')
+      ? m.fly.map(f => `<img src="${f.src}" alt="${f.label}" data-label="${f.label}" loading="lazy" class="fly-img">`).join('')
       : m.gallery
       ? m.gallery.map((g, i) => `<img src="${g.src}" srcset="${g.src} 1x, ${big(g.src, '@2x')} 2x" alt="${g.label}" data-label="${g.label}" loading="lazy" onerror="this.removeAttribute('srcset')" class="${i ? '' : 'is-on'}">`).join('')
       : m.video
       ? `<video src="${m.video}" poster="${m.poster}" muted loop playsinline preload="${m.live ? 'auto' : 'none'}" aria-label="${m.label}"></video>`
       : `<img src="${m.detail}" srcset="${m.detail} 1x, ${big(m.detail, '@2x')} 2x" alt="${m.label}" style="object-position:${m.pos}" loading="lazy" onerror="this.removeAttribute('srcset')">`;
     mLabel.textContent = m.label + (s.real ? ' · z ateliéru' : '');
+    document.dispatchEvent(new Event('macrochange'));
     const vid = $('video', mDetail);
     if (vid) {
       /* záber kapitoly sa opakuje dokola, kým sa kapitola nezmení */
@@ -632,6 +636,30 @@
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   const range = (p, a, b) => clamp((p - a) / (b - a));
 
+  /* ?tune — panel na ladenie prilietania: posuň čísla, scrolluj, skopíruj výsledok */
+  let tune = null;
+  if (/[?&]tune/.test(location.search)) {
+    const el = document.createElement('aside'); el.id = 'tune';
+    const F = ['at', 'until', 'x', 'y', 'fx', 'fy', 'w', 'r'];
+    const dump = () => tune.out.value = 'fly: [\n' + mFly.map(f => `  { src: '${f.src}', label: '${f.label}', ` + F.map(k => `${k}: ${f[k] === null ? 'null' : f[k]}`).join(', ') + ' },').join('\n') + '\n]';
+    const build = () => {
+      if (!mFly) { el.innerHTML = '<p>Tento kroj nemá prilietanie. Vyber na úvode prucel (08).</p>'; return; }
+      el.innerHTML = '<p class="t-h">Pozícia v detaile: <b class="t-d">0 %</b> · at/until = kedy (% scrollu), x/y = kde (% plochy, 0 0 stred), fx/fy = odkiaľ, w = šírka, r = náklon</p>' +
+        '<table><tr><th></th>' + F.map(k => `<th>${k}</th>`).join('') + '</tr>' +
+        mFly.map((f, i) => `<tr><td>${i + 1}. ${f.src.split('/').pop().replace('.webp', '')}</td>` +
+          F.map(k => `<td><input type="number" step="${k === 'at' || k === 'until' ? 1 : 1}" data-i="${i}" data-k="${k}" value="${f[k] === null ? '' : f[k]}" placeholder="–"></td>`).join('') + '</tr>').join('') +
+        '</table><textarea class="t-out" readonly></textarea><p class="t-n">Skopíruj obsah políčka a pošli ho.</p>';
+      tune = { d: $('.t-d', el), out: $('.t-out', el) };
+      $$('input', el).forEach(inp => inp.addEventListener('input', () => {
+        const f = mFly[+inp.dataset.i], k = inp.dataset.k;
+        f[k] = inp.value === '' ? null : +inp.value; dump(); onScroll();
+      }));
+      dump();
+    };
+    document.body.appendChild(el); build();
+    document.addEventListener('macrochange', build);
+  }
+
   let ticking = false;
   const onScroll = () => {
     ticking = false;
@@ -677,8 +705,29 @@
     let si = mSeq
       ? (p < .5 ? 0 : Math.min(N - 1, 1 + Math.floor(range(p, .5, .95) * (N - 1))))
       : Math.min(N - 1, Math.floor(range(p, 0, .9) * N));
+    if (mFly) {
+      /* každý kus letí podľa vlastného plánu; kapitola textu = posledný kus, ktorý priletel */
+      const d = range(p, .5, 1) * 100, cw = mv.clientWidth, chh = mv.clientHeight, eo = t => 1 - Math.pow(1 - t, 3);
+      mv.style.setProperty('--vz', 1); mv.style.setProperty('--vr', '0deg');
+      let last = -1;
+      gal.forEach((g, i) => {
+        const f = mFly[i]; if (!f) return;
+        const a = eo(range(d, f.at, f.at + 7)), b = f.until == null ? 0 : eo(range(d, f.until, f.until + 6));
+        if (a > 0 && b < 1) last = i;
+        const x = f.fx + (f.x - f.fx) * a - (f.fx * .5 + f.x * .3) * b, y = f.fy + (f.y - f.fy) * a - (f.fy * .5 + f.y * .3) * b;
+        const s = .3 + .7 * a + .5 * b, r = f.r * (2.4 - 1.4 * a) * (1 - .6 * b), blur = 6 * (1 - a) + 10 * b;
+        g.style.maxWidth = f.w + '%';
+        g.style.transform = `translate(calc(-50% + ${(x / 100 * cw).toFixed(1)}px), calc(-50% + ${(y / 100 * chh).toFixed(1)}px)) scale(${s.toFixed(3)}) rotate(${r.toFixed(2)}deg)`;
+        g.style.opacity = (clamp(a * 1.6) * clamp(1 - b * 1.4)).toFixed(3);
+        g.style.filter = `blur(${blur.toFixed(1)}px) drop-shadow(0 30px 40px rgba(24,22,20,${(.22 * a * (1 - b)).toFixed(2)}))`;
+        g.classList.toggle('is-on', i === last);
+      });
+      si = Math.min(N - 1, last + 1);
+      if (last >= 0) mLabel.textContent = mFly[last].label;
+      if (tune) tune.d.textContent = d.toFixed(0) + ' %';
+    }
     ch.forEach((c, i) => c.classList.toggle('is-on', i === si));
-    if (gal.length) {
+    if (gal.length && !mFly) {
       /* pri prilietaní počas priblíženia ešte nič neletí, prvý kus priletí až s druhou kapitolou */
       const gi = mv.classList.contains('is-fly') ? Math.min(gal.length - 1, si - 1) : Math.max(0, Math.min(gal.length - 1, si - 1));
       gal.forEach((g, i) => { g.classList.toggle('is-on', i === gi); g.classList.toggle('is-past', i < gi); });
