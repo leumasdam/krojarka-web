@@ -220,3 +220,6 @@ body.page-about .tools-sep { background: currentColor; opacity: .3; }
 body.page-about[data-scene="1"] .site-header, body.page-about[data-scene="3"] .site-header, body.page-about[data-scene="5"] .site-header { color: var(--cream); }
 body.page-about[data-scene="2"] .site-header, body.page-about[data-scene="4"] .site-header, body.page-about[data-scene="6"] .site-header { color: var(--text); background: none; }
 body.page-about .site-header { transition: none; }
+/* proces: jeden obrázok rozloženého kroja namiesto vrstiev */
+.s4 .layers.is-single .ly { inset: auto; left: 50%; top: 50%; width: 118%; height: auto; aspect-ratio: 1448 / 1086; object-fit: cover; transform: translate3d(-50%, calc(-50% + (.5 - var(--p, 0)) * 24px), 0); mix-blend-mode: multiply; -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent 100%); mask-image: radial-gradient(closest-side, #000 70%, transparent 100%); }
+.s4 .layers.is-single::after { display: none; }
