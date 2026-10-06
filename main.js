@@ -43,7 +43,11 @@
         { x: 34, y: 76, t: 'Sukňa', d: 'Čierna sukňa s pásmi výšivky a čipkovým lemom.', z: 380 },
       ],
       macro: { o: '16% 26%', z: 5, detail: 'img/detail-vysivka.webp', pos: '50% 50%', contain: true, rot: 10, label: 'Od kroja k stehu',
-        steps: ['Celý kroj', 'Živôtik', 'Rukáv', 'Výšivka', 'Jeden steh'] },
+        story: [
+          { t: 'Kroj sa čítal ako list.', d: 'Podľa živôtika, stuhy a sukne v kraji vedeli, odkiaľ žena je, koľko má rokov a či ide na hody, alebo do smútku.' },
+          { t: 'Živôtik drží siluetu.', d: 'Zamat, perličky a pevný strih. Práve na ňom sa ukáže, či šila majsterka.' },
+          { t: 'Výšivka sa ráta na stehy.', d: 'Jeden pás na rukáve sú stovky drobných stehov vedených rovno, ako podľa pravítka.' },
+        ] },
     },
     {
       key: 'trukovanie', title: 'Trukovanie', sub: 'Autorský Bašovský kroj.',
@@ -57,7 +61,12 @@
         { x: 62, y: 71, t: 'Trukovka', d: 'Zlatá trukovka na čiernom saténe — autorský vzor inšpirovaný starými predlohami.', z: 380 },
         { x: 28, y: 88, t: 'Čipka', d: 'Biela čipka na leme spodnej sukne.', z: 420 },
       ],
-      macro: { o: '50% 9%', z: 5, detail: 'img/hody/stofky-makro.webp', pos: '50% 50%', label: 'Vzácne bašovské štófky' },
+      macro: { o: '50% 9%', z: 5, detail: 'img/hody/stofky-makro.webp', pos: '50% 50%', label: 'Vzácne bašovské štófky',
+        story: [
+          { k: 'Bašovce', t: 'Kroj z domova.', d: 'Lenka nosí nebíčkový kroj po bašovskej babičke Márii Melicherovej. Z tohto kraja vychádza aj jej autorský kroj.' },
+          { k: 'Autorský kroj', t: 'Podľa starých vzorov, nie ich kópia.', d: 'Čierna a zlatá trukovka. Dnes je vystavený v ateliéri šperkárky Kataríny Žiak v Banskej Bystrici.' },
+          { k: 'Detail', t: 'Štófky na pleciach.', d: 'Vzácna bašovská biela čipka. Na hodoch v Bašovciach ju ešte uvidíte.' },
+        ] },
     },
     {
       key: 'cerveny', title: 'Zlatá retiazka', sub: 'Červený sviatočný kroj.',
@@ -73,7 +82,11 @@
         { x: 60, y: 94, t: 'Čipka', d: 'Biela čipka s lomeným okrajom.', z: 420 },
       ],
       macro: { o: '40% 72%', z: 4.2, video: 'img/kroj-cerveny.mp4', poster: 'img/kroj-cerveny-poster.jpg', label: 'Kroj zblízka',
-        steps: ['Celý kroj', 'Sukňa', 'Trukovka', 'Mašľa', 'Na hodoch'] },
+        story: [
+          { t: 'Červená na hody.', d: 'Červený živôtik so striebornými sponami a vysoký zlatý golier. Kroj, ktorý vidno z konca dediny.' },
+          { t: 'Kvety na čiernej sukni.', d: 'Každý zlatý kvet je jedna súvislá retiazka. Stroj ťahá niť, smer kreslí ruka.' },
+          { t: 'Mašľa vzadu.', d: 'Pestrá tkaná stuha s kvetmi sa viaže do veľkej mašle. Najlepšie ju vidno pri tanci.' },
+        ] },
     },
     {
       key: 'modrotlac', title: 'Modrotlač', sub: 'Farba, ktorá má vlastnú pamäť.',
@@ -85,7 +98,12 @@
         { x: 50, y: 58, t: 'Zástera', d: 'Biela zástera s modrým ornamentom.', z: 420 },
         { x: 50, y: 86, t: 'Lem', d: 'Tmavomodrý lem so vzorom, ktorý sa odtláčal drevenou formou.', z: 400 },
       ],
-      macro: { o: '50% 60%', z: 5, detail: 'img/detail-modrotlac.webp', pos: '50% 50%', label: 'Vzor modrotlače' },
+      macro: { o: '50% 60%', z: 5, detail: 'img/detail-modrotlac.webp', pos: '50% 50%', label: 'Vzor modrotlače',
+        story: [
+          { t: 'Vzor, ktorý nie je namaľovaný.', d: 'Drevenou formou sa na látku natlačí rezerva. Kde je, tam indigo nechytí a ostane biely ornament.' },
+          { t: 'Do kade a znova.', d: 'Látka sa ponára do indiga viackrát, kým nemá tú hlbokú modrú.' },
+          { t: 'Forma ako rukopis.', d: 'Každá dielňa mala svoje formy. Podľa vzoru sa dalo spoznať, odkiaľ látka je.' },
+        ] },
     },
     {
       key: 'fialovy', title: 'Brokát a čipka', sub: 'Sviatočný kroj s fialovým živôtikom.',
@@ -101,7 +119,13 @@
         { x: 30, y: 93, t: 'Čipka', d: 'Modrá tylová čipka s kvetmi na leme.', z: 400 },
       ],
       macro: { o: '50% 22%', z: 4.2, rot: 3, label: 'Detaily kroja',
-        steps: ['Celý kroj', 'Živôtik', 'Brokát', 'Rukávce', 'Zástera'],
+        story: [
+          { t: 'Nič sa tu nešetrilo.', d: 'Fialový brokát, zlaté borty, čipkový golier. Poďme po vrstvách.' },
+          { k: 'Živôtik', t: 'Borty a gombíky.', d: 'Zlaté a strieborné borty prišité ručne jedna vedľa druhej, kovové gombíky.' },
+          { k: 'Chrbát', t: 'Ľalie v brokáte.', d: 'Starý fialový brokát s ľaliami. Taký sa dnes zháňa veľmi ťažko.' },
+          { k: 'Rukávce', t: 'Kolesá a madeira.', d: 'Vyšívané kolesá v žltej, fialovej a zelenej, pod nimi madeira s farebnými vlnovkami.' },
+          { k: 'Zástera', t: 'Trukované kvety.', d: 'Kvety a slučky v bielej, fialovej a modrej. Všetko jedna retiazka vedená rukou.' },
+        ],
         gallery: [
           { src: 'img/fialovy-zivotik.webp', label: 'Živôtik · borty a gombíky' },
           { src: 'img/fialovy-brokat.webp', label: 'Brokát s ľaliami · chrbát' },
@@ -120,7 +144,12 @@
         { x: 7, y: 36, t: 'Čipka', d: 'Biela čipka po okrajoch, na hody vždy čerstvo vyškrobená.', z: 440 },
         { x: 50, y: 90, t: 'Spodnička', d: 'Biela spodná sukňa s madeirovým lemom.', z: 400 },
       ],
-      macro: { o: '30% 45%', z: 4.5, detail: 'img/zasterky-foto.webp', pos: '22% 42%', label: 'Výšivka na modrom saténe' },
+      macro: { o: '30% 45%', z: 4.5, detail: 'img/zasterky-foto.webp', pos: '22% 42%', label: 'Výšivka na modrom saténe',
+        story: [
+          { k: 'Pobedim', t: 'Posledná noc pred hodami.', d: 'Zásterky pre Elišku. Čipky došité, v noci vyškrobené, ráno pripravené.' },
+          { t: 'Každý pás iný.', d: 'Kvety, špirály a vlnovky v červenej, žltej a ružovej na modrom saténe.' },
+          { k: 'Pobedim', t: 'Dedina, ktorá nosí kroj.', d: 'Na hodoch sa stretnú tri generácie. A deti v miestnej škole si trukovanie vyskúšali priamo pri stroji.' },
+        ] },
     },
     {
       key: 'cepcenie', title: 'Čepčenie', sub: 'Keď sa odev stáva obradom.',
@@ -131,7 +160,12 @@
         { x: 50, y: 14, t: 'Čepiec', d: 'Vyšívaný čepiec s čipkou. Nevesta ho po prvý raz dostala na hlavu pri čepčení.', z: 380 },
         { x: 36, y: 42, t: 'Viazanie', d: 'Dlhé čipkové viazanie spadajúce na chrbát — vrstva nad vrstvou.', z: 380 },
       ],
-      macro: { o: '55% 15%', z: 4.5, detail: 'img/detail-stuha.webp', pos: '50% 50%', label: 'Čipka a stuha' },
+      macro: { o: '55% 15%', z: 4.5, detail: 'img/detail-stuha.webp', pos: '50% 50%', label: 'Čipka a stuha',
+        story: [
+          { t: 'Z dievčaťa nevesta.', d: 'Pri čepčení dostala nevesta prvý raz na hlavu čepiec. Od toho dňa ho nosila ako vydatá žena.' },
+          { t: 'Čipka nad čipkou.', d: 'Dlhé viazanie spadá na chrbát vrstva za vrstvou. Škrobí sa a skladá ručne.' },
+          { t: 'Odev ako obrad.', d: 'Čepiec nebol do skrine. Patril k svadbe, ku krstinám aj k hodom.' },
+        ] },
     },
     {
       key: 'prucel', title: 'Regióny', sub: 'Mužský prucel z Bučian.',
@@ -145,7 +179,12 @@
         { x: 84, y: 60, t: 'Brokát', d: 'Tyrkysový brokát s veľkými ružami, lemovaný retiazkovou výšivkou.', z: 400 },
         { x: 18, y: 95, t: 'Lem', d: 'Vykrajovaný plstený lem v zelenej, červenej a oranžovej.', z: 420 },
       ],
-      macro: { o: '27% 42%', z: 5, detail: 'img/prucel-foto.webp', pos: '22% 50%', label: 'Rozety a gombíky' },
+      macro: { o: '27% 42%', z: 5, detail: 'img/prucel-foto.webp', pos: '22% 50%', label: 'Rozety a gombíky',
+        story: [
+          { k: 'Bučany · Trnavský kroj', img: 'img/foto-bucany-predloha.webp', cap: 'Predloha · stará fotografia', t: 'Jediná stará fotka.', d: 'Mužský prucel z Bučian. Strih, rozety aj lemy sa čítali z čiernobielej fotografie.' },
+          { t: 'Rozety strihané ručne.', d: 'Plstené rozety v červenej a zelenej, v strede maľované gombíky. Žiadna nie je presne ako druhá.' },
+          { t: 'Keď brokát dosluhuje.', d: 'Lenka zachraňuje aj staré prucle. Keď zo stromkového brokátu ostanú len nitky, treba sa rozhodnúť: nechať, opraviť, alebo ušiť nanovo.' },
+        ] },
     },
     {
       key: 'ockov', title: 'Príbehy', sub: 'Podľa starej rodinnej fotky.',
@@ -158,7 +197,12 @@
         { x: 21, y: 25, t: 'Rukávce', d: 'Rukávce s veľkými kolesovými ornamentmi v žltej, ružovej a zelenej.', z: 420 },
         { x: 50, y: 60, t: 'Zástera', d: 'Modrá zástera s pásmi pestrej výšivky a špirál.', z: 400 },
       ],
-      macro: { o: '21% 25%', z: 4.5, video: 'img/rukavce.mp4', poster: 'img/rukavce-poster.jpg', label: 'Detské podolské rukávce' },
+      macro: { o: '21% 25%', z: 4.5, video: 'img/rukavce.mp4', poster: 'img/rukavce-poster.jpg', label: 'Detské podolské rukávce',
+        story: [
+          { k: 'Na želanie', img: 'img/foto-rodinna.webp', cap: 'Predloha · rodinná fotografia', t: 'Dievčatko medzi starými rodičmi.', d: 'Jediná rodinná fotka. Podľa nej vznikol detský očkovský kroj.' },
+          { t: 'Golier ako na fotke.', d: 'Ružový nariasený golier a rukávce s veľkými kolesami, tak ako ich mala dievčina na fotografii.' },
+          { t: 'Rukávce zblízka.', d: 'Kolesá v žltej, ružovej a zelenej. Retiazka za retiazkou.' },
+        ] },
     },
     {
       key: 'krojarka', title: 'Krojárka', sub: 'Aby príbeh pokračoval.',
@@ -377,13 +421,16 @@
     mk.dataset.z = m.z;
     mDetail.classList.toggle('is-cutout', !!m.contain);
     mDetail.dataset.rot = m.rot || 6;
-    const labels = m.steps || ['Celý kroj', 'Detail', 'Ornament', 'Steh', 'Ruka'];
-    $$('.macro-steps li').forEach((li, i) => (li.textContent = labels[i]));
     macro.classList.toggle('is-gallery', !!m.gallery);
     macro.classList.toggle('is-live', !!m.live);
     let facts = $('.macro-facts');
     if (!facts) { facts = document.createElement('ol'); facts.className = 'macro-facts'; mSticky.appendChild(facts); }
-    facts.innerHTML = (m.facts || []).map(f => `<li>${f}</li>`).join('');
+    /* príbeh kroja: kapitoly sa striedajú počas priblíženia */
+    facts.classList.toggle('is-story', !!m.story);
+    facts.innerHTML = m.story
+      ? m.story.map(c => `<li>${c.img ? `<figure class="mf-img"><img src="${c.img}" alt="${c.cap}" loading="lazy"><figcaption>${c.cap}</figcaption></figure>` : ''}` +
+          `${c.k ? `<span class="mf-k">${c.k}</span>` : ''}<b>${c.t}</b><span class="mf-d">${c.d}</span></li>`).join('')
+      : (m.facts || []).map(f => `<li>${f}</li>`).join('');
     mDetail.innerHTML = m.gallery
       ? m.gallery.map((g, i) => `<img src="${g.src}" srcset="${g.src} 1x, ${big(g.src, '@2x')} 2x" alt="${g.label}" data-label="${g.label}" loading="lazy" class="${i ? '' : 'is-on'}">`).join('')
       : m.video
@@ -540,7 +587,7 @@
 
   /* ───────── scroll: macro zoom, parallax, progress ───────── */
   const mv = mDetail;
-  const steps = $$('.macro-steps li'), mThread = $('.macro-thread path');
+  const mThread = $('.macro-thread path');
   mThread.setAttribute('pathLength', 1);
   const qb = $('.qb-img img'), atd = $('.at-detail'), pt = $('#pt-fill');
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -590,10 +637,11 @@
     }
     mSticky.style.setProperty('--co', range(p, .7, .86));
     mThread.style.setProperty('--to', 1 - range(p, .78, 1));
-    let si = Math.min(4, Math.floor(p * 5.2));
-    const galOn = $$('img[data-label]', mv).findIndex(g => g.classList.contains('is-on'));
-    if (galOn >= 0 && p >= .5) si = Math.min(4, galOn + 1);
-    steps.forEach((s, i) => s.classList.toggle('is-on', i === si));
+    const ch = $$('.macro-facts li'), N = ch.length || 1;
+    $('.macro-facts').style.setProperty('--lc', range(p, .12, .35).toFixed(3));
+    let si = Math.min(N - 1, Math.floor(range(p, 0, .9) * N));
+    if (gal.length) si = p < .5 ? 0 : Math.min(N - 1, 1 + gal.findIndex(g => g.classList.contains('is-on')));
+    ch.forEach((c, i) => c.classList.toggle('is-on', i === si));
 
     if (qb) {
       const qr = qb.parentElement.getBoundingClientRect();
