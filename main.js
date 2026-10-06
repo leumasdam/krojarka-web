@@ -165,7 +165,7 @@
       hs: [
         { x: 40, y: 50, t: 'Stroj', d: 'Historický trukovací stroj Lintz & Eckhardt, Berlín. Látku vedie ruka, stroj len ťahá retiazku.', z: 380 },
       ],
-      macro: { o: '46% 58%', z: 2.6, video: 'img/krojarka-stroj.mp4', poster: 'img/krojarka-stroj.webp', label: 'Pri trukovacom stroji', steps: ['Ateliér', 'Stroj', 'Ihla', 'Retiazka', 'Ruka'] },
+      macro: { o: '50% 50%', z: 1, video: 'img/krojarka-stroj.mp4', poster: 'img/krojarka-stroj.webp', live: true, label: 'Pri trukovacom stroji', steps: ['Ateliér', 'Stroj', 'Ihla', 'Retiazka', 'Ruka'] },
     },
   ];
 
@@ -377,6 +377,7 @@
     const labels = m.steps || ['Celý kroj', 'Detail', 'Ornament', 'Steh', 'Ruka'];
     $$('.macro-steps li').forEach((li, i) => (li.textContent = labels[i]));
     macro.classList.toggle('is-gallery', !!m.gallery);
+    macro.classList.toggle('is-live', !!m.live);
     mDetail.innerHTML = m.gallery
       ? m.gallery.map((g, i) => `<img src="${g.src}" srcset="${g.src} 1x, ${big(g.src, '@2x')} 2x" alt="${g.label}" data-label="${g.label}" loading="lazy" class="${i ? '' : 'is-on'}">`).join('')
       : m.video
@@ -546,6 +547,23 @@
 
     const r = macro.getBoundingClientRect();
     const p = clamp(-r.top / (r.height - vh));
+    if (macro.classList.contains('is-live')) {
+      /* fotka ožije: v tom istom oblúku sa prelne do videa, oblúk sa rozšíri na celú obrazovku, potom priblíženie na ihlu */
+      const live = range(p, .02, .18), grow = ease(range(p, .25, .55)), zoomIn = ease(range(p, .6, 1));
+      mk.style.setProperty('--mz', 1); mk.style.opacity = 1 - live;
+      mv.style.setProperty('--vo', live);
+      mv.style.setProperty('--grow', grow.toFixed(4));
+      mv.style.setProperty('--vz', (1 + zoomIn * 1.6).toFixed(4));
+      mv.style.setProperty('--vr', '0deg');
+      const vid = $('video', mv);
+      if (vid) { if (live > .05 && vid.paused) vid.play().catch(() => {}); else if (live <= .05 && !vid.paused) vid.pause(); }
+      mSticky.style.setProperty('--co', range(p, .7, .86));
+      mThread.style.setProperty('--to', 1 - range(p, .78, 1));
+      const si = Math.min(4, Math.floor(p * 5.2));
+      steps.forEach((s, i) => s.classList.toggle('is-on', i === si));
+      if (qb) { const qr = qb.parentElement.getBoundingClientRect(); qb.style.setProperty('--py', ((qr.top + qr.height / 2 - vh / 2) * -.12) + 'px'); }
+      return;
+    }
     const z = ease(range(p, 0, .6));
     mk.style.setProperty('--mz', 1 + z * ((+mk.dataset.z || 5) - 1));
     mk.style.opacity = 1 - range(p, .45, .62);
