@@ -549,11 +549,12 @@
     const p = clamp(-r.top / (r.height - vh));
     if (macro.classList.contains('is-live')) {
       /* fotka ožije: v tom istom oblúku sa prelne do videa, oblúk sa rozšíri na celú obrazovku, potom priblíženie na ihlu */
-      const live = range(p, .02, .18), grow = ease(range(p, .25, .55)), zoomIn = ease(range(p, .6, 1));
+      /* ožitie 0–12 %, rozšírenie 15–45 %, potom pomalé rovnomerné priblíženie až do konca */
+      const live = range(p, .02, .12), grow = ease(range(p, .15, .45)), zoomIn = range(p, .3, 1);
       mk.style.setProperty('--mz', 1); mk.style.opacity = 1 - live;
       mv.style.setProperty('--vo', live);
       mv.style.setProperty('--grow', grow.toFixed(4));
-      mv.style.setProperty('--vz', (1 + zoomIn * 0.55).toFixed(4));
+      mv.style.setProperty('--vz', (1 + zoomIn * 0.4).toFixed(4));
       mv.style.setProperty('--vr', '0deg');
       const vid = $('video', mv);
       if (vid) { if (live > .05 && vid.paused) vid.play().catch(() => {}); else if (live <= .05 && !vid.paused) vid.pause(); }
