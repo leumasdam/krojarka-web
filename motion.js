@@ -123,7 +123,7 @@
       const r = mzWrap.getBoundingClientRect();
       const p = range(-r.top / Math.max(1, r.height - H), 0, 1);
       /* perokresba sa vyjaví zľava doprava (tretina je hotová hneď), potom pod ňou fotka */
-      const draw = .32 + .68 * range(p, 0, .42), veil = 1 - range(p, .5, .85), fade = 1 - range(p, .72, .98);
+      const draw = .32 + .68 * range(p, 0, .42), veil = 1 - range(p, .42, .78), fade = 1 - range(p, .66, .94);
       mzDraw.style.setProperty('--t', (1 - draw).toFixed(4));
       mzDraw.style.setProperty('--rev', (draw * 135 - 10).toFixed(2) + '%');
       if (sk.length) {   // skica: ťahy sa dokresľujú zľava doprava medzi 22 % a 70 %
