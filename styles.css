@@ -950,8 +950,7 @@ body.is-tune .macro-cap, body.is-tune .macro-thread { display: none; }
   .fig[data-pos="-1"], .fig[data-pos="1"] { opacity: 0; }
 }
 
-/* makro výrez (sviatočný kroj) na obrazovkách pod 1600 px: menší, aby nešiel cez text vpravo dole */
-@media (min-width: 961px) and (max-width: 1600px) {
-  .macro-detail.is-cutout { width: min(62vh, 640px, 60vw); }
-  .macro-detail.is-cutout:not(.is-fly) { top: 46%; }
+/* makro výrez (sviatočný kroj): na všetkých desktopoch menší a vyššie, aby neprekrýval text vpravo dole */
+@media (min-width: 961px) {
+  .macro-detail.is-cutout:not(.is-fly) { width: min(58vh, 620px, 56vw); top: 44%; }
 }
