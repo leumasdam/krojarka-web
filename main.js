@@ -230,6 +230,24 @@
         ] },
     },
     {
+      key: 'babka', title: 'Na bicykli', sub: 'Kroj nie je len na hody.',
+      txt: 'Do kostola, na trh, za vnúčatami. Keď sa kroj nosí každý deň, nestarne — a majiteľka s ním tiež nie.',
+      cta: 'Pozrieť sa bližšie', href: '#macro',
+      img: 'img/babka-bicykel.webp', ar: 1201 / 1297, amb: '#D9A400', person: true, sc: 1.12,
+      hs: [
+        { x: 50, y: 20, t: 'Lajblík', d: 'Červený lajblík so zlatou výšivkou. Nedeľný, ale v utorok tiež dobrý.', z: 420 },
+        { x: 70, y: 42, t: 'Mašľa', d: 'Žltá mašľa na páse. Vlaje viac než vlajka na obecnom úrade.', z: 380 },
+        { x: 55, y: 68, t: 'Sukňa', d: 'Čierna sukňa s kvetmi, pod ňou vyškrobená čipka. Na bicykli drží tvar lepšie než rifle.', z: 360 },
+        { x: 28, y: 60, t: 'Bicykel', d: 'Jediná časť, ktorá nie je zo 60. rokov. Bicykel je z 80.', z: 300 },
+      ],
+      macro: { o: '55% 30%', z: 3.2, detail: 'img/babka-detail.webp', pos: '50% 50%', label: 'Kroj na každý deň',
+        story: [
+          { t: 'Kroj nie je kostým.', d: 'Nevyberá sa len na hody. Niekde ho ženy nosia doteraz každý deň a vyzerá v ňom lepšie každý rok.' },
+          { t: 'Vydrží viac než móda.', d: 'Lajblík, sukňa a čipka, ktoré prežili tri generácie. Žiadna rýchla móda to nedokáže.' },
+          { t: 'A na bicykli sa v ňom dá.', d: 'Len pozor na mašľu v špiciach. Všetko ostatné funguje.' },
+        ] },
+    },
+    {
       key: 'krojarka', title: 'Krojárka', sub: 'Aby príbeh pokračoval.',
       txt: 'Remeslo žije, kým ho má kto odovzdávať. Trukovanie ukazuje aj deťom v školách — priamo pri stroji.',
       cta: 'Spoznať Krojárku', href: '#krojarka', real: true,
