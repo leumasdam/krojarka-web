@@ -165,7 +165,7 @@
       hs: [
         { x: 40, y: 50, t: 'Stroj', d: 'Historický trukovací stroj Lintz & Eckhardt, Berlín. Látku vedie ruka, stroj len ťahá retiazku.', z: 380 },
       ],
-      macro: { o: '50% 50%', z: 1, video: 'img/krojarka-stroj.mp4', poster: 'img/krojarka-stroj.webp', live: true, label: 'Pri trukovacom stroji', steps: ['Ateliér', 'Stroj', 'Ihla', 'Retiazka', 'Ruka'] },
+      macro: { o: '50% 50%', z: 1, video: 'img/krojarka-stroj.mp4', poster: 'img/krojarka-stroj-first.jpg', live: true, label: 'Pri trukovacom stroji', steps: ['Ateliér', 'Stroj', 'Ihla', 'Retiazka', 'Ruka'] },
     },
   ];
 
@@ -381,7 +381,7 @@
     mDetail.innerHTML = m.gallery
       ? m.gallery.map((g, i) => `<img src="${g.src}" srcset="${g.src} 1x, ${big(g.src, '@2x')} 2x" alt="${g.label}" data-label="${g.label}" loading="lazy" class="${i ? '' : 'is-on'}">`).join('')
       : m.video
-      ? `<video src="${m.video}" poster="${m.poster}" muted loop playsinline preload="none" aria-label="${m.label}"></video>`
+      ? `<video src="${m.video}" poster="${m.poster}" muted loop playsinline preload="${m.live ? 'auto' : 'none'}" aria-label="${m.label}"></video>`
       : `<img src="${m.detail}" srcset="${m.detail} 1x, ${big(m.detail, '@2x')} 2x" alt="${m.label}" style="object-position:${m.pos}" loading="lazy">`;
     mLabel.textContent = m.label + (s.real ? ' · z ateliéru' : '');
     upgradeMacro();
@@ -550,14 +550,15 @@
     if (macro.classList.contains('is-live')) {
       /* fotka ožije: v tom istom oblúku sa prelne do videa, oblúk sa rozšíri na celú obrazovku, potom priblíženie na ihlu */
       /* ožitie 0–12 %, rozšírenie 15–45 %, potom pomalé rovnomerné priblíženie až do konca */
-      const live = range(p, .02, .14), grow = ease(range(p, .16, .5)), zoomIn = range(p, .2, 1);
-      mk.style.setProperty('--mz', 1); mk.style.opacity = 1 - live;
-      mv.style.setProperty('--vo', live);
+      /* video je vidno hneď, fotka z hero sa v makre vôbec neukáže */
+      const live = 1, grow = ease(range(p, .06, .42)), zoomIn = range(p, .15, 1);
+      mk.style.setProperty('--mz', 1); mk.style.opacity = 0;
+      mv.style.setProperty('--vo', 1);
       mv.style.setProperty('--grow', grow.toFixed(4));
       mv.style.setProperty('--vz', (1 + zoomIn * 0.18).toFixed(4));
       mv.style.setProperty('--vr', '0deg');
       const vid = $('video', mv);
-      if (vid) { if (live > .05 && vid.paused) vid.play().catch(() => {}); else if (live <= .05 && !vid.paused) vid.pause(); }
+      if (vid && vid.paused) vid.play().catch(() => {});
       mSticky.style.setProperty('--co', range(p, .5, .62));
       mThread.style.setProperty('--to', 1 - range(p, .6, .9));
       const si = Math.min(4, Math.floor(p * 5.2));
