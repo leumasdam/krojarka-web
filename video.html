@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Krojárka — video prehliadka webu</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="logo/favicon.svg" type="image/svg+xml">
+<style>
+  :root { --bg: #181614; --cream: #f3efe6; --accent: #b3121c; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--cream); font-family: "Newsreader", Georgia, serif; }
+  body { display: grid; grid-template-rows: auto 1fr auto; min-height: 100svh; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px clamp(16px, 4vw, 40px); }
+  header a { color: var(--cream); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+  header img { height: 26px; }
+  header span { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; opacity: .7; }
+  main { display: grid; place-items: center; padding: 0 clamp(8px, 2vw, 24px); }
+  video { width: 100%; max-width: min(100%, calc((100svh - 150px) * 16 / 9)); aspect-ratio: 16 / 9; background: #000; border-radius: 6px; box-shadow: 0 30px 80px rgba(0,0,0,.6); outline: none; }
+  footer { padding: 16px clamp(16px, 4vw, 40px) 22px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; opacity: .75; }
+  footer a { color: var(--cream); }
+</style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="logo/krojarka-horizontal.svg" alt="Krojárka" onerror="this.replaceWith(Object.assign(document.createElement('b'),{textContent:'Krojárka'}))"><span>Video prehliadka webu</span></a>
+    <span>2:55</span>
+  </header>
+  <main>
+    <video src="media/krojarka-web.mp4" poster="media/krojarka-web-poster.jpg" controls playsinline preload="metadata"></video>
+  </main>
+  <footer>
+    <span>Na celú obrazovku: ikona ⛶ v prehrávači alebo dvojklik na video.</span>
+    <a href="media/krojarka-web.mp4" download>Stiahnuť video (MP4)</a>
+    <a href="index.html">Otvoriť web →</a>
+  </footer>
+  <script>document.querySelector('video').addEventListener('dblclick', e => { const v = e.currentTarget; (document.fullscreenElement ? document.exitFullscreen() : (v.requestFullscreen || v.webkitEnterFullscreen).call(v)); });</script>
+</body>
+</html>
