@@ -432,10 +432,10 @@
           `${c.k ? `<span class="mf-k">${c.k}</span>` : ''}<b>${c.t}</b><span class="mf-d">${c.d}</span></li>`).join('')
       : (m.facts || []).map(f => `<li>${f}</li>`).join('');
     mDetail.innerHTML = m.gallery
-      ? m.gallery.map((g, i) => `<img src="${g.src}" srcset="${g.src} 1x, ${big(g.src, '@2x')} 2x" alt="${g.label}" data-label="${g.label}" loading="lazy" class="${i ? '' : 'is-on'}">`).join('')
+      ? m.gallery.map((g, i) => `<img src="${g.src}" srcset="${g.src} 1x, ${big(g.src, '@2x')} 2x" alt="${g.label}" data-label="${g.label}" loading="lazy" onerror="this.removeAttribute('srcset')" class="${i ? '' : 'is-on'}">`).join('')
       : m.video
       ? `<video src="${m.video}" poster="${m.poster}" muted loop playsinline preload="${m.live ? 'auto' : 'none'}" aria-label="${m.label}"></video>`
-      : `<img src="${m.detail}" srcset="${m.detail} 1x, ${big(m.detail, '@2x')} 2x" alt="${m.label}" style="object-position:${m.pos}" loading="lazy">`;
+      : `<img src="${m.detail}" srcset="${m.detail} 1x, ${big(m.detail, '@2x')} 2x" alt="${m.label}" style="object-position:${m.pos}" loading="lazy" onerror="this.removeAttribute('srcset')">`;
     mLabel.textContent = m.label + (s.real ? ' · z ateliéru' : '');
     upgradeMacro();
   }
