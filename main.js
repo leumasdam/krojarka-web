@@ -459,7 +459,7 @@
     if (mFly && macroNear && !mFlyRun) { mFlyRun = true; requestAnimationFrame(flyLoop); }
     const seq = !!m.gallery || !!m.fly || mSegs.some(Boolean);
     macro.classList.toggle('is-fly', !!m.fly);
-    if (!$('.macro-orn')) mSticky.insertAdjacentHTML('afterbegin', '<img class="macro-orn l" src="img/prucel/orn-l.webp" alt="" aria-hidden="true"><img class="macro-orn r" src="img/prucel/orn-r.webp" alt="" aria-hidden="true">');
+    if (!$('.macro-orn')) mSticky.insertAdjacentHTML('afterbegin', '<img class="macro-orn l" src="img/prucel/orn-l.webp?v=2" alt="" aria-hidden="true"><img class="macro-orn r" src="img/prucel/orn-r.webp?v=2" alt="" aria-hidden="true">');
     macro.classList.toggle('is-gallery', seq);
     mSeq = seq; mChapter = -1;
     macro.classList.toggle('is-live', !!m.live);
