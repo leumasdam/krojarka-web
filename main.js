@@ -370,7 +370,21 @@
     const a = 90 + seed * 90, b = 60 + (1 - seed) * 110;
     return `M-20 ${200 - a * .3} C 180 ${140 + a * .6}, 360 ${300}, 520 ${230} S 820 ${120 + b * .4}, 1000 ${190} S 1260 ${260 - b * .5}, 1460 ${120 + seed * 90}`;
   };
+  /* niť ostáva pôvodná vlna, len jej pás leží medzi spodkom textov (CTA vľavo, posledný riadok vpravo) a ovládaním dole,
+     takže nikdy nekríži text ani navbar; pod 1200 px je skrytá (CSS) */
+  const placeThread = () => {
+    const sv = thread.ownerSVGElement;
+    if (innerWidth < 1200) return;
+    const hr = hero.getBoundingClientRect();
+    const cta = $('.hero-left .cta-round'), lede = $('.hero-left .lede'), item = hrBody.lastElementChild;
+    const bottoms = [cta, lede].filter(Boolean).map(e => e.getBoundingClientRect().bottom);
+    if (item) [...item.querySelectorAll('*')].forEach(e => { const b = e.getBoundingClientRect().bottom; if (b > 0) bottoms.push(b); });
+    const top = Math.max(...bottoms) - hr.top + 26;
+    const ctrl = $('.hero-bottom').getBoundingClientRect().top - hr.top - 22;
+    sv.style.top = top + 'px'; sv.style.height = Math.max(40, ctrl - top) + 'px';
+  };
   const drawThread = i => {
+    placeThread();
     thread.setAttribute('d', wave(i));
     const L = thread.getTotalLength();
     thread.style.transition = 'none';
@@ -877,5 +891,6 @@
   };
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   addEventListener('resize', onScroll);
+  /*threadResize*/ let thrT; addEventListener('resize', () => { clearTimeout(thrT); thrT = setTimeout(placeThread, 120); });
   onScroll();
 })();

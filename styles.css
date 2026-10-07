@@ -989,3 +989,6 @@ html.logo-sig body.page-about[data-scene="1"] .site-header, html.logo-sig body.p
 /* verzia 2: vyššie vertikálne logo → hlavičky podstránok, ktoré začínajú hneď pod logom, odsadiť nižšie */
 html.logo-sig .kt-top { padding-top: 220px; }
 @media (max-width: 960px) { html.logo-sig .kt-top { padding-top: 150px; } html.logo-sig .hero { padding-top: 126px; } }
+
+/* niť v úvode: len na veľkých obrazovkách; pás umiestňuje main.js pod texty */
+@media (max-width: 1199px) { .hero-thread { display: none; } }
