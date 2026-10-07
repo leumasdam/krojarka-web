@@ -992,3 +992,18 @@ html.logo-sig .kt-top { padding-top: 220px; }
 
 /* niť v úvode: len na veľkých obrazovkách; pás umiestňuje main.js pod texty */
 @media (max-width: 1199px) { .hero-thread { display: none; } }
+
+/* ─── farebná varianta „modrá" (html.farba-modra, ?farba=modra): modrotlačová indigová ako druhá farba ───
+   Červená ostáva hlavná (logo, tlačidlá, pätička). Modrá berie text a nadpisy (namiesto čiernej)
+   a tiché akcenty: nadpisky, čísla, niť, ornamenty pri nadpiskoch. */
+html.farba-modra { --text: #17213d; --navy: #17213d; --royal: #2a3f8f; --line: rgba(23, 33, 61, .18); }
+html.farba-modra .display, html.farba-modra .display-l, html.farba-modra .display-m, html.farba-modra .display-s,
+html.farba-modra h1, html.farba-modra h2, html.farba-modra h3 { color: var(--navy); }
+html.farba-modra .eyebrow, html.farba-modra .orn-s { color: var(--royal); }
+html.farba-modra .counter b, html.farba-modra .stitch-steps .n, html.farba-modra .process-list .n, html.farba-modra .macro-facts .mf-k { color: var(--royal); }
+html.farba-modra .hero-thread path, html.farba-modra .macro-thread path { stroke: var(--royal); }
+html.farba-modra .macro-facts li::before { background: var(--royal); }
+/* na červených a tmavých plochách sa nič nemení */
+html.farba-modra .site-footer h2, html.farba-modra .site-footer h3, html.farba-modra .site-footer .display-l { color: inherit; }
+html.farba-modra .site-footer .eyebrow { color: #f7ece6; }
+html.farba-modra .sc.dark h1, html.farba-modra .sc.dark h2, html.farba-modra .sc.dark h3 { color: inherit; }

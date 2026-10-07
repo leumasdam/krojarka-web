@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="sk">
 <head>
+<script>/*farba*/(function(){var d=document.documentElement,q=location.search;try{if(/[?&]farba=modra/.test(q))localStorage.setItem("farba","modra");if(/[?&]farba=orig/.test(q))localStorage.removeItem("farba");if(localStorage.getItem("farba")==="modra")d.classList.add("farba-modra")}catch(e){if(/[?&]farba=modra/.test(q))d.classList.add("farba-modra")}})();</script>
 <script>if(/[?&]logo=alt/.test(location.search)||localStorage.getItem("logo")==="alt"){document.documentElement.classList.add("logo-alt");localStorage.setItem("logo","alt")}if(/[?&]logo=sig/.test(location.search)||localStorage.getItem("logo")==="sig"){document.documentElement.classList.remove("logo-alt");document.documentElement.classList.add("logo-sig");localStorage.setItem("logo","sig")}if(/[?&]logo=orig/.test(location.search)){localStorage.removeItem("logo");document.documentElement.classList.remove("logo-alt");document.documentElement.classList.remove("logo-sig")}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=36">
+<link rel="stylesheet" href="styles.css?v=37">
 <link rel="stylesheet" href="motion.css?v=8">
 <link rel="stylesheet" href="podstranky.css?v=2">
 </head>
