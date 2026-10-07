@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="sk">
 <head>
+<script>if(/[?&]logo=alt/.test(location.search)||localStorage.getItem("logo")==="alt"){document.documentElement.classList.add("logo-alt");localStorage.setItem("logo","alt")}if(/[?&]logo=orig/.test(location.search)){localStorage.removeItem("logo");document.documentElement.classList.remove("logo-alt")}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kontakt — Krojárka</title>
@@ -10,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=21">
+<link rel="stylesheet" href="styles.css?v=23">
 <link rel="stylesheet" href="motion.css?v=8">
 <link rel="stylesheet" href="podstranky.css?v=2">
 </head>
@@ -29,6 +30,7 @@
 
 <header class="site-header" id="top">
   <a class="logo" href="index.html" aria-label="Krojárka — domov">
+    <img class="logo-alt-img" src="img/logo-nahradne-napis.webp?v=2" alt="Krojárka">
     <svg class="logo-orn" viewBox="0 0 124.88 120.88"><use href="#orn"/></svg>
     <svg class="logo-word" viewBox="0 0 235.50 67.25"><use href="#wordmark"/></svg>
     <span class="logo-tag">Ľudové kroje<br>v novom príbehu</span>

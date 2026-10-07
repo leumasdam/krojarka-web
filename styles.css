@@ -954,3 +954,11 @@ body.is-tune .macro-cap, body.is-tune .macro-thread { display: none; }
 @media (min-width: 961px) {
   .macro-detail.is-cutout:not(.is-fly) { width: min(58vh, 620px, 56vw); top: 44%; }
 }
+
+/* showcase: náhradné rukopisné logo (zapína sa triedou logo-alt na <html>) */
+.logo-alt-img, .ft-alt { display: none; }
+html.logo-alt .logo-orn, html.logo-alt .logo-word, html.logo-alt .logo-tag { display: none !important; }
+html.logo-alt .logo-alt-img { display: block; height: 74px; width: auto; transition: height .5s var(--ease); }
+html.logo-alt .is-scrolled .logo-alt-img { height: 46px; }
+html.logo-alt .ft-alt { display: block; width: 150px; margin-bottom: 16px; }
+@media (max-width: 960px) { html.logo-alt .logo-alt-img { height: 48px; } html.logo-alt .is-scrolled .logo-alt-img { height: 40px; } }
