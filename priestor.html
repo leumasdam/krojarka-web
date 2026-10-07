@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="sk">
 <head>
-<script>if(/[?&]logo=alt/.test(location.search)||localStorage.getItem("logo")==="alt"){document.documentElement.classList.add("logo-alt");localStorage.setItem("logo","alt")}if(/[?&]logo=orig/.test(location.search)){localStorage.removeItem("logo");document.documentElement.classList.remove("logo-alt")}</script>
+<script>if(/[?&]logo=alt/.test(location.search)||localStorage.getItem("logo")==="alt"){document.documentElement.classList.add("logo-alt");localStorage.setItem("logo","alt")}if(/[?&]logo=sig/.test(location.search)||localStorage.getItem("logo")==="sig"){document.documentElement.classList.remove("logo-alt");document.documentElement.classList.add("logo-sig");localStorage.setItem("logo","sig")}if(/[?&]logo=orig/.test(location.search)){localStorage.removeItem("logo");document.documentElement.classList.remove("logo-alt");document.documentElement.classList.remove("logo-sig")}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Prenájom priestoru — Krojárka</title>
@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/gen/dom-interier.webp">
-<link rel="stylesheet" href="styles.css?v=24">
+<link rel="stylesheet" href="styles.css?v=27">
 <link rel="stylesheet" href="motion.css?v=2">
 <link rel="stylesheet" href="podstranky.css?v=2">
 </head>
@@ -31,6 +31,7 @@
 
 <header class="site-header" id="top">
   <a class="logo" href="index.html" aria-label="Krojárka — domov">
+    <span class="logo-sig-img" data-svg="logo/krojarka-signature.svg?v=3"></span>
     <img class="logo-alt-img" src="img/logo-nahradne-kruh.webp?v=3" alt="Krojárka">
     <svg class="logo-orn" viewBox="0 0 124.88 120.88"><use href="#orn"/></svg>
     <svg class="logo-word" viewBox="0 0 235.50 67.25"><use href="#wordmark"/></svg>
@@ -206,5 +207,6 @@
 
 <script src="podstranky.js?v=3"></script>
 <script src="motion.js?v=3"></script>
+<script>(function(){var els=document.querySelectorAll("[data-svg]");if(!els.length)return;fetch(els[0].dataset.svg).then(function(r){return r.text()}).then(function(t){els.forEach(function(e){e.innerHTML=t;var s=e.querySelector("svg");if(s){s.removeAttribute("width");s.removeAttribute("height");}})})})();/*inlineSvg*/</script>
 </body>
 </html>
