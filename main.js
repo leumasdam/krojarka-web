@@ -374,18 +374,22 @@
      takže nikdy nekríži text ani navbar; pod 1200 px je skrytá (CSS) */
   const placeThread = () => {
     const sv = thread.ownerSVGElement;
-    if (innerWidth < 1200) return;
+    if (innerWidth < 1200 || !thread.getAttribute('d')) return;
     const hr = hero.getBoundingClientRect();
     const cta = $('.hero-left .cta-round'), lede = $('.hero-left .lede'), item = hrBody.lastElementChild;
     const bottoms = [cta, lede].filter(Boolean).map(e => e.getBoundingClientRect().bottom);
     if (item) [...item.querySelectorAll('*')].forEach(e => { const b = e.getBoundingClientRect().bottom; if (b > 0) bottoms.push(b); });
-    const top = Math.max(...bottoms) - hr.top + 26;
-    const ctrl = $('.hero-bottom').getBoundingClientRect().top - hr.top - 22;
-    sv.style.top = top + 'px'; sv.style.height = Math.max(40, ctrl - top) + 'px';
+    const tb = Math.max(...bottoms) - hr.top + 18;                       // najvyšší bod vlny tesne pod textom
+    const ctrl = $('.hero-bottom').getBoundingClientRect().top - hr.top - 18;
+    const bb = thread.getBBox();                                       // rozsah vlny v súradniciach viewBoxu (0–400)
+    const amp = Math.max(30, Math.min(110, ctrl - tb));                // výška vlny v px
+    const H = amp / Math.max(1, bb.height) * 400;
+    sv.style.height = H + 'px';
+    sv.style.top = (tb - bb.y * H / 400) + 'px';
   };
   const drawThread = i => {
-    placeThread();
     thread.setAttribute('d', wave(i));
+    placeThread();
     const L = thread.getTotalLength();
     thread.style.transition = 'none';
     thread.style.strokeDasharray = L;
