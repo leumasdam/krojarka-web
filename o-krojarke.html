@@ -32,8 +32,8 @@
 <!-- ───────── HEADER ───────── -->
 <header class="site-header" id="top">
   <a class="logo" href="index.html" aria-label="Krojárka — domov">
-    <span class="logo-sig-v" data-svg="logo/krojarka-signature-vertical.svg?v=3"></span>
-    <span class="logo-sig-img" data-svg="logo/krojarka-signature.svg?v=3"></span>
+    <span class="logo-sig-v" data-svg="logo/krojarka-signature-vertical.svg?v=10"></span>
+    <span class="logo-sig-img" data-svg="logo/krojarka-signature.svg?v=10"></span>
     <img class="logo-alt-img" src="img/logo-nahradne-kruh.webp?v=3" alt="Krojárka">
     <svg class="logo-orn" viewBox="0 0 124.88 120.88"><use href="#orn"/></svg>
     <svg class="logo-word" viewBox="0 0 235.50 67.25"><use href="#wordmark"/></svg>
@@ -199,7 +199,7 @@
 <footer class="site-footer" id="kontakt">
   <div class="ft-top">
     <div>
-      <span class="ft-sig" data-svg="logo/krojarka-sig-symbol.svg?v=3"></span>
+      <span class="ft-sig" data-svg="logo/krojarka-sig-symbol.svg?v=10"></span>
       <p class="eyebrow">Kontakt</p>
       <h2 class="display-l">Navštívte<br>ateliér.</h2>
     </div>
@@ -211,7 +211,7 @@
     <a class="btn-red" href="mailto:ahoj@krojarka.sk">Kontaktovať <svg><use href="#arrow"/></svg></a>
   </div>
   <svg class="ft-word" viewBox="0 0 235.50 67.25" aria-hidden="true"><use href="#wordmark"/></svg>
-  <span class="ft-sig-word" data-svg="logo/krojarka-sig-wordmark.svg?v=2" aria-hidden="true"></span>
+  <span class="ft-sig-word" data-svg="logo/krojarka-sig-wordmark.svg?v=10" aria-hidden="true"></span>
   <div class="ft-bottom"><span>© 2026 Krojárka</span><span><a href="o-krojarke.html">O Krojárke</a> · <a href="podpor-nas.html">Múzeum</a> · <a href="priestor.html">Prenájom priestoru</a> · <a href="kontakt.html">Kontakt</a></span><a href="#top">Hore ↑</a></div>
 </footer>
 
@@ -221,5 +221,6 @@
 <script src="motion.js?v=3"></script>
 <script src="about.js?v=5"></script>
 <script>(function(){var els=document.querySelectorAll("[data-svg]");if(!els.length)return;var cache={};els.forEach(function(e){var u=e.dataset.svg;(cache[u]=cache[u]||fetch(u).then(function(r){return r.text()})).then(function(t){e.innerHTML=t;var s=e.querySelector("svg");if(s){s.removeAttribute("width");s.removeAttribute("height")}})})})();/*inlineSvg*/</script>
+<script>/*ornSig*/(function(){if(!document.documentElement.classList.contains("logo-sig"))return;var NS="http://www.w3.org/2000/svg";fetch("logo/orn-sig-paths.txt?v=1").then(function(r){return r.text()}).then(function(p){var d=document.createElementNS(NS,"svg");d.setAttribute("style","position:absolute;width:0;height:0;overflow:hidden");d.setAttribute("aria-hidden","true");d.innerHTML="<symbol id=\"orn-sig\" viewBox=\"-6 56 442 378\">"+p+"</symbol>";document.body.prepend(d);var sw=function(root){(root||document).querySelectorAll("use").forEach(function(u){var h=u.getAttribute("href")||u.getAttribute("xlink:href");if(h==="#orn"){u.setAttribute("href","#orn-sig")}})};sw();new MutationObserver(function(){sw()}).observe(document.body,{childList:true,subtree:true});})})();</script>
 </body>
 </html>
