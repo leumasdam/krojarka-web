@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=Geist:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=27">
+<link rel="stylesheet" href="styles.css?v=29">
 <link rel="stylesheet" href="motion.css?v=8">
 <link rel="stylesheet" href="podstranky.css?v=2">
 </head>
@@ -184,6 +184,7 @@
 <footer class="site-footer" id="kontakt">
   <div class="ft-top">
     <div>
+      <span class="ft-sig" data-svg="logo/krojarka-sig-symbol.svg?v=2"></span>
       <p class="eyebrow">Kontakt</p>
       <h2 class="display-l">Navštívte<br>ateliér.</h2>
     </div>
@@ -195,6 +196,7 @@
     <a class="btn-red" href="mailto:ahoj@krojarka.sk">Kontaktovať <svg><use href="#arrow"/></svg></a>
   </div>
   <svg class="ft-word" viewBox="0 0 235.50 67.25" aria-hidden="true"><use href="#wordmark"/></svg>
+  <span class="ft-sig-word" data-svg="logo/krojarka-sig-wordmark.svg" aria-hidden="true"></span>
   <div class="ft-bottom"><span>© 2026 Krojárka</span><span><a href="o-krojarke.html">O Krojárke</a> · <a href="podpor-nas.html">Múzeum</a> · <a href="priestor.html">Prenájom priestoru</a> · <a href="kontakt.html">Kontakt</a></span><a href="#top">Hore ↑</a></div>
 </footer>
 
@@ -202,6 +204,6 @@
 
 <script src="podstranky.js?v=3"></script>
 <script src="motion.js?v=3"></script>
-<script>(function(){var els=document.querySelectorAll("[data-svg]");if(!els.length)return;fetch(els[0].dataset.svg).then(function(r){return r.text()}).then(function(t){els.forEach(function(e){e.innerHTML=t;var s=e.querySelector("svg");if(s){s.removeAttribute("width");s.removeAttribute("height");}})})})();/*inlineSvg*/</script>
+<script>(function(){var els=document.querySelectorAll("[data-svg]");if(!els.length)return;var cache={};els.forEach(function(e){var u=e.dataset.svg;(cache[u]=cache[u]||fetch(u).then(function(r){return r.text()})).then(function(t){e.innerHTML=t;var s=e.querySelector("svg");if(s){s.removeAttribute("width");s.removeAttribute("height")}})})})();/*inlineSvg*/</script>
 </body>
 </html>

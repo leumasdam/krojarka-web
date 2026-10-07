@@ -963,12 +963,15 @@ html.logo-alt .is-scrolled .logo-alt-img { height: 62px; }
 html.logo-alt .ft-alt { display: block; width: 150px; margin-bottom: 16px; }
 @media (max-width: 960px) { html.logo-alt .logo-alt-img { height: 72px; } html.logo-alt .is-scrolled .logo-alt-img { height: 56px; } }
 
-/* showcase 2: podpisové logo (html.logo-sig): ornament + rukopis + slogan; po scrollnutí menšie */
-.logo-sig-img, .ft-sig { display: none; }
-html.logo-sig .logo-orn, html.logo-sig .logo-word, html.logo-sig .logo-tag, html.logo-sig .logo-alt-img, html.logo-sig .ft-alt { display: none !important; }
+/* verzia 2 (html.logo-sig): podpisové logo v hlavičke; v pätičke symbol nad Kontaktom a rukopisný logotyp dole */
+.logo-sig-img, .ft-sig, .ft-sig-word { display: none; }
+html.logo-sig .logo-orn, html.logo-sig .logo-word, html.logo-sig .logo-tag, html.logo-sig .logo-alt-img, html.logo-sig .ft-alt, html.logo-sig .ft-word { display: none !important; }
 html.logo-sig .logo-sig-img { display: block; color: var(--text); }
 html.logo-sig .logo-sig-img svg { height: 84px; width: auto; display: block; transition: height .5s var(--ease); }
 html.logo-sig .is-scrolled .logo-sig-img svg { height: 46px; }
-html.logo-sig .ft-sig { display: block; width: 300px; max-width: 100%; margin-bottom: 18px; color: #fbf8f1; --logo-orn: #fbf8f1; }
+html.logo-sig .ft-sig { display: block; width: 64px; margin: 0 0 26px; color: #fbf8f1; }
+html.logo-sig .site-footer .ft-top { padding-top: 40px; }
 html.logo-sig .ft-sig svg { width: 100%; height: auto; display: block; }
-@media (max-width: 960px) { html.logo-sig .logo-sig-img svg { height: 50px; } html.logo-sig .is-scrolled .logo-sig-img svg { height: 40px; } html.logo-sig .ft-sig { width: 240px; } }
+html.logo-sig .ft-sig-word { display: block; width: 100%; margin: 80px 0 30px; color: rgba(247,236,230,.14); }
+html.logo-sig .ft-sig-word svg { width: 100%; height: auto; display: block; }
+@media (max-width: 960px) { html.logo-sig .logo-sig-img svg { height: 50px; } html.logo-sig .is-scrolled .logo-sig-img svg { height: 40px; } html.logo-sig .ft-sig { width: 52px; } }
