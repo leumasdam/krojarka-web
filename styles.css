@@ -963,15 +963,19 @@ html.logo-alt .is-scrolled .logo-alt-img { height: 62px; }
 html.logo-alt .ft-alt { display: block; width: 150px; margin-bottom: 16px; }
 @media (max-width: 960px) { html.logo-alt .logo-alt-img { height: 72px; } html.logo-alt .is-scrolled .logo-alt-img { height: 56px; } }
 
-/* verzia 2 (html.logo-sig): podpisové logo v hlavičke; v pätičke symbol nad Kontaktom a rukopisný logotyp dole */
-.logo-sig-img, .ft-sig, .ft-sig-word { display: none; }
+/* verzia 2 (html.logo-sig): na úvode vertikálne podpisové logo, po scrollnutí horizontálne v lište;
+   v pätičke symbol nad Kontaktom a rukopisný logotyp dole */
+.logo-sig-img, .logo-sig-v, .ft-sig, .ft-sig-word { display: none; }
 html.logo-sig .logo-orn, html.logo-sig .logo-word, html.logo-sig .logo-tag, html.logo-sig .logo-alt-img, html.logo-sig .ft-alt, html.logo-sig .ft-word { display: none !important; }
-html.logo-sig .logo-sig-img { display: block; color: var(--text); }
-html.logo-sig .logo-sig-img svg { height: 84px; width: auto; display: block; transition: height .5s var(--ease); }
-html.logo-sig .is-scrolled .logo-sig-img svg { height: 46px; }
+html.logo-sig .logo-sig-v { display: block; color: var(--text); }
+html.logo-sig .logo-sig-v svg { height: 128px; width: auto; display: block; }
+html.logo-sig .is-scrolled .logo-sig-v { display: none; }
+html.logo-sig .is-scrolled .logo-sig-img { display: block; color: var(--text); }
+html.logo-sig .logo-sig-img svg { height: 46px; width: auto; display: block; }
+html.logo-sig .site-header:not(.is-scrolled) .logo { margin-top: 10px; }
 html.logo-sig .ft-sig { display: block; width: 64px; margin: 0 0 26px; color: #fbf8f1; }
 html.logo-sig .site-footer { padding-top: 56px; }
 html.logo-sig .ft-sig svg { width: 100%; height: auto; display: block; }
 html.logo-sig .ft-sig-word { display: block; width: 46%; margin: 8px 0 0; color: rgba(247,236,230,.14); }
 html.logo-sig .ft-sig-word svg { width: 100%; height: auto; display: block; }
-@media (max-width: 960px) { html.logo-sig .logo-sig-img svg { height: 50px; } html.logo-sig .is-scrolled .logo-sig-img svg { height: 40px; } html.logo-sig .ft-sig { width: 52px; } }
+@media (max-width: 960px) { html.logo-sig .logo-sig-v svg { height: 84px; } html.logo-sig .logo-sig-img svg { height: 40px; } html.logo-sig .ft-sig { width: 52px; } }
